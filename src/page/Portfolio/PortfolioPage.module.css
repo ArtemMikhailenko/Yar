@@ -1,0 +1,301 @@
+/* PortfolioPage.module.css */
+.page {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+  
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .heroSection {
+    position: relative;
+    text-align: center;
+    padding: 120px 20px;
+    margin-bottom: 60px;
+    overflow: hidden;
+  }
+  
+  .glowOrb {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 70%);
+    top: -200px;
+    left: -250px;
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite;
+  }
+  
+  .glowOrb2 {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1), transparent 70%);
+    bottom: -400px;
+    right: -250px;
+    border-radius: 50%;
+    animation: float 25s ease-in-out infinite reverse;
+  }
+  
+  .heroTitle {
+    font-size: 4.5rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.5rem;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 40px;
+    padding: 20px;
+  }
+  
+  .card {
+    perspective: 1000px;
+    height: 500px;
+  }
+  
+  .cardInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  .cardFront {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover .cardFront {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(59, 130, 246, 0.3);
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+  
+  .categoryBadge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 6px 12px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 20px;
+    color: #818cf8;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .cardHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .imageWrapper {
+    position: relative;
+    width: 60px;
+    height: 60px;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    object-fit: cover;
+  }
+  
+  .imageGlow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.4), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .card:hover .imageGlow {
+    opacity: 1;
+  }
+  
+  .projectName {
+    margin-left: 20px;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .statItem {
+    text-align: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .statItem:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+  }
+  
+  .statIconWrapper {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 10px;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .statIcon {
+    font-size: 1.25rem;
+  }
+  
+  .statLabel {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    margin-bottom: 4px;
+  }
+  
+  .statValue {
+    font-weight: 700;
+    color: white;
+    font-size: 1.125rem;
+  }
+  
+  .roiValue {
+    color: #34d399;
+  }
+  
+  .description {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .viewButton {
+    width: 100%;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #6366f1, #3b82f6);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .viewButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+  }
+  
+  .buttonText {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .buttonGlow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent 70%);
+    transform: rotate(45deg);
+    animation: buttonGlow 3s infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+      transform: translate(30px, -30px) rotate(2deg);
+    }
+    66% {
+      transform: translate(-20px, 20px) rotate(-2deg);
+    }
+  }
+  
+  @keyframes buttonGlow {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .heroTitle {
+      font-size: 3rem;
+    }
+    
+    .heroSubtitle {
+      font-size: 1.25rem;
+    }
+    
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .card {
+      height: auto;
+    }
+  }
