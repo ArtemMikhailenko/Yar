@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Header.module.css";
 import logo from "../../assets/logo-bull.png";
 import { Link } from "react-router-dom";

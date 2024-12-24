@@ -1,4 +1,4 @@
-import React from 'react';
+
 import styles from './FooterSection.module.css';
 
 const FooterSection = () => {

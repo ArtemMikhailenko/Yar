@@ -3,6 +3,7 @@ import  { useState } from 'react';
 import styles from './PortfolioPage.module.css';
 import logo from "../../assets/logo-bull.png";
 const PortfolioPage = () => {
+  //@ts-ignore
   const [hoveredCard, setHoveredCard] = useState(null);
 
   const projects = [
