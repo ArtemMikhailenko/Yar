@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+
 import styles from './AboutUs.module.css';
 
 const AboutUs = () => {
