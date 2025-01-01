@@ -7,19 +7,17 @@ import pr4 from '../../assets/partners/pr4.png';
 import pr5 from '../../assets/partners/pr5.png';
 
 const PartnersSection: React.FC = () => {
-  const sliderRef = useRef<HTMLDivElement | null>(null);  // Указываем тип HTMLDivElement
+  const sliderRef = useRef<HTMLDivElement | null>(null); 
   const requestRef = useRef<number | null>(null);
-  
-  // Настраиваемые параметры анимации
+
   const SCROLL_SPEED = 0.5;
   const PAUSE_ON_HOVER = true;
 
   const animate = () => {
     const slider = sliderRef.current;
     if (slider) {
-      slider.scrollLeft += SCROLL_SPEED;  // Ошибка исправлена, TS понимает, что slider не null
+      slider.scrollLeft += SCROLL_SPEED;
       
-      // Плавный переход в начало при достижении конца
       if (slider.scrollLeft >= (slider.scrollWidth / 2)) {
         slider.scrollLeft = 0;
       }
@@ -31,7 +29,6 @@ const PartnersSection: React.FC = () => {
     const slider = sliderRef.current;
     if (!slider) return;
 
-    // Дублируем содержимое для бесконечной прокрутки
     const content = slider.innerHTML;
     slider.innerHTML = content + content;
 

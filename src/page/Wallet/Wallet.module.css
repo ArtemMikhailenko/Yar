@@ -1,0 +1,416 @@
+.container {
+  /* max-width: 1400px; */
+  /* margin: 0 auto; */
+  padding: 24px;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* Balance Card */
+.balanceCard {
+  background: linear-gradient(135deg, #4c6fff 0%, #6e8aff 100%);
+  border-radius: 24px;
+  padding: 32px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 25px -5px rgba(76, 111, 255, 0.3);
+}
+
+.balanceInfo {
+  flex: 1;
+}
+
+.label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.balance {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+}
+
+.growth {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  width: fit-content;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButton {
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.activeButton {
+  background: white;
+  color: #4c6fff;
+  border: none;
+}
+
+.activeButton:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Main Content Layout */
+.mainContent {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+}
+
+/* Chart Card */
+.chartCard {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.tokenInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.tokenIcon,
+.tokenBadge {
+  width: 32px;
+  height: 32px;
+  background: #4c6fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+}
+
+.negative {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 0.875rem;
+}
+
+.timeframes {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.timeframes button {
+  padding: 6px 12px;
+  border: none;
+  background: #f3f4f6;
+  color: #6b7280;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeframes button:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.timeframes button.active {
+  background: #4c6fff;
+  color: white;
+}
+
+.chart {
+  margin-bottom: 24px;
+  /* height: 300px; */
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+}
+
+.tab {
+  padding: 12px 0;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 0.875rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  color: #4c6fff;
+}
+
+.activeTab {
+  color: #4c6fff;
+}
+
+.activeTab::after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #4c6fff;
+}
+
+/* Table */
+.tableWrapper {
+  overflow-x: auto;
+  margin: 0 -24px;
+  padding: 0 24px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table th,
+.table td {
+  padding: 16px;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.table th {
+  color: #6b7280;
+  font-weight: 500;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table td {
+  color: #1f2937;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.tokenCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tokenBadge {
+  width: 28px;
+  height: 28px;
+  font-size: 0.875rem;
+}
+
+/* Swap Panel */
+.swapCard {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+  position: sticky;
+  top: 24px;
+}
+
+.swapCard h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 24px 0;
+}
+
+.swapForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.tokenSelect {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f3f4f6;
+  border-radius: 12px;
+}
+
+.tokenSelect select {
+  border: none;
+  background: none;
+  color: #1f2937;
+  font-size: 0.875rem;
+  cursor: pointer;
+  width: 100%;
+  appearance: none;
+}
+
+.field input {
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  width: 100%;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #4c6fff;
+  box-shadow: 0 0 0 3px rgba(76, 111, 255, 0.1);
+}
+
+.swapButton {
+  background: #4c6fff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.swapButton:hover {
+  background: #3b5bdb;
+}
+
+@media (max-width: 1024px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+  }
+
+  .balanceCard {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .actionButton {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .swapCard {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .balance {
+    font-size: 2rem;
+  }
+
+  .timeframes {
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .timeframes button {
+    white-space: nowrap;
+  }
+
+  .tabs {
+    overflow-x: auto;
+  }
+
+  .tab {
+    white-space: nowrap;
+    min-width: max-content;
+  }
+
+  .table {
+    min-width: 800px;
+  }
+
+  .tokenCell {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .balance {
+    font-size: 1.75rem;
+  }
+
+  .chartHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .tokenInfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .swapCard {
+    padding: 16px;
+  }
+
+  .field input,
+  .tokenSelect {
+    width: 100%;
+  }
+}

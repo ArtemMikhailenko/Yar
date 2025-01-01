@@ -1,0 +1,217 @@
+.chartContainer {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    transition: all 0.3s ease;
+  }
+  
+  .chartContainer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .chartHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  
+  .currencyInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .currencyIcon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  
+  .priceInfo h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+  }
+  
+  .priceChange {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    width: fit-content;
+    transition: all 0.3s ease;
+  }
+  
+  .positive {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+  }
+  
+  .negative {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+  }
+  
+  .changeValue {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .changePercent {
+    font-size: 0.875rem;
+    opacity: 0.8;
+  }
+  
+  .timeFrames {
+    display: flex;
+    gap: 8px;
+    background: #f9fafb;
+    padding: 4px;
+    border-radius: 12px;
+  }
+  
+  .timeFrameButton {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .timeFrameButton:hover {
+    color: #1f2937;
+  }
+  
+  .activeTimeFrame {
+    background: white;
+    color: #3b82f6 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .chartWrapper {
+    height: 350px;
+    position: relative;
+  }
+  
+  .loadingContainer {
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f4f6;
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  .errorContainer {
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: #ef4444;
+  }
+  
+  .errorIcon {
+    stroke-width: 1.5;
+  }
+  
+  .error {
+    color: #1f2937;
+    text-align: center;
+    font-size: 0.875rem;
+  }
+  
+  .retryButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .retryButton:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .chartContainer {
+      padding: 16px;
+    }
+  
+    .chartHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+  
+    .timeFrames {
+      width: 100%;
+      overflow-x: auto;
+      padding: 4px;
+    }
+  
+    .timeFrameButton {
+      white-space: nowrap;
+    }
+  
+    .chartWrapper {
+      height: 300px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .currencyInfo {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  
+    .priceChange {
+      padding: 4px 8px;
+    }
+  }

@@ -20,7 +20,7 @@
   position: relative;
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Легкая тень */
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
 }
 
 
@@ -39,7 +39,7 @@
 }
 
 .titleHighlight:hover::after {
-  width: 100%; /* Полная линия подчеркивания при наведении */
+  width: 100%; 
   left: 0;
 }
 
@@ -146,7 +146,6 @@
     }
 }
 
-/* Медиа-запросы для адаптивности */
 @media (max-width: 768px) {
   .title {
     font-size: 2.5rem;

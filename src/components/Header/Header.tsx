@@ -1,12 +1,18 @@
-import { useState, useEffect } from "react";
+// Header.jsx
+import { useState, useEffect, useRef } from "react";
 import styles from "./Header.module.css";
 import logo from "../../assets/logo-bull.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import AuthModal from "../AuthModal/AuthModal";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [error, setError] = useState("");
+  const [user, setUser] = useState(null);
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,8 +23,28 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userData = localStorage.getItem("user");
+    if (token && userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
+    setError("");
     if (!isModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
@@ -26,114 +52,86 @@ const Header = () => {
     }
   };
 
-  const AuthModal = () => (
-    <div className={styles.modalOverlay} onClick={toggleModal}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.modalHeader}>
-          <div className={styles.tabs}>
-            <button
-              className={`${styles.tab} ${isLogin ? styles.activeTab : ""}`}
-              onClick={() => setIsLogin(true)}
-            >
-              Log In
-            </button>
-            <button
-              className={`${styles.tab} ${!isLogin ? styles.activeTab : ""}`}
-              onClick={() => setIsLogin(false)}
-            >
-              Sign In
-            </button>
-          </div>
-          <button className={styles.closeButton} onClick={toggleModal}>
-            ×
-          </button>
-        </div>
-
-        <div className={styles.modalBody}>
-          {isLogin ? (
-            <form className={styles.authForm}>
-              <div className={styles.formGroup}>
-                <input type="email" placeholder="Email address" required />
-                <span className={styles.focusEffect}></span>
-              </div>
-              <div className={styles.formGroup}>
-                <input type="password" placeholder="Password" required />
-                <span className={styles.focusEffect}></span>
-              </div>
-              <div className={styles.forgotPassword}>
-                <a href="#">Forgot password?</a>
-              </div>
-              <button type="submit" className={styles.submitButton}>
-                Log In
-                <div className={styles.buttonGlow}></div>
-              </button>
-            </form>
-          ) : (
-            <form className={styles.authForm}>
-              <div className={styles.formGroup}>
-                <input type="text" placeholder="Full name" required />
-                <span className={styles.focusEffect}></span>
-              </div>
-              <div className={styles.formGroup}>
-                <input type="email" placeholder="Email address" required />
-                <span className={styles.focusEffect}></span>
-              </div>
-              <div className={styles.formGroup}>
-                <input type="password" placeholder="Password" required />
-                <span className={styles.focusEffect}></span>
-              </div>
-              <div className={styles.formGroup}>
-                <input
-                  type="password"
-                  placeholder="Confirm password"
-                  required
-                />
-                <span className={styles.focusEffect}></span>
-              </div>
-              <button type="submit" className={styles.submitButton}>
-                Create Account
-                <div className={styles.buttonGlow}></div>
-              </button>
-            </form>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+    setIsDropdownOpen(false);
+    navigate("/");
+  };
 
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.headerGlow}></div>
       <div className={styles.container}>
         <div className={styles.logoWrapper}>
-          <a href="/" className={styles.logo}>
+          <Link to="/" className={styles.logo}>
             <img src={logo} alt="Logo" />
             <span className={styles.logoText}>ArkInvest</span>
-          </a>
+          </Link>
         </div>
 
         <nav className={styles.nav}>
-          <a href="/" className={styles.link}>
+          <Link to="/" className={styles.link}>
             <span className={styles.linkText}>Home</span>
-          </a>
+          </Link>
           <Link to="/portfolio" className={styles.link}>
             <span className={styles.linkText}>Portfolio</span>
           </Link>
           <Link to="/about" className={styles.link}>
             <span className={styles.linkText}>About Us</span>
           </Link>
-          <a href="/wallet" className={styles.link}>
-            <span className={styles.linkText}>My Wallet</span>
-          </a>
+          {user && (
+            <Link to="/wallet" className={styles.link}>
+              <span className={styles.linkText}>My Wallet</span>
+            </Link>
+          )}
         </nav>
 
-        <button className={styles.loginButton} onClick={toggleModal}>
-          <span>Login</span>
-          <div className={styles.buttonGlow}></div>
-        </button>
+        {user ? (
+          <div className={styles.userSection} ref={dropdownRef}>
+            <button 
+              className={styles.userButton} 
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <div className={styles.userAvatar}>
+                {user.fullName.charAt(0).toUpperCase()}
+              </div>
+              <span className={styles.userName}>{user.fullName}</span>
+            </button>
+
+            {isDropdownOpen && (
+              <div className={styles.dropdown}>
+                <Link to="/profile" className={styles.dropdownItem}>
+                  <span>Мой профиль</span>
+                </Link>
+                <Link to="/cabinet" className={styles.dropdownItem}>
+                  <span>Личный кабинет</span>
+                </Link>
+                <button onClick={handleLogout} className={styles.dropdownItem}>
+                  <span>Выйти</span>
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button className={styles.loginButton} onClick={toggleModal}>
+            <span>Login</span>
+            <div className={styles.buttonGlow}></div>
+          </button>
+        )}
       </div>
 
-      {isModalOpen && <AuthModal />}
+      {isModalOpen && (
+        <AuthModal
+          isOpen={isModalOpen}
+          onClose={toggleModal}
+          onLogin={(userData) => {
+            setUser(userData);
+            navigate("/");
+          }}
+        />
+      )}
     </header>
   );
 };

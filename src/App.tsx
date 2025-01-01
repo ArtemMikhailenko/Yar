@@ -7,6 +7,8 @@ import PartnersSection from './components/PartnersSection/PartnersSection';
 import Footer from './components/Footer/Footer';
 import AboutUs from './page/About Us/AboutUs';
 import PortfolioPage from './page/Portfolio/Portfolio';
+import Wallet from './page/Wallet/Waller';
+import Profile from './page/Profile/Profile';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         } />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/portfolio" element={<PortfolioPage/>} />
+        <Route path="/wallet" element={<Wallet/>} />
+        <Route path="/profile" element={<Profile/>} />
       </Routes>
       <Footer />
     </Router>
