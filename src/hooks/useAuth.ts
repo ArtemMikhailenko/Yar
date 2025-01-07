@@ -8,11 +8,11 @@ interface User {
   role: 'USER' | 'ADMIN';
 }
 
-interface AuthContextType {
-  user: User | null;
-  isLoading: boolean;
-  error: string | null;
-}
+// interface AuthContextType {
+//   user: User | null;
+//   isLoading: boolean;
+//   error: string | null;
+// }
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);

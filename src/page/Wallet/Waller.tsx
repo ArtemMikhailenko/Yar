@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { ArrowUpRight, ArrowDownRight, RefreshCcw } from 'lucide-react';
-import CryptoChart from '../../components/CryptoChart/CryptoChart';
-import styles from './Wallet.module.css';
+import { useState } from "react";
+import { ArrowUpRight, ArrowDownRight, RefreshCcw } from "lucide-react";
+import CryptoChart from "../../components/CryptoChart/CryptoChart";
+import styles from "./Wallet.module.css";
 
 const Wallet = () => {
-  const [activeTab, setActiveTab] = useState('HOLDINGS');
+  const [activeTab, setActiveTab] = useState("HOLDINGS");
 
   const holdings = Array(6).fill({
-    token: 'Project Network PNT',
+    token: "Project Network PNT",
     amount: 1500,
-    buyingPrice: '1$ (Private round)',
-    buyingTotal: '1500.00$',
-    currentPrice: '3$ (Public round)',
-    totalValue: '4500.00$',
+    buyingPrice: "1$ (Private round)",
+    buyingTotal: "1500.00$",
+    currentPrice: "3$ (Public round)",
+    totalValue: "4500.00$",
   });
 
   return (
@@ -53,21 +53,27 @@ const Wallet = () => {
             </div>
 
             <div className={styles.tabs}>
-              <button 
-                className={`${styles.tab} ${activeTab === 'HOLDINGS' ? styles.activeTab : ''}`}
-                onClick={() => setActiveTab('HOLDINGS')}
+              <button
+                className={`${styles.tab} ${
+                  activeTab === "HOLDINGS" ? styles.activeTab : ""
+                }`}
+                onClick={() => setActiveTab("HOLDINGS")}
               >
                 HOLDINGS
               </button>
-              <button 
-                className={`${styles.tab} ${activeTab === 'NEW DEALS' ? styles.activeTab : ''}`}
-                onClick={() => setActiveTab('NEW DEALS')}
+              <button
+                className={`${styles.tab} ${
+                  activeTab === "NEW DEALS" ? styles.activeTab : ""
+                }`}
+                onClick={() => setActiveTab("NEW DEALS")}
               >
                 NEW DEALS
               </button>
-              <button 
-                className={`${styles.tab} ${activeTab === 'ENDED DEALS' ? styles.activeTab : ''}`}
-                onClick={() => setActiveTab('ENDED DEALS')}
+              <button
+                className={`${styles.tab} ${
+                  activeTab === "ENDED DEALS" ? styles.activeTab : ""
+                }`}
+                onClick={() => setActiveTab("ENDED DEALS")}
               >
                 ENDED DEALS
               </button>
