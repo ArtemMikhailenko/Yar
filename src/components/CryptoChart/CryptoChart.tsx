@@ -51,7 +51,7 @@ const CryptoChart: React.FC<CryptoChartProps> = ({ currency = "bitcoin" }) => {
     value: 0,
     percentage: 0,
   });
-  const [selectedTimeframe, setSelectedTimeframe] = useState<string>("30D");
+  // const [selectedTimeframe, setSelectedTimeframe] = useState<string>("30D");
 
   useEffect(() => {
     const fetchChartData = async () => {
@@ -181,7 +181,7 @@ const CryptoChart: React.FC<CryptoChartProps> = ({ currency = "bitcoin" }) => {
     },
   };
 
-  const timeframes: string[] = ["24H", "7D", "30D", "90D", "1Y", "ALL"];
+  // const timeframes: string[] = ["24H", "7D", "30D", "90D", "1Y", "ALL"];
 
   return (
     <div className={styles.chartContainer}>
