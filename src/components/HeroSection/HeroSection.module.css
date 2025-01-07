@@ -1,133 +1,216 @@
 .hero {
-    width: 100%;
-    max-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
+  width: 100%;
+  max-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Градиентные круги для глубины */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(200px);
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1300px;
+  padding: 0 20px;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeIn 1s ease forwards;
+}
+
+.text {
+  max-width: 600px;
+  text-align: left;
+}
+
+.text h1 {
+  font-size: 72px;
+  color: #1a1a1a;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 50px;
+  background: linear-gradient(90deg, #1a1a1a, #0078ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Подзаголовок */
+.subtext {
+  font-size: 22px;
+  color: #555;
+  margin-bottom: 50px;
+  line-height: 1.6;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Градиентные круги для глубины */
-  .hero::before, .hero::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.3;
-    filter: blur(200px);
-  }  
+}
+
+/* Блок кнопок */
+.buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+.primaryButton {
+  padding: 20px 60px;
+  font-size: 22px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(90deg, #0078ff, #00d4ff);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 15px 35px rgba(0, 120, 255, 0.6);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.primaryButton:hover {
+  background: linear-gradient(90deg, #0056b3, #0096ff);
+  transform: translateY(-5px);
+  box-shadow: 0 18px 50px rgba(0, 120, 255, 0.7);
+}
+
+/* Контурная кнопка */
+.secondaryButton {
+  padding: 20px 60px;
+  font-size: 22px;
+  border: 2px solid #0078ff;
+  border-radius: 50px;
+  background: white;
+  color: #0078ff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.secondaryButton:hover {
+  background: #0078ff;
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 120, 255, 0.4);
+}
+
+/* Изображение */
+.image img {
+  width: 600px;
+  animation: float 5s infinite ease-in-out;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.image img:hover {
+  transform: scale(1.05);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+/* Общие стили остаются как есть, добавляем адаптивность */
+
+/* Адаптация для планшетов (ширина экрана до 1024px) */
+@media (max-width: 1024px) {
   .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1300px;
-    padding: 0 20px;
-    opacity: 0;
-    transform: translateY(40px);
-    animation: fadeIn 1s ease forwards;
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 0 15px;
   }
-  
+
   .text {
-    max-width: 600px;
-    text-align: left;
+    max-width: 100%;
+    margin-bottom: 30px;
   }
-  
+
   .text h1 {
-    font-size: 72px;
-    color: #1a1a1a;
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 50px;
-    background: linear-gradient(90deg, #1a1a1a, #0078ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 50px;
   }
-  
-  /* Подзаголовок */
+
   .subtext {
-    font-size: 22px;
-    color: #555;
-    margin-bottom: 50px;
-    line-height: 1.6;
+    font-size: 20px;
   }
-  
-  /* Анимация появления */
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Блок кнопок */
+
   .buttons {
-    display: flex;
-    justify-content: flex-start;
-    gap: 30px;
+    justify-content: center;
+    gap: 20px;
   }
-  
-  .primaryButton {
-    padding: 20px 60px;
-    font-size: 22px;
-    border: none;
-    border-radius: 50px;
-    background: linear-gradient(90deg, #0078ff, #00d4ff);
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 15px 35px rgba(0, 120, 255, 0.6);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .primaryButton:hover {
-    background: linear-gradient(90deg, #0056b3, #0096ff);
-    transform: translateY(-5px);
-    box-shadow: 0 18px 50px rgba(0, 120, 255, 0.7);
-  }
-  
-  /* Контурная кнопка */
-  .secondaryButton {
-    padding: 20px 60px;
-    font-size: 22px;
-    border: 2px solid #0078ff;
-    border-radius: 50px;
-    background: white;
-    color: #0078ff;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .secondaryButton:hover {
-    background: #0078ff;
-    color: white;
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 120, 255, 0.4);
-  }
-  
-  /* Изображение */
+
   .image img {
-    width: 600px;
-    animation: float 5s infinite ease-in-out;
-    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.3));
-    transition: transform 0.3s ease;
+    width: 500px;
   }
-  
-  .image img:hover {
-    transform: scale(1.05);
+}
+
+/* Адаптация для мобильных устройств (ширина экрана до 768px) */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
   }
-  
-  @keyframes float {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-30px);
-    }
-    100% {
-      transform: translateY(0);
-    }
+
+  .text h1 {
+    font-size: 40px;
   }
-  
+
+  .subtext {
+    font-size: 18px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    padding: 15px 40px;
+    font-size: 18px;
+  }
+
+  .image img {
+    width: 400px;
+  }
+}
+
+/* Адаптация для небольших мобильных устройств (ширина экрана до 480px) */
+@media (max-width: 480px) {
+  .text h1 {
+    font-size: 32px;
+  }
+
+  .subtext {
+    font-size: 16px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    padding: 12px 30px;
+    font-size: 16px;
+  }
+
+  .image img {
+    width: 300px;
+  }
+}

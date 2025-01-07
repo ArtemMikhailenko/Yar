@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import axios from "axios";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,9 +11,11 @@ import {
   Tooltip,
   Legend,
   Filler,
-} from 'chart.js';
-import { TrendingUp, TrendingDown, AlertCircle, RefreshCw } from 'lucide-react';
-import styles from './CryptoChart.module.css';
+  ChartData,
+  ChartOptions,
+} from "chart.js";
+import { TrendingUp, TrendingDown, AlertCircle, RefreshCw } from "lucide-react";
+import styles from "./CryptoChart.module.css";
 
 ChartJS.register(
   CategoryScale,
@@ -26,40 +28,58 @@ ChartJS.register(
   Filler
 );
 
-const CryptoChart = ({ currency = 'bitcoin' }) => {
-  const [chartData, setChartData] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [priceChange, setPriceChange] = useState({ value: 0, percentage: 0 });
-  const [selectedTimeframe, setSelectedTimeframe] = useState('30D');
+interface PriceChange {
+  value: number;
+  percentage: number;
+}
+
+interface CryptoChartProps {
+  currency?: string;
+}
+
+interface PriceData {
+  prices: [number, number][];
+}
+
+const CryptoChart: React.FC<CryptoChartProps> = ({ currency = "bitcoin" }) => {
+  const [chartData, setChartData] = useState<ChartData<"line">>({
+    datasets: [],
+  });
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+  const [priceChange, setPriceChange] = useState<PriceChange>({
+    value: 0,
+    percentage: 0,
+  });
+  const [selectedTimeframe, setSelectedTimeframe] = useState<string>("30D");
 
   useEffect(() => {
     const fetchChartData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(
+        const response = await axios.get<PriceData>(
           `https://api.coingecko.com/api/v3/coins/${currency}/market_chart?vs_currency=usd&days=30`
         );
 
         const prices = response.data.prices;
         const labels = prices.map((price) => {
           const date = new Date(price[0]);
-          return date.toLocaleDateString('en-US', { 
-            month: 'short', 
-            day: 'numeric' 
+          return date.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
           });
         });
 
         const data = prices.map((price) => price[1]);
-        
+
         const firstPrice = data[0];
         const lastPrice = data[data.length - 1];
         const change = lastPrice - firstPrice;
         const changePercentage = (change / firstPrice) * 100;
 
         setPriceChange({
-          value: change.toFixed(2),
-          percentage: changePercentage.toFixed(2)
+          value: Number(change.toFixed(2)),
+          percentage: Number(changePercentage.toFixed(2)),
         });
 
         setChartData({
@@ -68,24 +88,24 @@ const CryptoChart = ({ currency = 'bitcoin' }) => {
             {
               label: `${currency.toUpperCase()} Price (USD)`,
               data,
-              borderColor: '#3b82f6',
-              backgroundColor: 'rgba(59, 130, 246, 0.1)',
+              borderColor: "#3b82f6",
+              backgroundColor: "rgba(59, 130, 246, 0.1)",
               borderWidth: 2,
               fill: true,
               tension: 0.4,
               pointRadius: 0,
               pointHoverRadius: 6,
-              pointHoverBackgroundColor: '#3b82f6',
-              pointHoverBorderColor: '#fff',
+              pointHoverBackgroundColor: "#3b82f6",
+              pointHoverBorderColor: "#fff",
               pointHoverBorderWidth: 2,
             },
           ],
         });
 
-        setError(null);
+        setError("");
       } catch (err) {
-        console.error('Error fetching chart data:', err);
-        setError('Failed to load chart data. Please try again later.');
+        console.error("Error fetching chart data:", err);
+        setError("Failed to load chart data. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -94,7 +114,7 @@ const CryptoChart = ({ currency = 'bitcoin' }) => {
     fetchChartData();
   }, [currency]);
 
-  const chartOptions = {
+  const chartOptions: ChartOptions<"line"> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -102,20 +122,21 @@ const CryptoChart = ({ currency = 'bitcoin' }) => {
         display: false,
       },
       tooltip: {
-        mode: 'index',
+        mode: "index",
         intersect: false,
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        titleColor: '#1f2937',
-        bodyColor: '#1f2937',
-        borderColor: '#e5e7eb',
+        backgroundColor: "rgba(255, 255, 255, 0.9)",
+        titleColor: "#1f2937",
+        bodyColor: "#1f2937",
+        borderColor: "#e5e7eb",
         borderWidth: 1,
         padding: 12,
         displayColors: false,
         callbacks: {
-          label: (context) => `$${context.parsed.y.toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}`,
+          label: (context) =>
+            `$${context.parsed.y.toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}`,
         },
       },
     },
@@ -126,40 +147,41 @@ const CryptoChart = ({ currency = 'bitcoin' }) => {
         },
         ticks: {
           maxTicksLimit: 8,
-          color: '#9ca3af',
+          color: "#9ca3af",
           font: {
             size: 12,
           },
         },
         border: {
-          display: false
-        }
+          display: false,
+        },
       },
       y: {
         grid: {
-          color: '#f3f4f6',
-          drawBorder: false
+          color: "#f3f4f6",
+          //@ts-ignore
+          drawBorder: false,
         },
         ticks: {
-          color: '#9ca3af',
+          color: "#9ca3af",
           font: {
             size: 12,
           },
-          callback: (value) => `$${value.toLocaleString('en-US')}`,
+          callback: (value) => `$${value.toLocaleString("en-US")}`,
         },
         border: {
-          display: false
-        }
+          display: false,
+        },
       },
     },
     interaction: {
-      mode: 'nearest',
-      axis: 'x',
+      mode: "nearest",
+      axis: "x",
       intersect: false,
     },
   };
 
-  const timeframes = ['24H', '7D', '30D', '90D', '1Y', 'ALL'];
+  const timeframes: string[] = ["24H", "7D", "30D", "90D", "1Y", "ALL"];
 
   return (
     <div className={styles.chartContainer}>
@@ -172,7 +194,7 @@ const CryptoChart = ({ currency = 'bitcoin' }) => {
         <div className={styles.errorContainer}>
           <AlertCircle size={32} className={styles.errorIcon} />
           <p className={styles.error}>{error}</p>
-          <button 
+          <button
             className={styles.retryButton}
             onClick={() => window.location.reload()}
           >
@@ -185,17 +207,27 @@ const CryptoChart = ({ currency = 'bitcoin' }) => {
           <div className={styles.chartHeader}>
             <div className={styles.priceInfo}>
               <div className={styles.currencyInfo}>
-                <div className={styles.currencyIcon}>{currency[0].toUpperCase()}</div>
+                <div className={styles.currencyIcon}>
+                  {currency[0].toUpperCase()}
+                </div>
                 <h3>{currency.toUpperCase()} Price Chart</h3>
               </div>
-              <div className={`${styles.priceChange} ${priceChange.value >= 0 ? styles.positive : styles.negative}`}>
+              <div
+                className={`${styles.priceChange} ${
+                  priceChange.value >= 0 ? styles.positive : styles.negative
+                }`}
+              >
                 {priceChange.value >= 0 ? (
                   <TrendingUp size={20} />
                 ) : (
                   <TrendingDown size={20} />
                 )}
-                <span className={styles.changeValue}>${Math.abs(priceChange.value)}</span>
-                <span className={styles.changePercent}>({priceChange.percentage}%)</span>
+                <span className={styles.changeValue}>
+                  ${Math.abs(priceChange.value)}
+                </span>
+                <span className={styles.changePercent}>
+                  ({priceChange.percentage}%)
+                </span>
               </div>
             </div>
             {/* <div className={styles.timeFrames}>

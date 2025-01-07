@@ -36,9 +36,7 @@
 .scrolled {
   height: 70px;
   background: rgba(255, 255, 255, 0.95);
-  box-shadow: 
-    0 4px 30px rgba(0, 0, 0, 0.04),
-    0 10px 40px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04), 0 10px 40px rgba(0, 0, 0, 0.02);
 }
 
 .container {
@@ -124,11 +122,12 @@
 }
 
 .link::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, 
-    rgba(59, 130, 246, 0.1), 
+  background: radial-gradient(
+    circle at center,
+    rgba(59, 130, 246, 0.1),
     transparent 70%
   );
   opacity: 0;
@@ -151,18 +150,14 @@
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
-    0 4px 12px rgba(59, 130, 246, 0.2),
-    0 0 0 2px rgba(59, 130, 246, 0.1),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2),
+    0 0 0 2px rgba(59, 130, 246, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .loginButton:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 8px 24px rgba(59, 130, 246, 0.3),
-    0 0 0 2px rgba(59, 130, 246, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3),
+    0 0 0 2px rgba(59, 130, 246, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .buttonGlow {
@@ -208,8 +203,7 @@
   transform: translateZ(10px);
   background: rgba(59, 130, 246, 0.12);
   border-color: rgba(59, 130, 246, 0.25);
-  box-shadow: 
-    0 4px 12px rgba(59, 130, 246, 0.1),
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1),
     0 0 0 1px rgba(59, 130, 246, 0.1);
 }
 
@@ -224,10 +218,8 @@
   justify-content: center;
   font-weight: 600;
   font-size: 1.1rem;
-  box-shadow: 
-    0 2px 8px rgba(59, 130, 246, 0.2),
-    0 0 0 2px rgba(255, 255, 255, 0.4),
-    inset 0 2px 2px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2),
+    0 0 0 2px rgba(255, 255, 255, 0.4), inset 0 2px 2px rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -249,9 +241,7 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(231, 235, 240, 0.8);
   border-radius: 16px;
-  box-shadow: 
-    0 4px 24px rgba(0, 0, 0, 0.08),
-    0 2px 8px rgba(0, 0, 0, 0.04),
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04),
     0 0 1px rgba(0, 0, 0, 0.3);
   min-width: 220px;
   padding: 0.75rem;
@@ -286,7 +276,7 @@
 }
 
 .dropdownItem::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -334,12 +324,12 @@
   .container {
     padding: 0 1.5rem;
   }
-  
+
   .nav {
     gap: 2rem;
     padding: 0 2rem;
   }
-  
+
   .link {
     font-size: 1rem;
     padding: 0.6rem 1rem;
@@ -350,16 +340,359 @@
   .nav {
     display: none;
   }
-  
+
   .logoText {
     font-size: 1.3rem;
   }
-  
+
   .container {
     padding: 0 1rem;
   }
-  
+
   .loginButton {
     padding: 0.75rem 1.75rem;
+  }
+}
+/* ... (previous styles remain the same until media queries) ... */
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.burgerButton {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1100;
+  position: relative;
+}
+
+.burgerLine {
+  width: 100%;
+  height: 2px;
+  background: #1e293b;
+  border-radius: 4px;
+  transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.burgerButton:hover .burgerLine {
+  background: #3b82f6;
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileMenuOpen {
+  right: 0;
+}
+
+.mobileMenuContent {
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileMenuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.mobileLogoWrapper {
+  perspective: 1000px;
+}
+
+.mobileLogo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 1rem;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobileLogo img {
+  height: 40px;
+  width: auto;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobileLogoText {
+  font-size: 1.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.closeButton {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3b82f6;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.closeButton:hover {
+  background: rgba(59, 130, 246, 0.2);
+  transform: rotate(90deg);
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.mobileLink {
+  text-decoration: none;
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.mobileLink:hover {
+  background: rgba(59, 130, 246, 0.08);
+  color: #3b82f6;
+  padding-left: 2rem;
+}
+
+.mobileLinkIcon {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.mobileLink:hover .mobileLinkIcon {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mobileUserSection {
+  margin-top: auto;
+  border-top: 1px solid rgba(30, 41, 59, 0.1);
+  padding-top: 2rem;
+}
+
+.mobileUserInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1),
+    rgba(139, 92, 246, 0.1)
+  );
+  border-radius: 20px;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.mobileUserLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ... (previous styles remain the same) ... */
+
+.mobileUserLink {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  color: #1e293b;
+  font-size: 1.1rem;
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobileUserLink:hover {
+  background: rgba(59, 130, 246, 0.08);
+  color: #3b82f6;
+  padding-left: 2rem;
+}
+
+.mobileUserLink::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  transition: width 0.3s ease;
+  transform: translateY(-50%);
+}
+
+.mobileUserLink:hover::before {
+  width: 12px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 70px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .burgerButton {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b82f6;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .burgerButton.active {
+    opacity: 0;
+  }
+  .userButton {
+    padding: 0.5rem;
+  }
+
+  .userName {
+    display: none;
+  }
+
+  .loginButton {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .logo img {
+    height: 40px;
+  }
+
+  .logoText {
+    font-size: 1.3rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobileMenu {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: 60px;
+  }
+
+  .logo img {
+    height: 32px;
+  }
+
+  .logoText {
+    font-size: 1.1rem;
+  }
+
+  .loginButton {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .mobileLink {
+    font-size: 1.25rem;
+    padding: 0.875rem 1.25rem;
+  }
+
+  .mobileUserInfo {
+    padding: 1rem;
+  }
+
+  .mobileUserLink {
+    font-size: 1rem;
+    padding: 0.875rem 1.25rem;
+  }
+}
+
+/* Fix for iOS safari 100vh issue */
+@supports (-webkit-touch-callout: none) {
+  .mobileMenu {
+    height: -webkit-fill-available;
   }
 }

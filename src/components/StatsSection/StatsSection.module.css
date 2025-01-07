@@ -1,53 +1,53 @@
 .stats {
-    width: 100%;
-    padding: 30px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;  /* Чтобы круги не выходили за пределы */
+  width: 100%;
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* Чтобы круги не выходили за пределы */
 }
 
 /* Градиентные круги для глубины */
-.stats::before, .stats::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.3;
-    filter: blur(200px);
-    animation: moveCircles 12s infinite ease-in-out;
+.stats::before,
+.stats::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(200px);
+  animation: moveCircles 12s infinite ease-in-out;
 }
-
 
 /* Анимация движения кругов */
 @keyframes moveCircles {
-    0% {
-        transform: translateY(0) translateX(0);
-    }
-    50% {
-        transform: translateY(-40px) translateX(40px);
-    }
-    100% {
-        transform: translateY(0) translateX(0);
-    }
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-40px) translateX(40px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
 }
 
 /* Контейнер с текстом */
 .container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    width: 100%;
-    text-align: center;
-    padding: 50px 0;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+  padding: 50px 0;
 }
 
 /* Анимация появления */
 .statItem {
-    flex: 1;
-    opacity: 1;
-    transform: translateY(30px) scale(0.9);
-    transition: all 0.6s ease;
+  flex: 1;
+  opacity: 1;
+  transform: translateY(30px) scale(0.9);
+  transition: all 0.6s ease;
 }
 
 /* .statItem.show {
@@ -57,36 +57,90 @@
 
 /* Числа с градиентом и тенью */
 .statItem h2 {
-    font-size: 72px;
-    font-weight: 800;
-    margin-bottom: 14px;
-    background: linear-gradient(90deg, #3b82f6, #06b6d4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
-    transition: all 0.3s ease;
+  font-size: 72px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+  transition: all 0.3s ease;
 }
 
 /* Свечение при наведении */
 .statItem:hover h2 {
-    text-shadow: 0 12px 45px rgba(59, 130, 246, 0.6);
-    transform: scale(1.05);
+  text-shadow: 0 12px 45px rgba(59, 130, 246, 0.6);
+  transform: scale(1.05);
 }
 
 /* Градиентный текст под числом */
 .statItem p {
-    font-size: 22px;
-    color: #6b7280;
-    background: linear-gradient(90deg, #64748b, #94a3b8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin: 0;
-    font-weight: 500;
-    transition: color 0.3s ease;
+  font-size: 22px;
+  color: #6b7280;
+  background: linear-gradient(90deg, #64748b, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .statItem:hover p {
-    background: linear-gradient(90deg, #3b82f6, #06b6d4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* Общие стили остаются как есть, добавляем адаптивность */
+
+/* Адаптация для планшетов (ширина экрана до 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px; /* Пространство между элементами */
+  }
+
+  .statItem h2 {
+    font-size: 56px; /* Уменьшаем размер чисел */
+  }
+
+  .statItem p {
+    font-size: 20px; /* Уменьшаем текст */
+  }
+}
+
+/* Адаптация для мобильных устройств (ширина экрана до 768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 15px; /* Сужаем отступы */
+  }
+
+  .statItem h2 {
+    font-size: 48px; /* Ещё меньше для мобильных */
+    text-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  }
+
+  .statItem p {
+    font-size: 18px;
+  }
+}
+
+/* Адаптация для маленьких экранов (ширина экрана до 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 10px;
+  }
+
+  .statItem h2 {
+    font-size: 36px; /* Уменьшаем размер ещё больше */
+    text-shadow: none; /* Убираем тени для лучшей читаемости */
+  }
+
+  .statItem p {
+    font-size: 16px;
+  }
+
+  .stats {
+    padding: 20px 0; /* Уменьшаем отступы секции */
+  }
 }
