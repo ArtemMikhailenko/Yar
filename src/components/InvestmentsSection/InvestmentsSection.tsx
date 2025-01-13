@@ -23,7 +23,7 @@ const InvestmentsSection = () => {
   const [error, setError] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement | null>(null);
   const navigate = useNavigate();
-  const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:1024";
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchTokens = async () => {

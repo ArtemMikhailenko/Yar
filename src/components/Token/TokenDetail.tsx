@@ -28,7 +28,7 @@ const TokenDetail = () => {
   const [error, setError] = useState<string | null>(null);
   const mainCardRef = useRef<HTMLDivElement | null>(null);
   const statsCardRefs = useRef<HTMLDivElement[]>([]);
-  const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:1024";
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchTokenDetails = async () => {
