@@ -1,0 +1,110 @@
+/* Общий контейнер для всей секции */
+.container {
+  padding: 40px;
+  font-family: "Inter", sans-serif;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #eef2f3 0%, #dce5f1 100%);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e3e6eb;
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+
+/* Заголовок таблицы */
+h1 {
+  /* text-align: center; */
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Стили для таблицы */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+/* Заголовки таблицы */
+th {
+  background: #f0f2f5;
+  color: #4f5d75;
+  font-weight: 700;
+  text-align: left;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-bottom: 2px solid #e1e5eb;
+}
+
+/* Строки таблицы */
+td {
+  padding: 16px 20px;
+  font-size: 16px;
+  border-bottom: 1px solid #e1e5eb;
+  color: #333;
+}
+
+/* Чередование строк */
+tr:nth-child(odd) {
+  background-color: #f8f9fc;
+}
+
+tr:nth-child(even) {
+  background-color: white;
+}
+
+/* Эффект при наведении на строку */
+tr:hover {
+  background-color: #e6f7ff;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+/* Секция с названием проекта и логотипом */
+.projectName {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.projectLogo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  object-fit: cover;
+}
+
+/* Тип токена (бейдж) */
+.tokenType {
+  background: #e0f2fe;
+  color: #007bff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/* ATH Badge */
+.athBadge {
+  background: #2ecc71;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Сеть (иконка) */
+.chainIcon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}

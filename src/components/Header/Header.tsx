@@ -4,6 +4,7 @@ import styles from "./Header.module.css";
 import logo from "../../assets/logo-bull.png";
 import { Link, useNavigate } from "react-router-dom";
 import AuthModal from "../AuthModal/AuthModal";
+import ThirdWebWalletConnect from "./ThirdWebWalletConnect";
 interface User {
   fullName: string;
   // Add other user properties as needed
@@ -97,6 +98,7 @@ const Header = () => {
   const menuItems = [
     { path: "/", label: "Home" },
     { path: "/portfolio", label: "Portfolio" },
+    { path: "/projects", label: "Projects" },
     { path: "/about", label: "About Us" },
     ...(user ? [{ path: "/wallet", label: "My Wallet" }] : []),
   ];
@@ -119,7 +121,7 @@ const Header = () => {
             </Link>
           ))}
         </nav>
-
+        <ThirdWebWalletConnect />
         <div className={styles.rightSection}>
           {user ? (
             <div className={styles.userSection} ref={dropdownRef}>
@@ -137,9 +139,6 @@ const Header = () => {
                 <div className={styles.dropdown}>
                   <Link to="/profile" className={styles.dropdownItem}>
                     <span>Мy profile</span>
-                  </Link>
-                  <Link to="/cabinet" className={styles.dropdownItem}>
-                    <span>Personal account</span>
                   </Link>
                   <button
                     onClick={handleLogout}
@@ -263,13 +262,6 @@ const Header = () => {
                   onClick={closeMobileMenu}
                 >
                   <span>My profile</span>
-                </Link>
-                <Link
-                  to="/cabinet"
-                  className={styles.mobileUserLink}
-                  onClick={closeMobileMenu}
-                >
-                  <span>personal account</span>
                 </Link>
                 <button
                   onClick={handleLogout}

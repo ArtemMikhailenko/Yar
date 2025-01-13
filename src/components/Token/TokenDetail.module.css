@@ -1,0 +1,578 @@
+/* TokenDetail.module.css */
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0f1d 0%, #1a1f3d 50%, #0a0f1d 100%);
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Galaxy Background */
+.galaxyBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle 5s infinite;
+}
+
+/* Продолжение TokenDetail.module.css */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.mainCard {
+  position: relative;
+  background: rgba(13, 17, 23, 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.cardGlow {
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(
+    circle at calc(var(--mouse-x, 0.5) * 100%) calc(var(--mouse-y, 0.5) * 100%),
+    rgba(65, 184, 255, 0.15),
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.logoSection {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.logoContainer {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+}
+
+.logoWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logoWrapper:hover {
+  transform: rotateY(180deg);
+}
+
+.logoHologram {
+  position: absolute;
+  inset: -10px;
+  z-index: 1;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(65, 184, 255, 0.3),
+    transparent 60%
+  );
+  animation: spinHolo 8s linear infinite;
+}
+
+.logo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(13, 17, 23, 0.9);
+  border: 2px solid rgba(65, 184, 255, 0.3);
+  position: relative;
+  backface-visibility: hidden;
+  z-index: 5;
+}
+.logo img {
+  position: relative;
+  z-index: 10;
+}
+
+.logoRing {
+  position: absolute;
+  inset: -15px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  z-index: 1;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(65, 184, 255, 0.5),
+    transparent 60%
+  );
+  animation: spinRing 12s linear infinite;
+}
+
+@keyframes spinHolo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinRing {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.tokenInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(
+    45deg,
+    #fff,
+    #41b8ff 25%,
+    #fff 50%,
+    #41b8ff 75%,
+    #fff
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 6s linear infinite;
+}
+
+.symbolWrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.symbolContainer,
+.chainBadgeContainer {
+  position: relative;
+  isolation: isolate;
+}
+
+.symbol {
+  font-size: 1.2rem;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  background: rgba(65, 184, 255, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(65, 184, 255, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.symbolGlow,
+.chainGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(65, 184, 255, 0.2),
+    transparent 70%
+  );
+  filter: blur(8px);
+  z-index: 0;
+}
+
+.chainBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #41b8ff;
+  padding: 0.5rem 1.5rem;
+  background: rgba(65, 184, 255, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(65, 184, 255, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.chainDot {
+  width: 8px;
+  height: 8px;
+  background: #41b8ff;
+  border-radius: 50%;
+  position: relative;
+}
+
+.chainDot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  background: rgba(65, 184, 255, 0.3);
+  border-radius: 50%;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.statusSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.statusBadge.active {
+  background: rgba(46, 196, 182, 0.1);
+  color: rgb(46, 196, 182);
+  border: 1px solid rgba(46, 196, 182, 0.3);
+}
+
+.statusBadge.ended {
+  background: rgba(255, 99, 71, 0.1);
+  color: tomato;
+  border: 1px solid rgba(255, 99, 71, 0.3);
+}
+
+.statusIcon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.active .statusIcon {
+  background: rgb(46, 196, 182);
+  box-shadow: 0 0 10px rgba(46, 196, 182, 0.5);
+}
+
+.ended .statusIcon {
+  background: tomato;
+  box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
+}
+
+.timeContainer {
+  position: relative;
+  padding: 1rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.timeGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(65, 184, 255, 0.1),
+    transparent 70%
+  );
+  border-radius: 24px;
+  filter: blur(10px);
+}
+
+.timeRemaining {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+}
+
+.timeBlock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(65, 184, 255, 0.05);
+  padding: 1rem;
+  border-radius: 16px;
+  min-width: 80px;
+  border: 1px solid rgba(65, 184, 255, 0.1);
+  overflow: hidden;
+}
+
+.timeNumber {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.timeLabel {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.timeBlockGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(65, 184, 255, 0.2),
+    transparent 70%
+  );
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.timeBlock:hover .timeBlockGlow {
+  opacity: 1;
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.statsCard {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(65, 184, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.statsCard:hover {
+  transform: translateY(-5px);
+}
+
+.cardContent {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 1.5rem 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.titleLine {
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #41b8ff, transparent);
+  transition: width 0.3s ease;
+}
+
+.statsCard:hover .titleLine {
+  width: 100%;
+}
+
+.statsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.statItem {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(65, 184, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(65, 184, 255, 0.1);
+}
+
+.statItem:hover {
+  transform: translateX(10px);
+  background: rgba(65, 184, 255, 0.1);
+}
+
+.statIcon {
+  font-size: 1.2rem;
+}
+
+.statLabel {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.statValue {
+  font-weight: 600;
+  color: #fff;
+  text-align: right;
+}
+
+.descriptionCard {
+  position: relative;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 24px;
+  border: 1px solid rgba(65, 184, 255, 0.1);
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.descriptionGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(65, 184, 255, 0.1),
+    transparent 70%
+  );
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+/* Loading Animation */
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.loadingEffect {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.loadingDot {
+  width: 12px;
+  height: 12px;
+  background: #41b8ff;
+  border-radius: 50%;
+  animation: loadingDot 1.5s infinite ease-in-out;
+}
+
+.loadingDot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loadingDot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loadingDot {
+  0%,
+  100% {
+    transform: scale(0.3);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .logoSection {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .statusSection {
+    align-items: center;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .timeRemaining {
+    justify-content: center;
+  }
+
+  .timeBlock {
+    min-width: 70px;
+    padding: 0.8rem;
+  }
+
+  .timeNumber {
+    font-size: 1.5rem;
+  }
+}

@@ -3,12 +3,12 @@ import axios from "axios";
 import styles from "./AuthModal.module.css";
 import { AuthModalProps } from "../../types/header/header";
 import useAuth from "../../hooks/useAuth";
-import { 
-  UserIcon, 
-  EnvelopeIcon, 
-  LockClosedIcon, 
-  ShieldCheckIcon 
-} from '@heroicons/react/24/outline';
+import {
+  UserIcon,
+  EnvelopeIcon,
+  LockClosedIcon,
+  ShieldCheckIcon,
+} from "@heroicons/react/24/outline";
 
 const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -17,16 +17,16 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLogin }) => {
     fullName: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
-  
-  const { setUser } = useAuth();
 
+  const { setUser } = useAuth();
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
     setError("");
   };
@@ -34,9 +34,10 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLogin }) => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:1024/api/auth/login", {
+      // const response = await axios.post("http://localhost:1024/api/auth/login", {
+      const response = await axios.post(`${BASE_URL}/api/auth/login`, {
         email: formData.email,
-        password: formData.password
+        password: formData.password,
       });
 
       localStorage.setItem("token", response.data.token);
@@ -57,11 +58,14 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLogin }) => {
     }
 
     try {
-      const response = await axios.post("http://localhost:1024/api/auth/register", {
+      // const response = await axios.post(
+      //   "http://localhost:1024/api/auth/register",
+      //   {
+      const response = await axios.post(`${BASE_URL}/api/auth/register`, {
         fullName: formData.fullName,
         email: formData.email,
         password: formData.password,
-        confirmPassword: formData.confirmPassword
+        confirmPassword: formData.confirmPassword,
       });
 
       localStorage.setItem("token", response.data.token);
@@ -77,7 +81,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLogin }) => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:1024/api/auth/forgot-password", {
-        email: formData.email
+        email: formData.email,
       });
       setError("Password reset link has been sent to your email");
     } catch (error: any) {
@@ -89,7 +93,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLogin }) => {
 
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
-      <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <div className={styles.modalHeader}>
           <div className={styles.tabs}>
             <button
@@ -112,7 +116,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLogin }) => {
 
         <div className={styles.modalBody}>
           {error && <div className={styles.error}>{error}</div>}
-          
+
           {isLogin ? (
             <form className={styles.authForm} onSubmit={handleLogin}>
               <div className={styles.formGroup}>
