@@ -1,0 +1,261 @@
+/* BalanceCard.module.css */
+.card {
+  background: linear-gradient(145deg, #1a1f3d, #2a2f4d);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.balanceSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.balanceHeader {
+  width: 100%;
+}
+
+.balanceInfo {
+  margin-bottom: 24px;
+}
+
+.label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.balanceAmount {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dollarIcon {
+  color: #41b8ff;
+  width: 24px;
+  height: 24px;
+}
+
+.balance {
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  line-height: 1;
+}
+
+.currency {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.statsContainer {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.stat:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.statIcon {
+  color: #41b8ff;
+  width: 20px;
+  height: 20px;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.statValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4caf50;
+}
+
+.graphPlaceholder {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sparkline {
+  height: 120px;
+  background: linear-gradient(
+    180deg,
+    rgba(65, 184, 255, 0.1) 0%,
+    rgba(65, 184, 255, 0) 100%
+  );
+  border-radius: 8px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sparkline::after {
+  content: "";
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(65, 184, 255, 0) 0%,
+    rgba(65, 184, 255, 0.5) 50%,
+    rgba(65, 184, 255, 0) 100%
+  );
+}
+
+.timeframes {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.timeframe {
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.timeframe:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.timeframe.active {
+  background: rgba(65, 184, 255, 0.2);
+  color: #41b8ff;
+}
+
+.actionsContainer {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.actionButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.depositButton {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+}
+
+.depositButton:hover {
+  background: linear-gradient(135deg, #45a049, #3d8b40);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3);
+}
+
+.swapButton {
+  background: linear-gradient(135deg, #41b8ff, #2196f3);
+}
+
+.swapButton:hover {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(33, 150, 243, 0.3);
+}
+
+.withdrawButton {
+  background: linear-gradient(135deg, #ff4081, #e91e63);
+}
+
+.withdrawButton:hover {
+  background: linear-gradient(135deg, #e91e63, #d81b60);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(233, 30, 99, 0.3);
+}
+
+.actionIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.connectWalletWrapper {
+  margin-top: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card {
+    padding: 24px;
+  }
+
+  .balance {
+    font-size: 36px;
+  }
+
+  .statsContainer {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+  }
+
+  .graphPlaceholder {
+    padding: 16px;
+  }
+}

@@ -8,6 +8,7 @@ export interface User {
     role: UserRole;
     createdAt: string;
     lastLogin?: string;
+    balance:number;
   }
   
   export enum UserRole {

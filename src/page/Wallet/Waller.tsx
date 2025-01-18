@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { ArrowUpRight, ArrowDownRight, RefreshCcw } from "lucide-react";
-import CryptoChart from "../../components/CryptoChart/CryptoChart";
+// import { ArrowUpRight, ArrowDownRight, RefreshCcw } from "lucide-react";
+// import CryptoChart from "../../components/CryptoChart/CryptoChart";
+import BalanceCard from "../../components/BalanceCard/BalanceCard";
+import DepositModal from "../../components/DepositModal/DepositModal";
 import styles from "./Wallet.module.css";
 
 const Wallet = () => {
   const [activeTab, setActiveTab] = useState("HOLDINGS");
+  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
 
   const holdings = Array(6).fill({
     token: "Project Network PNT",
@@ -15,68 +18,35 @@ const Wallet = () => {
     totalValue: "4500.00$",
   });
 
+  // const openDepositModal = () => setIsDepositModalOpen(true);
+  const closeDepositModal = () => setIsDepositModalOpen(false);
+
   return (
     <div className={styles.container}>
-      {/* Balance Card */}
-      <div className={styles.balanceCard}>
-        <div className={styles.balanceInfo}>
-          <span className={styles.label}>Total Balance</span>
-          <h1 className={styles.balance}>$50,000.00 USD</h1>
-          <div className={styles.growth}>
-            <ArrowUpRight size={16} />
-            +12.5% from last month
-          </div>
-        </div>
-        <div className={styles.actions}>
-          <button className={styles.actionButton}>
-            <ArrowUpRight size={16} />
-            Deposit
-          </button>
-          <button className={`${styles.actionButton} ${styles.activeButton}`}>
-            <RefreshCcw size={16} />
-            Swap
-          </button>
-          <button className={styles.actionButton}>
-            <ArrowDownRight size={16} />
-            Withdraw
-          </button>
-        </div>
-      </div>
+      {/* Balance Card Component */}
+      <BalanceCard />
 
       {/* Main Content */}
       <div className={styles.mainContent}>
         <div className={styles.leftPanel}>
           {/* Chart Section */}
           <div className={styles.chartCard}>
-            <div className={styles.chart}>
+            {/* <div className={styles.chart}>
               <CryptoChart currency="bitcoin" />
-            </div>
+            </div> */}
 
             <div className={styles.tabs}>
-              <button
-                className={`${styles.tab} ${
-                  activeTab === "HOLDINGS" ? styles.activeTab : ""
-                }`}
-                onClick={() => setActiveTab("HOLDINGS")}
-              >
-                HOLDINGS
-              </button>
-              <button
-                className={`${styles.tab} ${
-                  activeTab === "NEW DEALS" ? styles.activeTab : ""
-                }`}
-                onClick={() => setActiveTab("NEW DEALS")}
-              >
-                NEW DEALS
-              </button>
-              <button
-                className={`${styles.tab} ${
-                  activeTab === "ENDED DEALS" ? styles.activeTab : ""
-                }`}
-                onClick={() => setActiveTab("ENDED DEALS")}
-              >
-                ENDED DEALS
-              </button>
+              {["HOLDINGS", "NEW DEALS", "ENDED DEALS"].map((tab) => (
+                <button
+                  key={tab}
+                  className={`${styles.tab} ${
+                    activeTab === tab ? styles.activeTab : ""
+                  }`}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab}
+                </button>
+              ))}
             </div>
 
             <div className={styles.tableWrapper}>
@@ -147,6 +117,9 @@ const Wallet = () => {
           </div>
         </div>
       </div>
+
+      {/* Deposit Modal */}
+      {isDepositModalOpen && <DepositModal onClose={closeDepositModal} />}
     </div>
   );
 };

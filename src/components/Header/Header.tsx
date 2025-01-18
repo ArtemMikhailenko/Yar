@@ -28,13 +28,13 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userData = localStorage.getItem("user");
-    if (token && userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   const userData = localStorage.getItem("user");
+  //   if (token && userData) {
+  //     setUser(JSON.parse(userData));
+  //   }
+  // }, [token]);
 
   useEffect(() => {
     //@ts-ignore

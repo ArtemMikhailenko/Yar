@@ -1,49 +1,58 @@
-import { Mail, MapPin, ExternalLink, Settings, LogOut } from 'lucide-react';
-import styles from './Profile.module.css';
+import { Mail, LogOut } from "lucide-react";
+import styles from "./Profile.module.css";
+import { useEffect, useState } from "react";
+import { User } from "../../types/header/header";
+import logo from "../../assets/logo-bull.png";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const [user, setUser] = useState<User | null>(null);
+  // const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const userData = localStorage.getItem("user");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, [userData]);
   const stats = [
-    { label: 'Total Balance', value: '$125,400' },
-    { label: 'Active Stakes', value: '12' },
-    { label: 'Total Profit', value: '+$45,200' }
+    { label: "Total Balance", value: user?.balance },
+    { label: "Projects", value: "0" },
+    { label: "Total Profit", value: "0" },
   ];
-
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/");
+  };
   return (
     <div className={styles.container}>
       <div className={styles.headerCard}>
         <div className={styles.profileHeader}>
           <div className={styles.headerContent}>
             <div className={styles.avatarWrapper}>
-              <img 
-                src="/api/placeholder/120/120" 
-                alt="Profile" 
-                className={styles.avatar}
-              />
+              <img src={logo} alt="Profile" className={styles.avatar} />
               <div className={styles.status}></div>
             </div>
-            
+
             <div className={styles.userInfo}>
               <div className={styles.nameWrapper}>
-                <h1>Alex Thompson</h1>
-                <span className={styles.badge}>PRO</span>
+                <h1>{user?.fullName}</h1>
               </div>
               <div className={styles.userMeta}>
                 <p>
                   <Mail size={16} />
-                  alex.thompson@example.com
-                </p>
-                <p>
-                  <MapPin size={16} />
-                  Los Angeles, CA
+                  {user?.email}
                 </p>
               </div>
             </div>
-            
+
             <div className={styles.actions}>
-              <button className={styles.actionButton}>
-                <Settings size={18} />
-              </button>
-              <button className={`${styles.actionButton} ${styles.logoutButton}`}>
+              <button
+                className={`${styles.actionButton} ${styles.logoutButton}`}
+                onClick={handleLogout}
+              >
                 <LogOut size={18} />
               </button>
             </div>
@@ -66,27 +75,27 @@ const Profile = () => {
             <div className={styles.investTitle}>
               <div className={styles.tokenIcon}>Ξ</div>
               <div>
-                <h3>ETH Staking Pool</h3>
+                <h3>USDT</h3>
                 <span>Active Investment</span>
               </div>
             </div>
-            <button className={styles.detailsButton}>
+            {/* <button className={styles.detailsButton}>
               View Details
               <ExternalLink size={16} />
-            </button>
+            </button> */}
           </div>
           <div className={styles.investStats}>
             <div>
               <span className={styles.label}>Staked Amount</span>
-              <span className={styles.value}>32 ETH</span>
+              <span className={styles.value}>0 USDT</span>
             </div>
             <div>
               <span className={styles.label}>APR</span>
-              <span className={`${styles.value} ${styles.positive}`}>5.2%</span>
+              <span className={`${styles.value} ${styles.positive}`}>0%</span>
             </div>
             <div>
               <span className={styles.label}>Duration</span>
-              <span className={styles.value}>12 months</span>
+              <span className={styles.value}>None</span>
             </div>
           </div>
         </div>
@@ -96,27 +105,27 @@ const Profile = () => {
             <div className={styles.investTitle}>
               <div className={`${styles.tokenIcon} ${styles.solana}`}>S</div>
               <div>
-                <h3>SOL Yield Farm</h3>
+                <h3>BTC</h3>
                 <span>Active Investment</span>
               </div>
             </div>
-            <button className={styles.detailsButton}>
+            {/* <button className={styles.detailsButton}>
               View Details
               <ExternalLink size={16} />
-            </button>
+            </button> */}
           </div>
           <div className={styles.investStats}>
             <div>
               <span className={styles.label}>Staked Amount</span>
-              <span className={styles.value}>1,500 SOL</span>
+              <span className={styles.value}>0 BTC</span>
             </div>
             <div>
               <span className={styles.label}>APR</span>
-              <span className={`${styles.value} ${styles.positive}`}>7.8%</span>
+              <span className={`${styles.value} ${styles.positive}`}>0%</span>
             </div>
             <div>
               <span className={styles.label}>Duration</span>
-              <span className={styles.value}>6 months</span>
+              <span className={styles.value}>None</span>
             </div>
           </div>
         </div>

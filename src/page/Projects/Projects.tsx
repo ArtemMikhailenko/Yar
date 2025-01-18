@@ -1,108 +1,114 @@
 import { useState, useEffect } from "react";
 import styles from "./Projects.module.css";
+import { useNavigate } from "react-router-dom";
+import UpcomingProjects from "../../components/UpcomingProjects/UpcomingProjects";
 
-interface TokenData {
-  id: string;
+interface ProjectData {
+  _id: string;
   name: string;
   symbol: string;
   type: string;
   participants: number;
-  totalRaised: string;
-  athSinceIdo: string;
-  endedIn: string;
+  totalRaised: number;
+  athSinceIDO: string;
+  endDate: string;
   chain: string;
-  logo: string;
-  chainIcon: string;
+  logoUrl: string;
+  description: string;
 }
 
 const Projects = () => {
-  const [tokens, setTokens] = useState<TokenData[]>([]);
+  const [projects, setProjects] = useState<ProjectData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-
+  const navigate = useNavigate();
+  const BASE_URL = "http://localhost:1024/api/projects";
+  const handleViewToken = (tokenName: string) => {
+    navigate(`/token/${encodeURIComponent(tokenName)}`);
+  };
   useEffect(() => {
-    const fetchTokens = async () => {
+    const fetchProjects = async () => {
       try {
-        const response = await fetch(
-          "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
-        );
+        const response = await fetch(BASE_URL);
+        if (!response.ok) {
+          throw new Error("Failed to fetch projects");
+        }
         const data = await response.json();
-        const formattedData = data.slice(0, 10).map((item: any) => ({
-          id: item.id,
-          name: item.name,
-          symbol: item.symbol.toUpperCase(),
-          type: "TOKEN SALE",
-          participants: Math.floor(Math.random() * 1000),
-          totalRaised: `$${item.market_cap.toLocaleString()}`,
-          athSinceIdo:
-            Math.random() > 0.5
-              ? `+${Math.floor(Math.random() * 500)}%`
-              : "TBA",
-          endedIn: "N/A",
-          chain: "Ethereum",
-          logo: item.image,
-          chainIcon: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+
+        // Преобразуем endDate в более читаемый формат
+        const formattedProjects = data.map((project: ProjectData) => ({
+          ...project,
+          endDate: project.endDate
+            ? new Date(project.endDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })
+            : "TBA",
         }));
-        setTokens(formattedData);
-        setLoading(false);
+
+        setProjects(formattedProjects);
       } catch (error) {
-        console.error("Error fetching tokens:", error);
+        console.error("Error fetching projects:", error);
+      } finally {
         setLoading(false);
       }
     };
-    fetchTokens();
+
+    fetchProjects();
   }, []);
 
   return (
     <div className={styles.container}>
-      <h1>Recently Created Tokens</h1>
+      <UpcomingProjects />
+      <h1>Recently Created Projects</h1>
       {loading ? (
-        <p>Loading tokens...</p>
+        <p>Loading projects...</p>
       ) : (
         <table className={styles.table}>
           <thead>
             <tr>
               <th>Project Name</th>
+              <th>Symbol</th>
               <th>Type</th>
               <th>Participants</th>
-              <th>Total Raised</th>
+              <th>Total Raised ($)</th>
               <th>ATH Since IDO</th>
-              <th>Ended In</th>
+              <th>End Date</th>
               <th>Chain</th>
             </tr>
           </thead>
           <tbody>
-            {tokens.map((token) => (
-              <tr key={token.id}>
-                <td>
+            {projects.map((project) => (
+              <tr key={project._id}>
+                <td onClick={() => handleViewToken(project.name)}>
                   <div className={styles.projectName}>
                     <img
-                      src={token.logo}
-                      alt={token.name}
+                      src={project.logoUrl}
+                      alt={project.name}
                       className={styles.projectLogo}
                     />
-                    {token.name}
+                    {project.name}
                   </div>
                 </td>
                 <td>
-                  <span className={styles.tokenType}>{token.type}</span>
+                  <span className={styles.tokenSymbol}>{project.symbol}</span>
                 </td>
-                <td>{token.participants}</td>
-                <td>{token.totalRaised}</td>
                 <td>
-                  {token.athSinceIdo !== "TBA" ? (
-                    <span className={styles.athBadge}>{token.athSinceIdo}</span>
+                  <span className={styles.tokenType}>{project.type}</span>
+                </td>
+                <td>{project.participants}</td>
+                <td>${project.totalRaised.toLocaleString()}</td>
+                <td>
+                  {project.athSinceIDO !== "TBA" ? (
+                    <span className={styles.athBadge}>
+                      {project.athSinceIDO}
+                    </span>
                   ) : (
                     "TBA"
                   )}
                 </td>
-                <td>{token.endedIn}</td>
-                <td>
-                  <img
-                    src={token.chainIcon}
-                    alt={token.chain}
-                    className={styles.chainIcon}
-                  />
-                </td>
+                <td>{project.endDate}</td>
+                <td>{project.chain}</td>
               </tr>
             ))}
           </tbody>

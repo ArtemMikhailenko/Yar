@@ -15,12 +15,13 @@ interface Token {
   description: string;
 }
 
-// interface TimeRemaining {
-//   total: number;
-//   days: number;
-//   hours: number;
-//   minutes: number;
-// }
+interface TimeRemaining {
+  total: number;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
 const TokenDetail = () => {
   const { tokenId } = useParams<{ tokenId: string }>();
   const [token, setToken] = useState<Token | null>(null);
@@ -28,6 +29,14 @@ const TokenDetail = () => {
   const [error, setError] = useState<string | null>(null);
   const mainCardRef = useRef<HTMLDivElement | null>(null);
   const statsCardRefs = useRef<HTMLDivElement[]>([]);
+  const [timeLeft, setTimeLeft] = useState<TimeRemaining>({
+    total: 0,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+  const timerRef = useRef<NodeJS.Timeout>();
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   useEffect(() => {
     const fetchTokenDetails = async () => {
@@ -44,6 +53,12 @@ const TokenDetail = () => {
     };
 
     fetchTokenDetails();
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
   }, [tokenId]);
 
   useEffect(() => {
@@ -71,15 +86,49 @@ const TokenDetail = () => {
     }).format(num);
   };
 
-  const getTimeRemaining = (endDate: any) => {
-    //@ts-ignore
-    const total = Date.parse(endDate) - Date.parse(new Date());
-    const days = Math.floor(total / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((total / 1000 / 60) % 60);
-    return { total, days, hours, minutes };
-  };
+  const getTimeRemaining = (endDate: string): TimeRemaining => {
+    const total = new Date(endDate).getTime() - new Date().getTime();
 
+    if (total <= 0) {
+      return {
+        total: 0,
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      };
+    }
+
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / (1000 * 60)) % 60);
+    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+    const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+    return { total, days, hours, minutes, seconds };
+  };
+  useEffect(() => {
+    if (token?.endDate) {
+      // Initial calculation
+      setTimeLeft(getTimeRemaining(token.endDate));
+
+      // Set up interval
+      timerRef.current = setInterval(() => {
+        const remaining = getTimeRemaining(token.endDate);
+        setTimeLeft(remaining);
+
+        if (remaining.total <= 0 && timerRef.current) {
+          clearInterval(timerRef.current);
+        }
+      }, 1000);
+
+      // Cleanup
+      return () => {
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+        }
+      };
+    }
+  }, [token?.endDate]);
   if (loading) {
     return (
       <div className={styles.page}>
@@ -173,11 +222,17 @@ const TokenDetail = () => {
                       { value: timeRemaining.days, label: "days" },
                       { value: timeRemaining.hours, label: "hours" },
                       { value: timeRemaining.minutes, label: "min" },
+                      { value: timeRemaining.seconds, label: "sec" },
                     ].map((time, index) => (
                       <div key={index} className={styles.timeBlock}>
-                        <span className={styles.timeNumber}>{time.value}</span>
+                        <span className={styles.timeNumber}>
+                          {String(time.value).padStart(2, "0")}
+                        </span>
                         <span className={styles.timeLabel}>{time.label}</span>
                         <div className={styles.timeBlockGlow}></div>
+                        {index < 3 && (
+                          <div className={styles.timeSeparator}>:</div>
+                        )}
                       </div>
                     ))}
                   </div>

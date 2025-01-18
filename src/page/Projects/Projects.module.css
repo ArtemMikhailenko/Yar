@@ -1,14 +1,14 @@
 /* Общий контейнер для всей секции */
 .container {
-  padding: 40px;
+  /* padding: 40px; */
   font-family: "Inter", sans-serif;
   max-width: 1400px;
   margin: 0 auto;
-  background: linear-gradient(135deg, #eef2f3 0%, #dce5f1 100%);
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e3e6eb;
-  margin-top: 40px;
+  /* background: linear-gradient(135deg, #eef2f3 0%, #dce5f1 100%); */
+  /* border-radius: 16px; */
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); */
+  /* border: 1px solid #e3e6eb; */
+  margin-top: 20px;
   margin-bottom: 50px;
 }
 

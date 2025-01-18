@@ -1,0 +1,219 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: overlayFadeIn 0.3s ease-out;
+}
+
+.modalContent {
+  width: 90%;
+  max-width: 440px;
+  background: linear-gradient(145deg, #ffffff, #f3f4f6);
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  text-align: center;
+  animation: modalSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.closeIcon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.closeIcon:hover {
+  color: #000;
+  transform: rotate(90deg);
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 32px;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.walletRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+.walletRow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.walletRow:hover::before {
+  transform: translateX(100%);
+}
+
+.walletRow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: #ddd;
+}
+
+.walletLabel {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.walletLabel::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.walletAddress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  word-break: break-all;
+  position: relative;
+  font-family: "Roboto Mono", monospace;
+  letter-spacing: 0.5px;
+  border: 1px solid #eee;
+}
+
+.copyButton {
+  background: none;
+  border: none;
+  color: #666;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copyButton:hover {
+  color: #007bff;
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.closeButton {
+  width: 100%;
+  margin-top: 24px;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.closeButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(102, 126, 234, 0.25);
+}
+
+.closeButton:active {
+  transform: translateY(1px);
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 95%;
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .walletAddress {
+    font-size: 12px;
+  }
+}

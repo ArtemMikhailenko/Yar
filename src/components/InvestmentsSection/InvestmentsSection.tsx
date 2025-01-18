@@ -28,6 +28,8 @@ const InvestmentsSection = () => {
     const fetchTokens = async () => {
       try {
         const response = await fetch(`${BASE_URL}/api/projects`);
+        console.log(response);
+
         if (!response.ok) {
           throw new Error("Failed to fetch projects");
         }
