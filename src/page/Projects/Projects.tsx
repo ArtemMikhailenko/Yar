@@ -21,14 +21,14 @@ const Projects = () => {
   const [projects, setProjects] = useState<ProjectData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
-  const BASE_URL = "http://localhost:1024/api/projects";
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const handleViewToken = (tokenName: string) => {
     navigate(`/token/${encodeURIComponent(tokenName)}`);
   };
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch(BASE_URL);
+        const response = await fetch(`${BASE_URL}/api/projects`);
         if (!response.ok) {
           throw new Error("Failed to fetch projects");
         }
