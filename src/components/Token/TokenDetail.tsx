@@ -29,6 +29,7 @@ const TokenDetail = () => {
   const [error, setError] = useState<string | null>(null);
   const mainCardRef = useRef<HTMLDivElement | null>(null);
   const statsCardRefs = useRef<HTMLDivElement[]>([]);
+  //@ts-ignore
   const [timeLeft, setTimeLeft] = useState<TimeRemaining>({
     total: 0,
     days: 0,

@@ -2,7 +2,7 @@ import {
   ConnectWallet,
   ThirdwebProvider,
   useAddress,
-  useDisconnect,
+  // useDisconnect,
 } from "@thirdweb-dev/react";
 import { useEffect } from "react";
 import {
@@ -18,7 +18,7 @@ import useAuth from "../../hooks/useAuth"; // Assuming you have this hook
 
 const WalletConnectInner = () => {
   const address = useAddress();
-  const disconnect = useDisconnect();
+  // const disconnect = useDisconnect();
   const { user, setUser } = useAuth();
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const WalletConnectInner = () => {
 
           const updatedUser = { ...user, walletAddress: null };
           localStorage.setItem("user", JSON.stringify(updatedUser));
-          setUser(updatedUser);
+          setUser(updatedUser as any);
         } catch (error) {
           console.error("Failed to clear wallet address:", error);
         }
