@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
+// import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 import styles from "./AuthModal.module.css";
 import { AuthModalProps } from "../../types/header/header";
 import useAuth from "../../hooks/useAuth";
@@ -19,13 +19,13 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
     confirmPassword: "",
   });
 
-  const address = useAddress();
+  // const address = useAddress();
   const { setUser } = useAuth();
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-  useEffect(() => {
-    setError("");
-  }, [address]);
+  // useEffect(() => {
+  //   setError("");
+  // }, [address]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -93,7 +93,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
           {
             ...formData,
             phoneNumber: formData.phoneNumber,
-            walletAddress: address,
+            walletAddress: "",
           }
         );
 
@@ -117,7 +117,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
       const response = await axios.post(`${BASE_URL}/api/auth/login`, {
         email: formData.email,
         password: formData.password,
-        walletAddress: address,
+        walletAddress: "",
       });
 
       localStorage.setItem("token", response.data.token);
@@ -153,7 +153,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
           </button>
         </div>
 
-        <div className={styles.walletSection}>
+        {/* <div className={styles.walletSection}>
           <h3>Step 1: Connect Your Wallet</h3>
           <div className={styles.walletConnect}>
             <ConnectWallet
@@ -168,10 +168,10 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
               {address.slice(0, 6)}...{address.slice(-4)}
             </div>
           )}
-        </div>
+        </div> */}
 
         <div className={styles.formSection}>
-          <h3>Step 2: {isLogin ? "Sign In" : "Create Account"}</h3>
+          <h3> {isLogin ? "Sign In" : "Create Account"}</h3>
           {error && <div className={styles.error}>{error}</div>}
 
           {isLogin ? (
@@ -182,7 +182,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
                 placeholder="Email"
                 onChange={handleInputChange}
                 required
-                disabled={!address}
+                // disabled={!address}
               />
               <input
                 type="password"
@@ -190,14 +190,15 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
                 placeholder="Password"
                 onChange={handleInputChange}
                 required
-                disabled={!address}
+                // disabled={!address}
               />
               <button
                 type="submit"
-                disabled={!address}
-                className={!address ? styles.buttonDisabled : ""}
+                // disabled={!address}
+                // className={!address ? styles.buttonDisabled : ""}
               >
-                {!address ? "Connect Wallet First" : "Login"}
+                {/* {!address ? "Connect Wallet First" : "Login"} */}
+                Login
               </button>
             </form>
           ) : !isCodeSent ? (
@@ -208,7 +209,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
                 placeholder="Full Name"
                 onChange={handleInputChange}
                 required
-                disabled={!address}
+                // disabled={!address}
               />
               <input
                 type="email"
@@ -216,7 +217,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
                 placeholder="Email"
                 onChange={handleInputChange}
                 required
-                disabled={!address}
+                // disabled={!address}
               />
               <input
                 type="tel"
@@ -224,7 +225,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
                 placeholder="Phone Number (e.g. +7 999 123 45 67)"
                 onChange={handleInputChange}
                 required
-                disabled={!address}
+                // disabled={!address}
               />
               <input
                 type="password"
@@ -232,7 +233,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
                 placeholder="Password"
                 onChange={handleInputChange}
                 required
-                disabled={!address}
+                // disabled={!address}
               />
               <input
                 type="password"
@@ -240,12 +241,12 @@ const AuthModal: React.FC<AuthModalProps> = ({ onClose, onLogin }) => {
                 placeholder="Confirm Password"
                 onChange={handleInputChange}
                 required
-                disabled={!address}
+                // disabled={!address}
               />
               <button
                 type="submit"
-                disabled={!address}
-                className={!address ? styles.buttonDisabled : ""}
+                // disabled={!address}
+                // className={!address ? styles.buttonDisabled : ""}
               >
                 Send Verification Code
               </button>

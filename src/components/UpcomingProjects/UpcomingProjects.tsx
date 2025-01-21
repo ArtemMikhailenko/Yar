@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   Calendar,
   Users,
@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./UpcomingProjects.module.css";
 
 interface UpcomingProject {
@@ -24,9 +25,10 @@ interface UpcomingProject {
   categories: string[];
 }
 
-const FeaturedProject: React.FC<{ project: UpcomingProject }> = ({
-  project,
-}) => (
+const FeaturedProject: React.FC<{
+  project: UpcomingProject;
+  onViewProject: (tokenName: string) => void;
+}> = ({ project, onViewProject }) => (
   <div className={styles.featuredContainer}>
     <div
       className={styles.featuredBanner}
@@ -92,7 +94,10 @@ const FeaturedProject: React.FC<{ project: UpcomingProject }> = ({
               </div>
             </div>
           </div>
-          <button className={styles.learnMoreButton}>
+          <button
+            onClick={() => onViewProject(project.name)}
+            className={styles.learnMoreButton}
+          >
             View Project Details
             <span className={styles.buttonGlow} />
           </button>
@@ -105,76 +110,64 @@ const FeaturedProject: React.FC<{ project: UpcomingProject }> = ({
 const UpcomingProjects: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const upcomingProjects: UpcomingProject[] = [
-    {
-      id: "1",
-      name: "Ondo AI",
-      description:
-        "Revolutionizing AI infrastructure with decentralized computing power and blockchain technology. Ondo AI creates an ecosystem where users can share computational resources and earn rewards.",
-      logoUrl:
-        "https://polkastarter.com/_next/image?url=https%3A%2F%2Fassets.polkastarter.com%2Flogo_onda_ba410336f5%2Flogo_onda_ba410336f5.jpg&w=96&q=70",
-      bannerUrl:
-        "https://cdn.banklesstimes.com/bt/content/uploads/2024/07/1720681115-Ondo-Finance.jpg",
-      startDate: "Jan 30, 2025",
-      targetRaise: 400000,
-      totalParticipants: 12000,
-      timeUntilStart: "12 days",
-      chain: "Ethereum",
-      status: "Upcoming",
-      categories: ["AI", "Infrastructure", "Web3"],
-    },
-    {
-      id: "2",
-      name: "Avalanche AI",
-      description:
-        "A next-generation AI platform leveraging the Avalanche network for high-performance machine learning applications. Building the future of decentralized artificial intelligence.",
-      logoUrl:
-        "https://polkastarter.com/_next/image?url=https%3A%2F%2Fassets.polkastarter.com%2Fqug8_L_Ew_F_400x400_63d22bf6ba%2Fqug8_L_Ew_F_400x400_63d22bf6ba.jpg&w=96&q=70",
-      bannerUrl:
-        "https://polkastarter.com/_next/image?url=https%3A%2F%2Fassets.polkastarter.com%2Fbanner_fe80625570%2Fbanner_fe80625570.png&w=3840&q=75",
-      startDate: "Feb 5, 2025",
-      targetRaise: 350000,
-      totalParticipants: 10000,
-      timeUntilStart: "18 days",
-      chain: "Avalanche",
-      status: "Upcoming",
-      categories: ["AI", "DeFi", "Gaming"],
-    },
-    {
-      id: "3",
-      name: "Lympid",
-      description:
-        "Pioneering liquid staking solutions with advanced DeFi protocols. Lympid enables seamless staking across multiple chains while maintaining full liquidity.",
-      logoUrl:
-        "https://polkastarter.com/_next/image?url=https%3A%2F%2Fassets.polkastarter.com%2Flympid_logo_400x400_4647e1b1c2%2Flympid_logo_400x400_4647e1b1c2.png&w=96&q=70",
-      bannerUrl:
-        "https://dex-bin.bnbstatic.com/static/dapp-uploads/W3bLk6HK1uSI3oh54ruas",
-      startDate: "Feb 12, 2025",
-      targetRaise: 450000,
-      totalParticipants: 15000,
-      timeUntilStart: "25 days",
-      chain: "Multichain",
-      status: "Upcoming",
-      categories: ["DeFi", "Staking", "Infrastructure"],
-    },
-  ];
+  const [projects, setProjects] = useState<UpcomingProject[]>([]); // ✅ исправлено, теперь projects - массив
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const nextProject = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % upcomingProjects.length);
-  }, [upcomingProjects.length]);
+  const timerRef = useRef<NodeJS.Timeout>();
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-  const prevProject = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + upcomingProjects.length) % upcomingProjects.length
-    );
+  const handleViewToken = (tokenName: string) => {
+    navigate(`/upcoming/${encodeURIComponent(tokenName)}`);
   };
 
   useEffect(() => {
-    if (!isPaused) {
+    const fetchTokenDetails = async () => {
+      try {
+        const response = await fetch(
+          `${BASE_URL}/api/projects?status=Upcoming`
+        );
+        if (!response.ok) throw new Error("Failed to fetch token details");
+        const data = await response.json();
+        setProjects(data); // ✅ теперь data всегда массив
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTokenDetails();
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, []);
+
+  const nextProject = useCallback(() => {
+    if (projects.length > 0) {
+      setCurrentIndex((prev) => (prev + 1) % projects.length);
+    }
+  }, [projects.length]);
+
+  const prevProject = () => {
+    if (projects.length > 0) {
+      setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
+    }
+  };
+
+  useEffect(() => {
+    if (!isPaused && projects.length > 0) {
       const interval = setInterval(nextProject, 5000); // Auto-scroll every 5 seconds
       return () => clearInterval(interval);
     }
-  }, [isPaused, nextProject]);
+  }, [isPaused, nextProject, projects.length]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div
@@ -189,19 +182,26 @@ const UpcomingProjects: React.FC = () => {
         <button
           className={`${styles.navButton} ${styles.prevButton}`}
           onClick={prevProject}
+          disabled={projects.length === 0}
         >
           <ChevronLeft />
         </button>
-        <FeaturedProject project={upcomingProjects[currentIndex]} />
+        {projects.length > 0 && (
+          <FeaturedProject
+            project={projects[currentIndex]}
+            onViewProject={handleViewToken}
+          />
+        )}
         <button
           className={`${styles.navButton} ${styles.nextButton}`}
           onClick={nextProject}
+          disabled={projects.length === 0}
         >
           <ChevronRight />
         </button>
       </div>
       <div className={styles.projectDots}>
-        {upcomingProjects.map((_, index) => (
+        {projects.map((_, index) => (
           <button
             key={index}
             className={`${styles.dot} ${

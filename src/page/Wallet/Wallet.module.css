@@ -82,8 +82,8 @@
 
 /* Main Content Layout */
 .mainContent {
-  display: grid;
-  grid-template-columns: 1fr 360px;
+  /* display: grid; */
+  /* grid-template-columns: 1fr 360px; */
   gap: 24px;
 }
 
@@ -192,7 +192,7 @@
 }
 
 .activeTab::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -9px;
   left: 0;
@@ -204,6 +204,8 @@
 /* Table */
 .tableWrapper {
   overflow-x: auto;
+  max-height: 500px;
+  overflow-y: scroll;
   margin: 0 -24px;
   padding: 0 24px;
 }

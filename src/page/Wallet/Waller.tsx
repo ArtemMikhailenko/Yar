@@ -4,12 +4,13 @@ import { useState } from "react";
 import BalanceCard from "../../components/BalanceCard/BalanceCard";
 import DepositModal from "../../components/DepositModal/DepositModal";
 import styles from "./Wallet.module.css";
+import ProjectsTable from "../../components/ProjectsTable/ProjectsTable";
 
 const Wallet = () => {
   const [activeTab, setActiveTab] = useState("HOLDINGS");
   const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
 
-  const holdings = Array(6).fill({
+  const holdings = Array(2).fill({
     token: "Project Network PNT",
     amount: 1500,
     buyingPrice: "1$ (Private round)",
@@ -30,13 +31,15 @@ const Wallet = () => {
       <div className={styles.mainContent}>
         <div className={styles.leftPanel}>
           {/* Chart Section */}
+          <ProjectsTable />
           <div className={styles.chartCard}>
             {/* <div className={styles.chart}>
               <CryptoChart currency="bitcoin" />
             </div> */}
 
             <div className={styles.tabs}>
-              {["HOLDINGS", "NEW DEALS", "ENDED DEALS"].map((tab) => (
+              {/* {["HOLDINGS", "NEW DEALS", "ENDED DEALS"].map((tab) => ( */}
+              {["HISTORY"].map((tab) => (
                 <button
                   key={tab}
                   className={`${styles.tab} ${
@@ -84,7 +87,7 @@ const Wallet = () => {
         </div>
 
         {/* Swap Panel */}
-        <div className={styles.rightPanel}>
+        {/* <div className={styles.rightPanel}>
           <div className={styles.swapCard}>
             <h2>Swap Tokens</h2>
             <div className={styles.swapForm}>
@@ -115,7 +118,7 @@ const Wallet = () => {
               <button className={styles.swapButton}>Swap</button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Deposit Modal */}
