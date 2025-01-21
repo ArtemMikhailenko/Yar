@@ -7,7 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./UpcomingProjects.module.css";
 
 interface UpcomingProject {
