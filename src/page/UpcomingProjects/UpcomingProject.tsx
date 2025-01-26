@@ -49,6 +49,32 @@ interface UpcomingProjectProps {
 }
 
 const UpcomingProject: React.FC<UpcomingProjectProps> = ({ project }) => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 14,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    if (project.name === "Avalanche AI") {
+      const timer = setInterval(() => {
+        const now = new Date();
+        const endDate = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+        const difference = endDate.getTime() - now.getTime();
+
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        });
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [project.name]);
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       month: "long",
@@ -64,6 +90,10 @@ const UpcomingProject: React.FC<UpcomingProjectProps> = ({ project }) => {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(value);
+  };
+
+  const handleBuy = () => {
+    console.log("Purchasing Avalanche AI tokens");
   };
 
   const projectContent = {
@@ -188,9 +218,23 @@ const UpcomingProject: React.FC<UpcomingProjectProps> = ({ project }) => {
             <h1 className={styles.projectName}>{project.name}</h1>
             <div className={styles.projectMeta}>
               <span className={styles.chain}>{project.chain}</span>
-              <span className={styles.status}>{project.status}</span>
+              <span className={styles.status}>
+                {project.name === "Avalanche AI" ? "Active" : project.status}
+              </span>
             </div>
           </div>
+          {project.name === "Avalanche AI" && (
+            <div className={styles.buySection}>
+              <div className={styles.priceTag}>$0.01 per token</div>
+              <div className={styles.countdown}>
+                Time remaining: {timeLeft.days}d {timeLeft.hours}h{" "}
+                {timeLeft.minutes}m {timeLeft.seconds}s
+              </div>
+              <button onClick={handleBuy} className={styles.buyButton}>
+                Buy Tokens
+              </button>
+            </div>
+          )}
         </div>
       </div>
 

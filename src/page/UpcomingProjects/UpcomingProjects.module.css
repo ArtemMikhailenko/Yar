@@ -553,7 +553,45 @@
   padding-top: 3rem;
   position: relative;
 }
+.buySection {
+  margin-left: auto;
+  padding: 1rem;
+  background: rgba(5, 5, 5, 0.8);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
+.priceTag {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #22c55e;
+  margin-bottom: 0.5rem;
+}
+
+.countdown {
+  color: #64748b;
+  margin-bottom: 1rem;
+  font-family: "Monaco", monospace;
+}
+
+.buyButton {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.buyButton:hover {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
 .projectDetails::before {
   content: "";
   position: absolute;

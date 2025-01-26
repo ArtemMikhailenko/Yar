@@ -16,6 +16,7 @@
 
 .balanceSection {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
 }
@@ -24,37 +25,61 @@
   width: 100%;
 }
 
-.balanceInfo {
-  margin-bottom: 24px;
-}
-
-.label {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+.balanceTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  display: block;
-  margin-bottom: 8px;
+}
+
+.balanceWrapper {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.balanceItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 16px;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.balanceItem:hover {
+  transform: scale(1.05);
+}
+
+.currencyIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.balanceInfo {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .balanceAmount {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.dollarIcon {
-  color: #41b8ff;
-  width: 24px;
-  height: 24px;
-}
-
-.balance {
-  font-size: 48px;
+  font-size: 20px;
   font-weight: 700;
   color: white;
-  margin: 0;
-  line-height: 1;
+}
+
+.balanceLabel {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 24px;
 }
 
 .currency {

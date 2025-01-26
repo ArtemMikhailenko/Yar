@@ -1,13 +1,15 @@
-import React, { useEffect, useRef } from 'react';
-import styles from './PartnersSection.module.css';
-import pr1 from '../../assets/partners/pr1.png';
-import pr2 from '../../assets/partners/pr2.png';
-import pr3 from '../../assets/partners/pr3.png';
-import pr4 from '../../assets/partners/pr4.png';
-import pr5 from '../../assets/partners/pr5.png';
-
+"use client";
+import React, { useEffect, useRef } from "react";
+import styles from "./PartnersSection.module.css";
+import pr1 from "../../assets/partners/pr1.png";
+import pr2 from "../../assets/partners/pr2.png";
+import pr3 from "../../assets/partners/pr3.png";
+import pr4 from "../../assets/partners/pr4.png";
+import pr5 from "../../assets/partners/pr5.png";
+// import pr6 from "../../assets/partners/pr6.jpg";
+// import pr7 from "../../assets/partners/pr7.jpg";
 const PartnersSection: React.FC = () => {
-  const sliderRef = useRef<HTMLDivElement | null>(null); 
+  const sliderRef = useRef<HTMLDivElement | null>(null);
   const requestRef = useRef<number | null>(null);
 
   const SCROLL_SPEED = 0.5;
@@ -17,8 +19,8 @@ const PartnersSection: React.FC = () => {
     const slider = sliderRef.current;
     if (slider) {
       slider.scrollLeft += SCROLL_SPEED;
-      
-      if (slider.scrollLeft >= (slider.scrollWidth / 2)) {
+
+      if (slider.scrollLeft >= slider.scrollWidth / 2) {
         slider.scrollLeft = 0;
       }
     }
@@ -42,13 +44,13 @@ const PartnersSection: React.FC = () => {
         requestRef.current = requestAnimationFrame(animate);
       };
 
-      slider.addEventListener('mouseenter', pauseAnimation);
-      slider.addEventListener('mouseleave', resumeAnimation);
+      slider.addEventListener("mouseenter", pauseAnimation);
+      slider.addEventListener("mouseleave", resumeAnimation);
 
       return () => {
         if (requestRef.current) cancelAnimationFrame(requestRef.current);
-        slider.removeEventListener('mouseenter', pauseAnimation);
-        slider.removeEventListener('mouseleave', resumeAnimation);
+        slider.removeEventListener("mouseenter", pauseAnimation);
+        slider.removeEventListener("mouseleave", resumeAnimation);
       };
     }
   }, []);
@@ -76,6 +78,12 @@ const PartnersSection: React.FC = () => {
             <div className={styles.slide}>
               <img src={pr5} alt="Partner 5" />
             </div>
+            {/* <div className={styles.slide}>
+              <img src={pr6} alt="Partner 6" />
+            </div>
+            <div className={styles.slide}>
+              <img src={pr7} alt="Partner 7" />
+            </div> */}
           </div>
         </div>
       </div>

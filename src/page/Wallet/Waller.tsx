@@ -85,40 +85,6 @@ const Wallet = () => {
             </div>
           </div>
         </div>
-
-        {/* Swap Panel */}
-        {/* <div className={styles.rightPanel}>
-          <div className={styles.swapCard}>
-            <h2>Swap Tokens</h2>
-            <div className={styles.swapForm}>
-              <div className={styles.field}>
-                <label>From token</label>
-                <div className={styles.tokenSelect}>
-                  <div className={styles.tokenBadge}>B</div>
-                  <select defaultValue="USDC">
-                    <option value="USDC">USDC</option>
-                    <option value="ETH">ETH</option>
-                  </select>
-                </div>
-                <input type="number" placeholder="0.00" />
-              </div>
-
-              <div className={styles.field}>
-                <label>To token</label>
-                <div className={styles.tokenSelect}>
-                  <div className={styles.tokenBadge}>E</div>
-                  <select defaultValue="BTC">
-                    <option value="BTC">BTC</option>
-                    <option value="USDT">USDT</option>
-                  </select>
-                </div>
-                <input type="number" placeholder="0.00" />
-              </div>
-
-              <button className={styles.swapButton}>Swap</button>
-            </div>
-          </div>
-        </div> */}
       </div>
 
       {/* Deposit Modal */}

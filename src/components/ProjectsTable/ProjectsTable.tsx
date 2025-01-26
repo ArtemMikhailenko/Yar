@@ -58,7 +58,6 @@ const ProjectsTable = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Recently Created Projects</h1>
       {loading ? (
         <p>Loading projects...</p>
       ) : (

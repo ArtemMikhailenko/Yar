@@ -6,6 +6,7 @@ import {
   Clock,
   ChevronLeft,
   ChevronRight,
+  ShoppingCart,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import styles from "./UpcomingProjects.module.css";
@@ -28,84 +29,145 @@ interface UpcomingProject {
 const FeaturedProject: React.FC<{
   project: UpcomingProject;
   onViewProject: (tokenName: string) => void;
-}> = ({ project, onViewProject }) => (
-  <div className={styles.featuredContainer}>
-    <div
-      className={styles.featuredBanner}
-      style={{ backgroundImage: `url(${project.bannerUrl})` }}
-    >
-      <div className={styles.featuredOverlay}>
-        <div className={styles.spotlight} />
-        <div className={styles.featuredContent}>
-          <div className={styles.projectHeader}>
-            <div className={styles.logoWrapper}>
-              <img
-                src={project.logoUrl}
-                alt={project.name}
-                className={styles.featuredLogo}
-              />
-              <div className={styles.logoGlow} />
-            </div>
-            <div className={styles.projectInfo}>
-              <div className={styles.titleRow}>
-                <h2>{project.name}</h2>
-                <div className={styles.badgeContainer}>
-                  <span className={styles.statusBadge}>{project.status}</span>
+}> = ({ project, onViewProject }) => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 14,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    if (project.name === "Avalanche AI") {
+      const timer = setInterval(() => {
+        const now = new Date();
+        const endDate = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+        const difference = endDate.getTime() - now.getTime();
+
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        });
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [project.name]);
+
+  const handleBuy = () => {
+    // Handle purchase logic here
+    console.log("Purchasing Avalanche AI tokens");
+  };
+
+  return (
+    <div className={styles.featuredContainer}>
+      <div
+        className={styles.featuredBanner}
+        style={{ backgroundImage: `url(${project.bannerUrl})` }}
+      >
+        <div className={styles.featuredOverlay}>
+          <div className={styles.spotlight} />
+          <div className={styles.featuredContent}>
+            <div className={styles.projectHeader}>
+              <div className={styles.logoWrapper}>
+                <img
+                  src={project.logoUrl}
+                  alt={project.name}
+                  className={styles.featuredLogo}
+                />
+                <div className={styles.logoGlow} />
+              </div>
+              <div className={styles.projectInfo}>
+                <div className={styles.titleRow}>
+                  <h2>{project.name}</h2>
+                  <div className={styles.badgeContainer}>
+                    <span className={styles.statusBadge}>
+                      {project.name === "Avalanche AI"
+                        ? "Active"
+                        : project.status}
+                    </span>
+                  </div>
+                </div>
+                <div className={styles.categoriesRow}>
+                  <span className={styles.chainBadge}>{project.chain}</span>
+                  {project.categories.map((category, index) => (
+                    <span key={index} className={styles.categoryBadge}>
+                      {category}
+                    </span>
+                  ))}
                 </div>
               </div>
-              <div className={styles.categoriesRow}>
-                <span className={styles.chainBadge}>{project.chain}</span>
-                {project.categories.map((category, index) => (
-                  <span key={index} className={styles.categoryBadge}>
-                    {category}
-                  </span>
-                ))}
+            </div>
+            <p className={styles.description}>{project.description}</p>
+            <div className={styles.statsGrid}>
+              <div className={styles.statItem}>
+                <Calendar className={styles.statIcon} />
+                <div>
+                  <h4>Start Date</h4>
+                  <p>{project.startDate}</p>
+                </div>
               </div>
+              <div className={styles.statItem}>
+                <DollarSign className={styles.statIcon} />
+                <div>
+                  <h4>
+                    {project.name === "Avalanche AI"
+                      ? "Token Price"
+                      : "Target Raise"}
+                  </h4>
+                  <p>
+                    {project.name === "Avalanche AI"
+                      ? "$0.01"
+                      : `$${project.targetRaise.toLocaleString()}`}
+                  </p>
+                </div>
+              </div>
+              <div className={styles.statItem}>
+                <Users className={styles.statIcon} />
+                <div>
+                  <h4>Expected Participants</h4>
+                  <p>{project.totalParticipants.toLocaleString()}</p>
+                </div>
+              </div>
+              <div className={styles.statItem}>
+                <Clock className={styles.statIcon} />
+                <div>
+                  <h4>Time Remaining</h4>
+                  <p>
+                    {project.name === "Avalanche AI"
+                      ? `${timeLeft.days}d ${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`
+                      : project.timeUntilStart}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className={styles.buttonContainer}>
+              <button
+                onClick={() => onViewProject(project.name)}
+                className={styles.learnMoreButton}
+              >
+                View Project Details
+                <span className={styles.buttonGlow} />
+              </button>
+              {project.name === "Avalanche AI" && (
+                <button
+                  onClick={handleBuy}
+                  className={`${styles.learnMoreButton} ${styles.buyButton}`}
+                >
+                  <ShoppingCart className={styles.buttonIcon} />
+                  Buy Tokens
+                  <span className={styles.buttonGlow} />
+                </button>
+              )}
             </div>
           </div>
-          <p className={styles.description}>{project.description}</p>
-          <div className={styles.statsGrid}>
-            <div className={styles.statItem}>
-              <Calendar className={styles.statIcon} />
-              <div>
-                <h4>Start Date</h4>
-                <p>{project.startDate}</p>
-              </div>
-            </div>
-            <div className={styles.statItem}>
-              <DollarSign className={styles.statIcon} />
-              <div>
-                <h4>Target Raise</h4>
-                <p>${project.targetRaise.toLocaleString()}</p>
-              </div>
-            </div>
-            <div className={styles.statItem}>
-              <Users className={styles.statIcon} />
-              <div>
-                <h4>Expected Participants</h4>
-                <p>{project.totalParticipants.toLocaleString()}</p>
-              </div>
-            </div>
-            <div className={styles.statItem}>
-              <Clock className={styles.statIcon} />
-              <div>
-                <h4>Time Until Start</h4>
-                <p>{project.timeUntilStart}</p>
-              </div>
-            </div>
-          </div>
-          <button
-            onClick={() => onViewProject(project.name)}
-            className={styles.learnMoreButton}
-          >
-            View Project Details
-            <span className={styles.buttonGlow} />
-          </button>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const UpcomingProjects: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

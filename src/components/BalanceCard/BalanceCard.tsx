@@ -1,62 +1,121 @@
-// BalanceCard.tsx
+"use client";
 import React, { useEffect, useState } from "react";
-import {
-  ArrowUpRight,
-  ArrowDownRight,
-  TrendingUp,
-  DollarSign,
-  Activity,
-} from "lucide-react";
-import { ConnectWallet } from "@thirdweb-dev/react";
+import { ArrowUpRight, ArrowDownRight, RefreshCcw } from "lucide-react";
+// import { ConnectWallet } from "@thirdweb-dev/react";
 import styles from "./BalanceCard.module.css";
 import DepositModal from "../DepositModal/DepositModal";
 import WithdrawalModal from "../WithdrawalModal/WithdrawalModal";
-import { User } from "../../types/header/header";
+import SwapModal from "../SwapModal/SwapModal";
 
-// interface BalanceCardProps {
-//   balance: number;
-// }
+const API_URL =
+  "https://api.coingecko.com/api/v3/simple/price?ids=ethereum,bitcoin,tether&vs_currencies=usd";
 
 const BalanceCard: React.FC = () => {
   const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
   const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
-  const userData = localStorage.getItem("user");
-  const [user, setUser] = useState<User | null>(null);
+  const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
 
-  const openDepositModal = () => setIsDepositModalOpen(true);
-  const closeDepositModal = () => setIsDepositModalOpen(false);
+  const userData = localStorage.getItem("user");
+  const [user, setUser] = useState<{
+    balance: number;
+    btc: number;
+    eth: number;
+  }>({
+    balance: 0,
+    btc: 0,
+    eth: 0,
+  });
+  const [prices, setPrices] = useState<{
+    ETH: number;
+    BTC: number;
+    USDT: number;
+  }>({
+    ETH: 0,
+    BTC: 0,
+    USDT: 1,
+  });
+
   useEffect(() => {
     if (userData) {
-      setUser(JSON.parse(userData));
+      const storedUser = JSON.parse(userData);
+      setUser({
+        balance: storedUser.balance,
+        btc: storedUser.btc || 0,
+        eth: storedUser.eth || 0,
+      });
     }
   }, [userData]);
+
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        setPrices({
+          ETH: data.ethereum.usd,
+          BTC: data.bitcoin.usd,
+          USDT: data.tether.usd,
+        });
+      } catch (error) {
+        console.error("Ошибка загрузки цен:", error);
+      }
+    };
+
+    fetchPrices();
+    const interval = setInterval(fetchPrices, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className={styles.card}>
       <div className={styles.mainContent}>
         <div className={styles.balanceSection}>
-          <div className={styles.balanceHeader}>
-            <div className={styles.balanceInfo}>
-              <span className={styles.label}>Total Balance</span>
-              <div className={styles.balanceAmount}>
-                <DollarSign className={styles.dollarIcon} />
-                <h1 className={styles.balance}>{user?.balance}</h1>
-                <span className={styles.currency}>USD</span>
+          <h2 className={styles.balanceTitle}>Wallet Balance</h2>
+
+          <div className={styles.balanceWrapper}>
+            <div className={styles.balanceItem}>
+              <img
+                src="/icons/usdt.svg"
+                alt="USDT"
+                className={styles.currencyIcon}
+              />
+              <div className={styles.balanceInfo}>
+                <span className={styles.balanceAmount}>
+                  ${user.balance.toFixed(2)}
+                </span>
+                <span className={styles.balanceLabel}>USD (Tether)</span>
               </div>
             </div>
-            <div className={styles.statsContainer}>
-              <div className={styles.stat}>
-                <Activity className={styles.statIcon} />
-                <div className={styles.statInfo}>
-                  <span className={styles.statLabel}>24h Change</span>
-                  <span className={styles.statValue}>0%</span>
-                </div>
+
+            <div className={styles.balanceItem}>
+              <img
+                src="/icons/btc.svg"
+                alt="BTC"
+                className={styles.currencyIcon}
+              />
+              <div className={styles.balanceInfo}>
+                <span className={styles.balanceAmount}>
+                  {user.btc.toFixed(6)} BTC
+                </span>
+                <span className={styles.balanceLabel}>
+                  ≈ ${((user.btc || 0) * prices.BTC).toFixed(2)}
+                </span>
               </div>
-              <div className={styles.stat}>
-                <TrendingUp className={styles.statIcon} />
-                <div className={styles.statInfo}>
-                  <span className={styles.statLabel}>Monthly Growth</span>
-                  <span className={styles.statValue}>0%</span>
-                </div>
+            </div>
+
+            <div className={styles.balanceItem}>
+              <img
+                src="/icons/eth.svg"
+                alt="ETH"
+                className={styles.currencyIcon}
+              />
+              <div className={styles.balanceInfo}>
+                <span className={styles.balanceAmount}>
+                  {user.eth.toFixed(6)} ETH
+                </span>
+                <span className={styles.balanceLabel}>
+                  ≈ ${((user.eth || 0) * prices.ETH).toFixed(2)}
+                </span>
               </div>
             </div>
           </div>
@@ -67,15 +126,18 @@ const BalanceCard: React.FC = () => {
         <div className={styles.actionButtons}>
           <button
             className={`${styles.actionButton} ${styles.depositButton}`}
-            onClick={openDepositModal}
+            onClick={() => setIsDepositModalOpen(true)}
           >
             <ArrowUpRight className={styles.actionIcon} />
             <span>Deposit</span>
           </button>
-          {/* <button className={`${styles.actionButton} ${styles.swapButton}`}>
+          <button
+            className={`${styles.actionButton} ${styles.swapButton}`}
+            onClick={() => setIsSwapModalOpen(true)}
+          >
             <RefreshCcw className={styles.actionIcon} />
             <span>Swap</span>
-          </button> */}
+          </button>
           <button
             className={`${styles.actionButton} ${styles.withdrawButton}`}
             onClick={() => setIsWithdrawalModalOpen(true)}
@@ -84,14 +146,16 @@ const BalanceCard: React.FC = () => {
             <span>Withdraw</span>
           </button>
         </div>
-        <div className={styles.connectWalletWrapper}>
-          <ConnectWallet />
-        </div>
       </div>
 
-      {isDepositModalOpen && <DepositModal onClose={closeDepositModal} />}
+      {isDepositModalOpen && (
+        <DepositModal onClose={() => setIsDepositModalOpen(false)} />
+      )}
       {isWithdrawalModalOpen && (
         <WithdrawalModal onClose={() => setIsWithdrawalModalOpen(false)} />
+      )}
+      {isSwapModalOpen && (
+        <SwapModal onClose={() => setIsSwapModalOpen(false)} />
       )}
     </div>
   );
