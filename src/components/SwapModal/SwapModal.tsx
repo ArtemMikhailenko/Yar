@@ -13,8 +13,8 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
   >([]);
   const [fromCurrency, setFromCurrency] = useState("ETH");
   const [toCurrency, setToCurrency] = useState("BTC");
-  const [amount, setAmount] = useState("");
-  const [convertedAmount, setConvertedAmount] = useState("0");
+  const [fromAmount, setFromAmount] = useState("");
+  const [toAmount, setToAmount] = useState("0");
   const [prices, setPrices] = useState<{ [key: string]: number }>({});
 
   useEffect(() => {
@@ -59,8 +59,8 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
   }, []);
 
   useEffect(() => {
-    if (!amount || isNaN(parseFloat(amount))) {
-      setConvertedAmount("0");
+    if (!fromAmount || isNaN(parseFloat(fromAmount))) {
+      setToAmount("0");
       return;
     }
 
@@ -68,61 +68,72 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
     const toPrice = prices[toCurrency];
 
     if (fromPrice && toPrice) {
-      const converted = (parseFloat(amount) * fromPrice) / toPrice;
-      setConvertedAmount(converted.toFixed(6));
+      const converted = (parseFloat(fromAmount) * fromPrice) / toPrice;
+      setToAmount(converted.toFixed(6));
     }
-  }, [amount, fromCurrency, toCurrency, prices]);
+  }, [fromAmount, fromCurrency, toCurrency, prices]);
+
+  const swapTokens = () => {
+    setFromCurrency(toCurrency);
+    setToCurrency(fromCurrency);
+    setFromAmount(toAmount);
+    setToAmount(fromAmount);
+  };
 
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <h2>
-          <img src="/swap-icon.svg" alt="Swap" /> Swap Tokens
+          {fromCurrency} → {toCurrency}
         </h2>
 
-        <div className={styles.tokenSelect}>
-          <img
-            src={tokenList.find((t) => t.symbol === fromCurrency)?.logo}
-            alt={fromCurrency}
-          />
-          <select
-            value={fromCurrency}
-            onChange={(e) => setFromCurrency(e.target.value)}
-          >
-            {tokenList.map((token) => (
-              <option key={token.symbol} value={token.symbol}>
-                {token.symbol}
-              </option>
-            ))}
-          </select>
-        </div>
+        <div className={styles.swapContainer}>
+          <label className={styles.label}>From Token</label>
+          <div className={styles.tokenInput}>
+            <img
+              src={tokenList.find((t) => t.symbol === fromCurrency)?.logo}
+              alt={fromCurrency}
+            />
+            <select
+              value={fromCurrency}
+              onChange={(e) => setFromCurrency(e.target.value)}
+            >
+              {tokenList.map((token) => (
+                <option key={token.symbol} value={token.symbol}>
+                  {token.symbol}
+                </option>
+              ))}
+            </select>
+            <input
+              type="number"
+              placeholder="0.0"
+              value={fromAmount}
+              onChange={(e) => setFromAmount(e.target.value)}
+            />
+          </div>
 
-        <div className={styles.tokenSelect}>
-          <img
-            src={tokenList.find((t) => t.symbol === toCurrency)?.logo}
-            alt={toCurrency}
-          />
-          <select
-            value={toCurrency}
-            onChange={(e) => setToCurrency(e.target.value)}
-          >
-            {tokenList.map((token) => (
-              <option key={token.symbol} value={token.symbol}>
-                {token.symbol}
-              </option>
-            ))}
-          </select>
-        </div>
+          <button className={styles.swapIcon} onClick={swapTokens}>
+            ↔
+          </button>
 
-        <input
-          type="number"
-          placeholder="Enter amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-
-        <div className={styles.result}>
-          {amount} {fromCurrency} ≈ {convertedAmount} {toCurrency}
+          <label className={styles.label}>To Token</label>
+          <div className={styles.tokenInput}>
+            <img
+              src={tokenList.find((t) => t.symbol === toCurrency)?.logo}
+              alt={toCurrency}
+            />
+            <select
+              value={toCurrency}
+              onChange={(e) => setToCurrency(e.target.value)}
+            >
+              {tokenList.map((token) => (
+                <option key={token.symbol} value={token.symbol}>
+                  {token.symbol}
+                </option>
+              ))}
+            </select>
+            <input type="text" value={toAmount} readOnly />
+          </div>
         </div>
 
         <button className={styles.swapButton}>Swap</button>
