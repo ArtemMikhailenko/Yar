@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import styles from "./UpcomingProjects.module.css";
+import BuyTokenModal from "../BuyTokenModal/BuyTokenModal";
 
 interface UpcomingProject {
   id: string;
@@ -29,7 +30,8 @@ interface UpcomingProject {
 const FeaturedProject: React.FC<{
   project: UpcomingProject;
   onViewProject: (tokenName: string) => void;
-}> = ({ project, onViewProject }) => {
+  onBuy: (project: UpcomingProject) => void;
+}> = ({ project, onViewProject, onBuy }) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 14,
     hours: 0,
@@ -55,11 +57,6 @@ const FeaturedProject: React.FC<{
       return () => clearInterval(timer);
     }
   }, [project.name]);
-
-  const handleBuy = () => {
-    // Handle purchase logic here
-    console.log("Purchasing Avalanche AI tokens");
-  };
 
   return (
     <div className={styles.featuredContainer}>
@@ -153,7 +150,7 @@ const FeaturedProject: React.FC<{
               </button>
               {project.name === "Avalanche AI" && (
                 <button
-                  onClick={handleBuy}
+                  onClick={() => onBuy(project)}
                   className={`${styles.learnMoreButton} ${styles.buyButton}`}
                 >
                   <ShoppingCart className={styles.buttonIcon} />
@@ -179,11 +176,21 @@ const UpcomingProjects: React.FC = () => {
 
   const timerRef = useRef<NodeJS.Timeout>();
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProject, setSelectedProject] =
+    useState<UpcomingProject | null>(null);
   const handleViewToken = (tokenName: string) => {
     navigate(`/upcoming/${encodeURIComponent(tokenName)}`);
   };
-
+  const handleBuy = (project: UpcomingProject) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to purchase tokens!");
+      return;
+    }
+    setSelectedProject(project);
+    setShowModal(true);
+  };
   useEffect(() => {
     const fetchTokenDetails = async () => {
       try {
@@ -252,6 +259,13 @@ const UpcomingProjects: React.FC = () => {
           <FeaturedProject
             project={projects[currentIndex]}
             onViewProject={handleViewToken}
+            onBuy={handleBuy}
+          />
+        )}
+        {showModal && selectedProject && (
+          <BuyTokenModal
+            project={selectedProject}
+            onClose={() => setShowModal(false)}
           />
         )}
         <button

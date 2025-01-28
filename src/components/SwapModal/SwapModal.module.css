@@ -1,122 +1,219 @@
+/* 🌌 Затемнение заднего фона */
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
 }
 
+/* 📦 Основной контейнер модалки */
 .modalContent {
-  background: linear-gradient(145deg, #1b1f3b, #16192c);
-  padding: 30px;
+  background: linear-gradient(145deg, #20253f, #181c33);
+  padding: 32px;
   border-radius: 16px;
   width: 420px;
   text-align: center;
   color: white;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.3s ease-in-out;
 }
 
+/* 🏷 Заголовок */
 h2 {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   font-size: 22px;
   font-weight: bold;
   color: #ffffff;
-  text-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+  text-shadow: 0 0 10px rgba(74, 144, 226, 0.4);
 }
 
+/* 🎯 Лейблы */
 .label {
   font-size: 14px;
   color: #b0b5d3;
   margin-bottom: 5px;
   display: block;
+  text-align: left;
+  font-weight: 500;
 }
 
+/* 📦 Блок с полями */
 .swapContainer {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
+/* 🔄 Поля ввода */
 .tokenInput {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   padding: 12px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  transition: all 0.3s ease-in-out;
 }
 
+/* 🖼 Логотип */
 .tokenInput img {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   margin-right: 10px;
 }
 
+/* 🎛 Select и Input */
 select,
 input {
   background: transparent;
   border: none;
-  color: black;
+  color: white;
   font-size: 16px;
   flex-grow: 1;
   padding: 10px;
 }
-input {
-  color: white;
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
+/* 📌 Исправление цвета текста в select */
 select {
-  padding: 5px;
+  padding: 6px;
   cursor: pointer;
   border-radius: 6px;
-  appearance: none;
   outline: none;
   background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: background 0.3s ease-in-out;
 }
 
+select:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* 💡 Подсветка выпадающего списка */
+select option {
+  background: #181c33;
+  color: white;
+  padding: 10px;
+}
+
+/* 🏦 Отображение баланса */
+.balance {
+  font-size: 13px;
+  color: #4ade80;
+  font-weight: 500;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 🔄 Кнопка свапа */
 .swapIcon {
   background: #4a90e2;
   color: white;
-  font-size: 18px;
+  font-size: 22px;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
-  rotate: 90deg;
   justify-content: center;
   cursor: pointer;
-  margin: 10px auto;
-  transition: 0.3s;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 12px auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.swapIcon:hover {
+  transform: rotate(180deg) scale(1.1);
+  box-shadow: 0 0 15px rgba(74, 144, 226, 0.5);
+}
+
+/* 🔘 Кнопка обмена */
 .swapButton {
   width: 100%;
   padding: 14px;
-
   background: linear-gradient(135deg, #4a90e2, #3b82f6);
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 18px;
   color: white;
+  font-weight: 600;
   cursor: pointer;
   margin-top: 15px;
   border: none;
+  transition: all 0.3s ease-in-out;
 }
 
+.swapButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(74, 144, 226, 0.4);
+}
+
+/* ❌ Кнопка закрытия */
 .closeButton {
   width: 100%;
   padding: 14px;
   background: linear-gradient(135deg, #ff4b6c, #ff1744);
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 18px;
   color: white;
+  font-weight: 600;
   cursor: pointer;
   margin-top: 10px;
   border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.closeButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 75, 108, 0.4);
+}
+
+/* 🔥 Анимация появления */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 🔥 Сообщение об ошибке */
+.errorMessage {
+  margin-top: 10px;
+  color: #ff4b6c;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  background: rgba(255, 75, 108, 0.1);
+  padding: 8px;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 🎉 Сообщение об успешном обмене */
+.successMessage {
+  margin-top: 10px;
+  color: #4ade80;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  background: rgba(74, 222, 128, 0.1);
+  padding: 8px;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-in-out;
 }

@@ -1,0 +1,174 @@
+/* 🔥 Затемнение заднего фона с эффектом размытия */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 📦 Основной контейнер модального окна */
+.modalContent {
+  background: linear-gradient(135deg, #22263d, #191d34);
+  padding: 30px;
+  border-radius: 16px;
+  width: 420px;
+  text-align: center;
+  color: white;
+  box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.6);
+  animation: slideIn 0.4s ease-in-out;
+  position: relative;
+}
+
+/* 🏷 Заголовок */
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(74, 144, 226, 0.5);
+  margin-bottom: 18px;
+}
+
+/* 💰 Цена токена */
+p {
+  font-size: 16px;
+  color: #b0b5d3;
+  margin-bottom: 16px;
+}
+
+/* 🔄 Выбор валюты */
+.currencySelect {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  text-align: center;
+  margin-bottom: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.currencySelect:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 🔢 Поле ввода */
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 16px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 12px rgba(74, 144, 226, 0.5);
+}
+
+/* 💰 Баланс */
+.balanceText {
+  color: #4ade80;
+  font-weight: 600;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+/* 📊 Сколько получит ARK */
+.arkReceive {
+  font-size: 16px;
+  color: #b0b5d3;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+/* 🔴 Ошибка */
+.errorText {
+  color: #ff4b6c;
+  font-size: 14px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+/* 🟢 Успешное сообщение */
+.successText {
+  color: #4ade80;
+  font-size: 14px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+/* ✨ Кнопки с эффектом свечения */
+.buyButton,
+.closeButton {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  margin-top: 12px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+/* 🔵 Кнопка покупки */
+.buyButton {
+  background: linear-gradient(135deg, #4a90e2, #3b82f6);
+  color: white;
+  box-shadow: 0 0 15px rgba(74, 144, 226, 0.5);
+}
+
+.buyButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(74, 144, 226, 0.7);
+}
+
+/* 🔴 Кнопка отмены */
+.closeButton {
+  background: linear-gradient(135deg, #ff4b6c, #ff1744);
+  color: white;
+  box-shadow: 0 0 15px rgba(255, 75, 108, 0.5);
+}
+
+.closeButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 75, 108, 0.7);
+}
+
+/* 🎬 Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

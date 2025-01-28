@@ -14,16 +14,16 @@ const BalanceCard: React.FC = () => {
   const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
   const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
-
-  const userData = localStorage.getItem("user");
   const [user, setUser] = useState<{
-    balance: number;
-    btc: number;
-    eth: number;
+    USDT: number;
+    BTC: number;
+    ETH: number;
+    ARK: number;
   }>({
-    balance: 0,
-    btc: 0,
-    eth: 0,
+    USDT: 0,
+    BTC: 0,
+    ETH: 0,
+    ARK: 0,
   });
   const [prices, setPrices] = useState<{
     ETH: number;
@@ -34,18 +34,38 @@ const BalanceCard: React.FC = () => {
     BTC: 0,
     USDT: 1,
   });
-
-  useEffect(() => {
+  const getUserId = () => {
+    const userData = localStorage.getItem("user");
     if (userData) {
-      const storedUser = JSON.parse(userData);
-      setUser({
-        balance: storedUser.balance,
-        btc: storedUser.btc || 0,
-        eth: storedUser.eth || 0,
-      });
+      try {
+        return JSON.parse(userData)._id; // Убедись, что поле называется "_id"
+      } catch (error) {
+        console.error("Ошибка парсинга user ID:", error);
+      }
     }
-  }, [userData]);
+    return null;
+  };
 
+  const fetchUserBalance = async () => {
+    const userId = getUserId();
+    if (!userId) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:1024/api/auth/user/${userId}/balance`
+      );
+      if (!response.ok) throw new Error("Ошибка при получении баланса");
+
+      const data = await response.json();
+      setUser(data);
+      console.log(data);
+    } catch (error) {
+      console.error("Ошибка загрузки баланса:", error);
+    }
+  };
+  useEffect(() => {
+    fetchUserBalance();
+  }, []);
   useEffect(() => {
     const fetchPrices = async () => {
       try {
@@ -73,6 +93,7 @@ const BalanceCard: React.FC = () => {
           <h2 className={styles.balanceTitle}>Wallet Balance</h2>
 
           <div className={styles.balanceWrapper}>
+            {/* USDT */}
             <div className={styles.balanceItem}>
               <img
                 src="/icons/usdt.svg"
@@ -81,12 +102,13 @@ const BalanceCard: React.FC = () => {
               />
               <div className={styles.balanceInfo}>
                 <span className={styles.balanceAmount}>
-                  ${user.balance.toFixed(2)}
+                  ${user.USDT.toFixed(2)}
                 </span>
                 <span className={styles.balanceLabel}>USD (Tether)</span>
               </div>
             </div>
 
+            {/* BTC */}
             <div className={styles.balanceItem}>
               <img
                 src="/icons/btc.svg"
@@ -95,14 +117,15 @@ const BalanceCard: React.FC = () => {
               />
               <div className={styles.balanceInfo}>
                 <span className={styles.balanceAmount}>
-                  {user.btc.toFixed(6)} BTC
+                  {user.BTC.toFixed(6)} BTC
                 </span>
                 <span className={styles.balanceLabel}>
-                  ≈ ${((user.btc || 0) * prices.BTC).toFixed(2)}
+                  ≈ ${(user.BTC * prices.BTC).toFixed(2)}
                 </span>
               </div>
             </div>
 
+            {/* ETH */}
             <div className={styles.balanceItem}>
               <img
                 src="/icons/eth.svg"
@@ -111,11 +134,26 @@ const BalanceCard: React.FC = () => {
               />
               <div className={styles.balanceInfo}>
                 <span className={styles.balanceAmount}>
-                  {user.eth.toFixed(6)} ETH
+                  {user.ETH.toFixed(6)} ETH
                 </span>
                 <span className={styles.balanceLabel}>
-                  ≈ ${((user.eth || 0) * prices.ETH).toFixed(2)}
+                  ≈ ${(user.ETH * prices.ETH).toFixed(2)}
                 </span>
+              </div>
+            </div>
+
+            {/* ARK */}
+            <div className={styles.balanceItem}>
+              <img
+                src="/icons/ark.svg"
+                alt="ARK"
+                className={styles.currencyIcon}
+              />
+              <div className={styles.balanceInfo}>
+                <span className={styles.balanceAmount}>
+                  {user.ARK.toFixed(2)} ARK
+                </span>
+                <span className={styles.balanceLabel}>ARK Token</span>
               </div>
             </div>
           </div>

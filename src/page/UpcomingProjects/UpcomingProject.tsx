@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./UpcomingProjects.module.css";
 import { useParams } from "react-router-dom";
+import BuyTokenModal from "../../components/BuyTokenModal/BuyTokenModal";
 
 interface TokenDistribution {
   category: string;
@@ -46,9 +47,13 @@ interface UpcomingProject {
 
 interface UpcomingProjectProps {
   project: UpcomingProject;
+  onBuy: (project: UpcomingProject) => void;
 }
 
-const UpcomingProject: React.FC<UpcomingProjectProps> = ({ project }) => {
+const UpcomingProject: React.FC<UpcomingProjectProps> = ({
+  project,
+  onBuy,
+}) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 14,
     hours: 0,
@@ -90,10 +95,6 @@ const UpcomingProject: React.FC<UpcomingProjectProps> = ({ project }) => {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(value);
-  };
-
-  const handleBuy = () => {
-    console.log("Purchasing Avalanche AI tokens");
   };
 
   const projectContent = {
@@ -230,7 +231,10 @@ const UpcomingProject: React.FC<UpcomingProjectProps> = ({ project }) => {
                 Time remaining: {timeLeft.days}d {timeLeft.hours}h{" "}
                 {timeLeft.minutes}m {timeLeft.seconds}s
               </div>
-              <button onClick={handleBuy} className={styles.buyButton}>
+              <button
+                onClick={() => onBuy(project)}
+                className={styles.buyButton}
+              >
                 Buy Tokens
               </button>
             </div>
@@ -349,7 +353,9 @@ const UpcomingProjectDetails = () => {
   const [error, setError] = useState<string | null>(null);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const timerRef = useRef<NodeJS.Timeout>();
-
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProject, setSelectedProject] =
+    useState<UpcomingProject | null>(null);
   useEffect(() => {
     const fetchTokenDetails = async () => {
       try {
@@ -376,18 +382,56 @@ const UpcomingProjectDetails = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!project) return <p>No project found</p>;
-
-  return <UpcomingProject project={project} />;
+  const handleBuy = (project: UpcomingProject) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to purchase tokens!");
+      return;
+    }
+    setSelectedProject(project);
+    setShowModal(true);
+  };
+  return (
+    <>
+      <UpcomingProject project={project} onBuy={handleBuy} />
+      {showModal && selectedProject && (
+        <BuyTokenModal
+          project={selectedProject}
+          onClose={() => setShowModal(false)}
+        />
+      )}
+    </>
+  );
 };
 
 const UpcomingProjects: React.FC<{ projects: UpcomingProject[] }> = ({
   projects = [],
 }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProject, setSelectedProject] =
+    useState<UpcomingProject | null>(null);
+
+  const handleBuy = (project: UpcomingProject) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You must be logged in to purchase tokens!");
+      return;
+    }
+    setSelectedProject(project);
+    setShowModal(true);
+  };
+
   return (
     <div>
       {projects.map((project) => (
-        <UpcomingProject key={project.id} project={project} />
+        <UpcomingProject key={project.id} project={project} onBuy={handleBuy} />
       ))}
+      {showModal && selectedProject && (
+        <BuyTokenModal
+          project={selectedProject}
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 };
