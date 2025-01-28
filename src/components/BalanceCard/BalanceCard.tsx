@@ -14,6 +14,7 @@ const BalanceCard: React.FC = () => {
   const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
   const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
   const [isSwapModalOpen, setIsSwapModalOpen] = useState(false);
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [user, setUser] = useState<{
     USDT: number;
     BTC: number;
@@ -52,7 +53,7 @@ const BalanceCard: React.FC = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:1024/api/auth/user/${userId}/balance`
+        `${BASE_URL}/api/auth/user/${userId}/balance`
       );
       if (!response.ok) throw new Error("Ошибка при получении баланса");
 
