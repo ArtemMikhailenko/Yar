@@ -13,7 +13,7 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
     ETH: 0,
     BTC: 0,
     USDT: 0,
-    ARK: 0,
+    AVL: 0,
   });
 
   const [fromCurrency, setFromCurrency] = useState("ETH");
@@ -24,7 +24,7 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
     ETH: 0,
     BTC: 0,
     USDT: 1,
-    ARK: 0.01, // Фиксированная цена ARK в USDT
+    AVL: 0.01, // Фиксированная цена AVL в USDT
   });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -39,7 +39,7 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
           ETH: data.ethereum.usd,
           BTC: data.bitcoin.usd,
           USDT: data.tether.usd,
-          ARK: 0.01,
+          AVL: 0.01,
         });
       } catch (error) {
         console.error("Ошибка получения цен:", error);

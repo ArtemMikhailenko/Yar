@@ -14,6 +14,7 @@ interface Token {
   roi: string;
   description: string;
   chain: string;
+  status: string;
   endDate?: string;
 }
 
@@ -27,24 +28,38 @@ const InvestmentsSection = () => {
   useEffect(() => {
     const fetchTokens = async () => {
       try {
+        // Запрос всех проектов
         const response = await fetch(`${BASE_URL}/api/projects`);
-        console.log(response);
+        if (!response.ok) throw new Error("Failed to fetch projects");
+        const allProjects: Token[] = await response.json();
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch projects");
-        }
-        const data: Token[] = await response.json();
-
-        // Сортировка по дате (последние проекты)
-        const sortedProjects = data
+        // Сортировка по endDate (чтобы получить два самых свежих проекта)
+        const sortedProjects = allProjects
           .sort(
             (a, b) =>
               new Date(b.endDate || "").getTime() -
               new Date(a.endDate || "").getTime()
           )
-          .slice(0, 3);
+          .slice(0, 2); // Берём только 2 последних
 
-        setTokens(sortedProjects);
+        // Запрос самого нового проекта с статусом "Upcoming"
+        const upcomingResponse = await fetch(
+          `${BASE_URL}/api/projects?status=Upcoming`
+        );
+        if (!upcomingResponse.ok)
+          throw new Error("Failed to fetch upcoming project");
+        const upcomingProjects: Token[] = await upcomingResponse.json();
+
+        // Берём 1 самый новый проект из "Upcoming"
+        const newestUpcomingToken =
+          upcomingProjects.length > 0 ? upcomingProjects[2] : null;
+
+        // Обновляем состояние: два старых + один новый из Upcoming
+        setTokens(
+          newestUpcomingToken
+            ? [...sortedProjects, newestUpcomingToken]
+            : sortedProjects
+        );
       } catch (err: any) {
         setError(err.message);
         console.error("Error fetching project data:", err);
@@ -80,8 +95,12 @@ const InvestmentsSection = () => {
   }, [tokens]);
 
   // Добавлен явный тип string для параметра
-  const handleViewToken = (tokenName: string) => {
-    navigate(`/token/${encodeURIComponent(tokenName)}`);
+  const handleViewToken = (tokenName: string, status: string) => {
+    if (status === "Upcoming") {
+      navigate(`/upcoming/${encodeURIComponent(tokenName)}`);
+    } else {
+      navigate(`/token/${encodeURIComponent(tokenName)}`);
+    }
   };
 
   if (loading) {
@@ -130,7 +149,7 @@ const InvestmentsSection = () => {
             <p className={styles.description}>{token.description}</p>
             <button
               className={styles.viewButton}
-              onClick={() => handleViewToken(token.name)}
+              onClick={() => handleViewToken(token.name, token.status)}
             >
               View
             </button>

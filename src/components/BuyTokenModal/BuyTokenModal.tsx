@@ -26,13 +26,13 @@ const BuyTokenModal: React.FC<BuyTokenModalProps> = ({ project, onClose }) => {
     ETH: 0,
     BTC: 0,
     USDT: 0,
-    ARK: 0,
+    AVL: 0,
   });
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const tokenPriceInUSDT = 0.01; // Цена токена ARK в USDT
+  const tokenPriceInUSDT = 0.01; // Цена токена AVL в USDT
 
   useEffect(() => {
     const fetchPrices = async () => {
@@ -68,7 +68,7 @@ const BuyTokenModal: React.FC<BuyTokenModalProps> = ({ project, onClose }) => {
     }
   }, [userId]);
 
-  // Вычисление количества ARK, которое получит пользователь
+  // Вычисление количества AVL, которое получит пользователь
   const arkToReceive = amount
     ? (parseFloat(amount) / (tokenPriceInUSDT / prices[currency])).toFixed(6)
     : "0";
@@ -94,7 +94,7 @@ const BuyTokenModal: React.FC<BuyTokenModalProps> = ({ project, onClose }) => {
     const updatedBalance = {
       ...userBalance,
       [currency]: userCurrencyBalance - totalCost,
-      ARK: userBalance.ARK + parseFloat(arkToReceive),
+      AVL: userBalance.AVL + parseFloat(arkToReceive),
     };
 
     try {
@@ -141,6 +141,7 @@ const BuyTokenModal: React.FC<BuyTokenModalProps> = ({ project, onClose }) => {
         </select>
 
         <input
+          className={styles.buyInput}
           type="number"
           placeholder="Enter amount to spend"
           value={amount}
@@ -152,7 +153,7 @@ const BuyTokenModal: React.FC<BuyTokenModalProps> = ({ project, onClose }) => {
         </p>
 
         <p className={styles.arkReceive}>
-          You will receive: <strong>{arkToReceive} ARK</strong>
+          You will receive: <strong>{arkToReceive} Avalanche</strong>
         </p>
 
         {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}

@@ -16,7 +16,7 @@ const Profile = () => {
     }
   }, [userData]);
   const stats = [
-    { label: "Total Balance", value: user?.balance },
+    { label: "Total Balance", value: "0" },
     { label: "Projects", value: "0" },
     { label: "Total Profit", value: "0" },
   ];
@@ -103,7 +103,7 @@ const Profile = () => {
         <div className={styles.investCard}>
           <div className={styles.investHeader}>
             <div className={styles.investTitle}>
-              <div className={`${styles.tokenIcon} ${styles.solana}`}>S</div>
+              <div className={`${styles.tokenIcon} ${styles.solana}`}>B</div>
               <div>
                 <h3>BTC</h3>
                 <span>Active Investment</span>
@@ -118,6 +118,64 @@ const Profile = () => {
             <div>
               <span className={styles.label}>Staked Amount</span>
               <span className={styles.value}>0 BTC</span>
+            </div>
+            <div>
+              <span className={styles.label}>APR</span>
+              <span className={`${styles.value} ${styles.positive}`}>0%</span>
+            </div>
+            <div>
+              <span className={styles.label}>Duration</span>
+              <span className={styles.value}>None</span>
+            </div>
+          </div>
+        </div>
+        <div className={styles.investCard}>
+          <div className={styles.investHeader}>
+            <div className={styles.investTitle}>
+              <div className={`${styles.tokenIcon} ${styles.solana}`}>E</div>
+              <div>
+                <h3>ETH</h3>
+                <span>Active Investment</span>
+              </div>
+            </div>
+            {/* <button className={styles.detailsButton}>
+              View Details
+              <ExternalLink size={16} />
+            </button> */}
+          </div>
+          <div className={styles.investStats}>
+            <div>
+              <span className={styles.label}>Staked Amount</span>
+              <span className={styles.value}>0 ETH</span>
+            </div>
+            <div>
+              <span className={styles.label}>APR</span>
+              <span className={`${styles.value} ${styles.positive}`}>0%</span>
+            </div>
+            <div>
+              <span className={styles.label}>Duration</span>
+              <span className={styles.value}>None</span>
+            </div>
+          </div>
+        </div>
+        <div className={styles.investCard}>
+          <div className={styles.investHeader}>
+            <div className={styles.investTitle}>
+              <div className={`${styles.tokenIcon} ${styles.solana}`}>A</div>
+              <div>
+                <h3>AVL</h3>
+                <span>Active Investment</span>
+              </div>
+            </div>
+            {/* <button className={styles.detailsButton}>
+              View Details
+              <ExternalLink size={16} />
+            </button> */}
+          </div>
+          <div className={styles.investStats}>
+            <div>
+              <span className={styles.label}>Staked Amount</span>
+              <span className={styles.value}>0 AVL</span>
             </div>
             <div>
               <span className={styles.label}>APR</span>

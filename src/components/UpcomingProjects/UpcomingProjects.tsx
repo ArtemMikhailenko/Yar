@@ -11,6 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import styles from "./UpcomingProjects.module.css";
 import BuyTokenModal from "../BuyTokenModal/BuyTokenModal";
+import AuthModal from "../AuthModal/AuthModal";
 
 interface UpcomingProject {
   id: string;
@@ -182,14 +183,17 @@ const UpcomingProjects: React.FC = () => {
   const handleViewToken = (tokenName: string) => {
     navigate(`/upcoming/${encodeURIComponent(tokenName)}`);
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleBuy = (project: UpcomingProject) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("You must be logged in to purchase tokens!");
-      return;
+      setIsModalOpen(true);
     }
     setSelectedProject(project);
     setShowModal(true);
+  };
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
   useEffect(() => {
     const fetchTokenDetails = async () => {
@@ -199,7 +203,7 @@ const UpcomingProjects: React.FC = () => {
         );
         if (!response.ok) throw new Error("Failed to fetch token details");
         const data = await response.json();
-        setProjects(data); // ✅ теперь data всегда массив
+        setProjects(data.reverse()); // ✅ Инвертируем порядок
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -287,6 +291,16 @@ const UpcomingProjects: React.FC = () => {
           />
         ))}
       </div>
+      {isModalOpen && (
+        <AuthModal
+          isOpen={isModalOpen}
+          onClose={toggleModal}
+          onLogin={() => {
+            setIsModalOpen(false); // Закрываем модалку после входа
+            navigate("/wallet"); // После входа перенаправляем в кошелек
+          }}
+        />
+      )}
     </div>
   );
 };

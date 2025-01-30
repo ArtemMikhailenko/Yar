@@ -19,12 +19,12 @@ const BalanceCard: React.FC = () => {
     USDT: number;
     BTC: number;
     ETH: number;
-    ARK: number;
+    AVL: number;
   }>({
     USDT: 0,
     BTC: 0,
     ETH: 0,
-    ARK: 0,
+    AVL: 0,
   });
   const [prices, setPrices] = useState<{
     ETH: number;
@@ -146,15 +146,15 @@ const BalanceCard: React.FC = () => {
             {/* ARK */}
             <div className={styles.balanceItem}>
               <img
-                src="/icons/ark.svg"
-                alt="ARK"
+                src="https://polkastarter.com/_next/image?url=https%3A%2F%2Fassets.polkastarter.com%2Fqug8_L_Ew_F_400x400_63d22bf6ba%2Fqug8_L_Ew_F_400x400_63d22bf6ba.jpg&w=96&q=70"
+                alt="AVL"
                 className={styles.currencyIcon}
               />
               <div className={styles.balanceInfo}>
                 <span className={styles.balanceAmount}>
-                  {user.ARK.toFixed(2)} ARK
+                  {user.AVL.toFixed(2)} AVL
                 </span>
-                <span className={styles.balanceLabel}>ARK Token</span>
+                <span className={styles.balanceLabel}>AVL Token</span>
               </div>
             </div>
           </div>
