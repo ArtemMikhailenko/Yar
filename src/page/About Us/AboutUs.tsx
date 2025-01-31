@@ -1,5 +1,4 @@
-
-import styles from './AboutUs.module.css';
+import styles from "./AboutUs.module.css";
 
 const AboutUs = () => {
   return (
@@ -38,29 +37,42 @@ const AboutUs = () => {
           <div className={styles.missionContent}>
             <h2>Our Mission</h2>
             <p>
-              At ArkInvest, we're dedicated to revolutionizing the financial landscape through cutting-edge blockchain technology. Our mission is to create a more transparent, efficient, and accessible financial ecosystem for everyone.
+              Arkinvest aims to revolutionize the way crypto projects are
+              launched and developed. We believe that everyone deserves access
+              to the best blockchain opportunities, while projects receive
+              high-quality support and promotion.
             </p>
           </div>
           <div className={styles.valuesGrid}>
             <div className={styles.valueCard}>
               <div className={styles.valueIcon}>🔒</div>
-              <h3>Security First</h3>
-              <p>Enterprise-grade security protocols protecting your assets 24/7</p>
+              <h3>Reliability & Transparency</h3>
+              <p>
+                We ensure transaction security and access to verified projects.
+              </p>
             </div>
             <div className={styles.valueCard}>
               <div className={styles.valueIcon}>💡</div>
-              <h3>Innovation</h3>
-              <p>Pushing the boundaries of blockchain technology</p>
-            </div>
-            <div className={styles.valueCard}>
-              <div className={styles.valueIcon}>🤝</div>
-              <h3>Trust</h3>
-              <p>Building lasting relationships through transparency</p>
+              <h3>Multi-Chain Support</h3>
+              <p>
+                We work with leading blockchains like Ethereum, BNB Chain,
+                Polygon, and Avalanche.
+              </p>
             </div>
             <div className={styles.valueCard}>
               <div className={styles.valueIcon}>🚀</div>
-              <h3>Performance</h3>
-              <p>High-speed, scalable solutions for the modern world</p>
+              <h3>Innovation</h3>
+              <p>
+                Supporting breakthrough ideas in DeFi, AI, NFT, and Web3 Gaming.
+              </p>
+            </div>
+            <div className={styles.valueCard}>
+              <div className={styles.valueIcon}>📈</div>
+              <h3>Investor Benefits</h3>
+              <p>
+                Exclusive access to early token sales and unique investment
+                growth opportunities.
+              </p>
             </div>
           </div>
         </div>
@@ -68,23 +80,23 @@ const AboutUs = () => {
 
       <section className={styles.expertise}>
         <div className={styles.container}>
-          <h2>Our Expertise</h2>
+          <h2>What We Offer</h2>
           <div className={styles.expertiseGrid}>
             <div className={styles.expertiseCard}>
-              <h3>Smart Contracts</h3>
-              <p>Automated, secure, and transparent contract execution for your business needs</p>
+              <h3>Launchpads & IDO</h3>
+              <p>Powerful fundraising tools for crypto projects.</p>
             </div>
             <div className={styles.expertiseCard}>
-              <h3>DeFi Solutions</h3>
-              <p>Revolutionary decentralized financial products and services</p>
+              <h3>Expert Community</h3>
+              <p>Work with professionals to make your project stand out.</p>
             </div>
             <div className={styles.expertiseCard}>
-              <h3>Digital Assets</h3>
-              <p>Comprehensive digital asset management and trading solutions</p>
+              <h3>Crypto Tools</h3>
+              <p>Advanced analytics, trading, and investment services.</p>
             </div>
             <div className={styles.expertiseCard}>
               <h3>Enterprise Blockchain</h3>
-              <p>Scalable blockchain solutions for enterprise-level operations</p>
+              <p>Scalable blockchain solutions for large-scale operations.</p>
             </div>
           </div>
         </div>
@@ -92,7 +104,7 @@ const AboutUs = () => {
 
       <section className={styles.team}>
         <div className={styles.container}>
-          <h2>Leadership Team</h2>
+          <h2>Our Team</h2>
           <div className={styles.teamGrid}>
             <div className={styles.teamCard}>
               <div className={styles.teamMemberImage}>
