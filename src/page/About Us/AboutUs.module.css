@@ -226,7 +226,16 @@
   padding: 4rem 2rem;
   text-align: center;
 }
-
+.team h2 {
+  color: black;
+  font-size: 42px;
+}
+.teamText {
+  color: black;
+  font-weight: 500;
+  font-size: 23px;
+  margin-bottom: 40px;
+}
 .teamGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -272,10 +281,15 @@
 
 /* Join Us */
 .joinUs {
-  background: #1e293b;
-  color: white;
+  position: relative;
+  height: 200px;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  display: flex;
   text-align: center;
-  padding: 4rem 2rem;
+  color: #f8fafc;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .joinUs h2 {

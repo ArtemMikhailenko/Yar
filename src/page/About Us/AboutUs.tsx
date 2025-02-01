@@ -5,8 +5,15 @@ const AboutUs = () => {
     <div className={styles.aboutPage}>
       <section className={styles.hero}>
         <div className={styles.heroContent}>
-          <h1>Pioneering the Future of Blockchain</h1>
-          <p>Transforming industries through innovative blockchain solutions</p>
+          <h1>
+            Welcome to Arkinvest – The Leading Launchpad Platform for Crypto
+            Projects!
+          </h1>
+          <p>
+            We create a unique ecosystem for launching and promoting the most
+            promising blockchain projects, connecting creators of innovative
+            solutions with investors around the world.
+          </p>
         </div>
         <div className={styles.heroGlow}></div>
       </section>
@@ -101,37 +108,50 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
-
-      <section className={styles.team}>
+      <section className={styles.joinUs}>
         <div className={styles.container}>
-          <h2>Our Team</h2>
-          <div className={styles.teamGrid}>
-            <div className={styles.teamCard}>
-              <div className={styles.teamMemberImage}>
-                <img src="/api/placeholder/300/300" alt="CEO" />
-              </div>
-              <h3>Michael Anderson</h3>
-              <span>CEO & Founder</span>
-              <p>15+ years in FinTech & Blockchain</p>
+          <h2>Join Arkinvest!</h2>
+          <p>
+            Be part of the Web3 revolution. Launch your projects, invest with
+            confidence, and create the future together with us!
+          </p>
+        </div>
+        <div className={styles.heroGlow}></div>
+      </section>
+      <section className={styles.team}>
+        {/* <div className={styles.container}> */}
+        <h2>Our Team</h2>
+        <p className={styles.teamText}>
+          Arkinvest is a team of experienced specialists in blockchain,
+          investments, and marketing who work daily to improve your results.
+        </p>
+        <div className={styles.teamGrid}>
+          <div className={styles.teamCard}>
+            <div className={styles.teamMemberImage}>
+              <img src="/api/placeholder/300/300" alt="CEO" />
             </div>
-            <div className={styles.teamCard}>
-              <div className={styles.teamMemberImage}>
-                <img src="/api/placeholder/300/300" alt="CTO" />
-              </div>
-              <h3>Sarah Chen</h3>
-              <span>CTO</span>
-              <p>Former Tech Lead at Ethereum Foundation</p>
+            <h3>Michael Anderson</h3>
+            <span>CEO & Founder</span>
+            <p>15+ years in FinTech & Blockchain</p>
+          </div>
+          <div className={styles.teamCard}>
+            <div className={styles.teamMemberImage}>
+              <img src="/api/placeholder/300/300" alt="CTO" />
             </div>
-            <div className={styles.teamCard}>
-              <div className={styles.teamMemberImage}>
-                <img src="/api/placeholder/300/300" alt="COO" />
-              </div>
-              <h3>David Miller</h3>
-              <span>COO</span>
-              <p>20+ years in Operations & Strategy</p>
+            <h3>Sarah Chen</h3>
+            <span>CTO</span>
+            <p>Former Tech Lead at Ethereum Foundation</p>
+          </div>
+          <div className={styles.teamCard}>
+            <div className={styles.teamMemberImage}>
+              <img src="/api/placeholder/300/300" alt="COO" />
             </div>
+            <h3>David Miller</h3>
+            <span>COO</span>
+            <p>20+ years in Operations & Strategy</p>
           </div>
         </div>
+        {/* </div> */}
       </section>
 
       {/* <section className={styles.contact}>

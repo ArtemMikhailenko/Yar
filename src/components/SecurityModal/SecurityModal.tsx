@@ -8,8 +8,8 @@ const SecurityModal = ({ onClose }: { onClose: () => void }) => {
         <div className={styles.modalBody}>
           <p>
             At Arkinvest, we understand that security is a top priority for all
-            participants on our platform. We strive to ensure the maximum
-            protection of your data, funds, and transactions by utilizing the
+            participants of our platform. We strive to provide maximum
+            protection for your data, funds, and transactions by utilizing the
             most advanced technologies and approaches.
           </p>
 
@@ -19,54 +19,61 @@ const SecurityModal = ({ onClose }: { onClose: () => void }) => {
           <p>
             We have implemented advanced encryption technologies to protect your
             personal information and transactions. All user data is stored in
-            encrypted form, preventing unauthorized access.
+            encrypted form, which prevents unauthorized access.
           </p>
 
           <h4>2. KYC and AML Procedures</h4>
           <p>
-            To prevent fraud and comply with international standards, we conduct
-            thorough verification of platform participants.
+            To protect against fraud and comply with international standards, we
+            conduct thorough verification of platform participants. This
+            minimizes risks and ensures the reliability of all operations.
           </p>
 
           <h4>3. Audited Smart Contracts</h4>
           <p>
             All projects hosted on our platform use verified smart contracts.
-            Each contract undergoes an audit before launch.
+            Each contract undergoes an audit prior to launch to prevent
+            vulnerabilities.
           </p>
 
           <h4>4. Wallet Protection</h4>
           <p>
-            Your funds are always under your control. We support decentralized
-            wallets and recommend enabling two-factor authentication (2FA).
+            Your funds are always under your control. We support the use of
+            decentralized wallets and recommend two-factor authentication (2FA)
+            for additional protection.
           </p>
 
           <h4>5. Activity Monitoring</h4>
           <p>
             Our system continuously monitors suspicious activities on the
-            platform to quickly respond to potential threats.
+            platform in order to respond quickly to potential threats.
           </p>
 
           <h4>6. Transaction Transparency</h4>
           <p>
-            All transactions on Arkinvest are fully transparent and recorded on
-            the blockchain.
+            All transactions taking place on Arkinvest are completely
+            transparent and recorded on the blockchain. This eliminates the
+            possibility of manipulation and ensures trust between participants.
           </p>
 
-          <h4>7. Backup and Attack Protection</h4>
+          <h4>7. Backups and Attack Protection</h4>
           <p>
             Our servers are protected against DDoS attacks and other cyber
-            threats. We regularly create data backups.
+            threats. We regularly create backups of data to ensure their safety
+            in case of unforeseen circumstances.
           </p>
 
           <h3>Recommendations for Users</h3>
           <ul>
             <li>Never share your account credentials with third parties.</li>
-            <li>Use strong passwords and activate 2FA.</li>
-            <li>Always check the website address before logging in.</li>
+            <li>Use strong passwords and enable 2FA.</li>
+            <li>Always verify the website address before logging in.</li>
           </ul>
 
           <p>
             At Arkinvest, security is not just a standard—it is our philosophy.
+            We do everything possible so that you can focus on the success of
+            your projects and investments without worrying about risks.
           </p>
         </div>
         <button className={styles.closeButton} onClick={onClose}>

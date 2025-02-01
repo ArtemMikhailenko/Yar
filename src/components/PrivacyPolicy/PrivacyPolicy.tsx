@@ -7,10 +7,10 @@ const PrivacyPolicy = ({ onClose }: { onClose: () => void }) => {
         <h2 className={styles.modalTitle}>Privacy Policy</h2>
         <div className={styles.modalBody}>
           <p>
-            ArkInvest ("we," "our," "us") is committed to protecting and
+            Arkinvest ("we", "our", "us") is committed to protecting and
             respecting your privacy. This Privacy Policy explains what data we
             collect, how we use it, and how we safeguard your information when
-            you use the ArkInvest platform ("Platform").
+            you use the Arkinvest platform ("Platform").
           </p>
 
           <h3>1. Data We Collect</h3>
@@ -18,130 +18,136 @@ const PrivacyPolicy = ({ onClose }: { onClose: () => void }) => {
             We collect various types of data to provide and improve our
             services:
           </p>
+
+          <h4>1.1. Personal Data:</h4>
           <ul>
-            <li>
-              <strong>Personal Data:</strong> Full name, email address, phone
-              number, payment information (cryptocurrency wallets), legal
-              documents (for KYC verification).
-            </li>
-            <li>
-              <strong>Non-Personal Data:</strong> IP addresses, browser/device
-              details, platform activity logs.
-            </li>
-            <li>
-              <strong>Third-Party Data:</strong> We may collect data from
-              external services like payment processors or social networks if
-              you authenticate through them.
-            </li>
+            <li>First and last name.</li>
+            <li>Email address.</li>
+            <li>Phone number.</li>
+            <li>Payment information (including cryptocurrency wallets).</li>
+            <li>Legal documents (when KYC is required).</li>
           </ul>
 
-          <h3>2. Purpose of Data Usage</h3>
-          <p>We use your data to:</p>
+          <h4>1.2. Non-Personal Data:</h4>
           <ul>
-            <li>Register and manage your account.</li>
-            <li>Process transactions, including IDOs and token sales.</li>
-            <li>Communicate with you (emails, notifications).</li>
-            <li>Improve our platform and analyze user activity.</li>
-            <li>Ensure compliance with legal regulations.</li>
+            <li>IP addresses.</li>
+            <li>Browser and device information.</li>
+            <li>Activity logs on the Platform.</li>
+          </ul>
+
+          <h4>1.3. Data from Third-Party Sources:</h4>
+          <p>
+            We may collect information from third-party services, such as
+            payment systems or social networks, if you authenticate through
+            them.
+          </p>
+
+          <h3>2. Purposes of Data Usage</h3>
+          <p>We use the collected data to:</p>
+          <ul>
+            <li>Register users and provide access to the Platform.</li>
+            <li>Fulfill our service obligations.</li>
+            <li>Conduct transactions, including IDOs and token sales.</li>
+            <li>Communicate with users (newsletters, notifications).</li>
+            <li>Improve the Platform and analyze user activity.</li>
+            <li>Ensure compliance with laws and regulatory requirements.</li>
           </ul>
 
           <h3>3. Data Sharing with Third Parties</h3>
-          <p>We do not sell your data. However, we may share it with:</p>
+          <p>
+            We do not sell your data to third parties. However, in certain
+            cases, data may be shared:
+          </p>
           <ul>
             <li>
-              <strong>Partners:</strong> For transaction processing or service
-              provision.
+              With partner companies: For conducting transactions or providing
+              services.
             </li>
+            <li>With legal authorities: When required by law.</li>
             <li>
-              <strong>Legal Authorities:</strong> When required by law.
-            </li>
-            <li>
-              <strong>Technical Providers:</strong> For hosting, analytics, and
-              other services.
+              With technical service providers: For hosting, analytics, and
+              other operations.
             </li>
           </ul>
 
-          <h3>4. Data Storage & Security</h3>
+          <h3>4. Data Storage</h3>
+          <h4>4.1. Retention Period:</h4>
           <p>
-            <strong>4.1 Retention Period:</strong> We store data only as long as
-            necessary to fulfill our obligations or as required by law.
+            We retain data only for the period necessary to fulfill the purposes
+            outlined in this Policy or as required by law.
           </p>
+          <h4>4.2. Data Security:</h4>
           <p>
-            <strong>4.2 Security Measures:</strong> We implement technical and
-            organizational safeguards to protect your data from unauthorized
-            access, alteration, or destruction.
+            We take reasonable technical and organizational measures to protect
+            your data from unauthorized access, alteration, or destruction.
           </p>
 
           <h3>5. Your Rights</h3>
           <p>You have the right to:</p>
           <ul>
             <li>
-              <strong>Access your data:</strong> Request a copy of your personal
-              information.
+              Access your data: Request a copy of the personal information we
+              hold.
             </li>
             <li>
-              <strong>Correct your data:</strong> Update incorrect or outdated
-              details.
+              Correct your data: Make changes if the data is outdated or
+              incorrect.
             </li>
             <li>
-              <strong>Delete your data:</strong> Request data removal (subject
-              to legal obligations).
+              Delete your data: Request the removal of your data (subject to
+              legal requirements).
             </li>
             <li>
-              <strong>Restrict processing:</strong> Request limitations on how
-              we process your data.
+              Restrict processing: Ask us to limit the processing of your data.
             </li>
             <li>
-              <strong>Withdraw consent:</strong> Revoke any previously given
-              consent.
+              Withdraw consent: If you have previously given consent for data
+              processing, you may revoke it.
             </li>
           </ul>
           <p>
-            To exercise these rights, contact us using the details in Section 8.
+            To exercise these rights, please contact us using the details
+            provided in Section 8.
           </p>
 
-          <h3>6. Cookies & Tracking</h3>
-          <p>We use cookies to:</p>
+          <h3>6. Use of Cookies</h3>
+          <p>We use cookies and similar technologies to:</p>
           <ul>
             <li>Analyze user activity.</li>
-            <li>Personalize your experience.</li>
-            <li>Ensure platform security.</li>
+            <li>Personalize your experience on the Platform.</li>
+            <li>Ensure security.</li>
           </ul>
           <p>
-            You can disable cookies in your browser settings, but some features
-            may not work properly.
+            You may disable cookies in your browser settings, but this may
+            affect the functionality of the Platform.
           </p>
 
-          <h3>7. Minors' Privacy</h3>
+          <h3>7. Minors' Policy</h3>
           <p>
-            Our services are not intended for individuals under 18 years old. We
-            do not knowingly collect data from minors.
+            Our services are not intended for individuals under the age of 18.
+            We do not knowingly collect data from minors.
           </p>
 
           <h3>8. Contact Information</h3>
           <p>
-            If you have any questions or concerns regarding data processing,
-            contact us:
+            If you have any questions or complaints related to data processing,
+            please contact us:
           </p>
           <ul>
-            <li>
-              <strong>Email:</strong> [Provide email address]
-            </li>
-            <li>
-              <strong>Phone:</strong> [Provide phone number]
-            </li>
-            <li>
-              <strong>Address:</strong> [Provide postal address]
-            </li>
+            <li>Email: [provide email address]</li>
+            <li>Phone: [provide phone number]</li>
+            <li>Address: [provide postal address]</li>
           </ul>
 
-          <h3>9. Changes to this Privacy Policy</h3>
+          <h3>9. Changes to the Privacy Policy</h3>
           <p>
-            We may update this Privacy Policy, and changes will be published on
-            our Platform. We encourage you to review this section regularly.
+            We reserve the right to update this Policy. Updates will be
+            published on the Platform, and we recommend that you review this
+            section regularly.
           </p>
           <p>
-            By using our Platform, you confirm that you have read and understood
+            This Privacy Policy is an integral part of the User Agreement. By
+            using the Platform, you confirm that you have read and understood
             this Policy.
           </p>
         </div>
