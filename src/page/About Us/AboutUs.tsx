@@ -6,13 +6,21 @@ const AboutUs = () => {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1>
-            Welcome to Arkinvest – The Leading Launchpad Platform for Crypto
-            Projects!
+            Welcome to Arkinvest - the leading lunchespad platform for crypto
+            projects!
           </h1>
           <p>
             We create a unique ecosystem for launching and promoting the most
             promising blockchain projects, connecting creators of innovative
-            solutions with investors around the world.
+            solutions with investors around the world. Why Arkinvest? -
+            Reliability and transparency: Our platform guarantees the security
+            of all transactions and provides access to verified projects. -
+            Multi-chain support: We work with the largest blockchains, including
+            Ethereum, BNB Chain, Polygon, Avalanche and others. - Innovation: We
+            help projects realize their boldest ideas, whether it's DeFi, AI,
+            NFT or Web3 Gaming. - Investor Benefits: Members of our platform get
+            exclusive access to early tokensales and unique opportunities to
+            grow their investments.
           </p>
         </div>
         <div className={styles.heroGlow}></div>
@@ -44,10 +52,15 @@ const AboutUs = () => {
           <div className={styles.missionContent}>
             <h2>Our Mission</h2>
             <p>
-              Arkinvest aims to revolutionize the way crypto projects are
+              Arkinvest is committed to changing the way crypto projects are
               launched and developed. We believe that everyone deserves access
-              to the best blockchain opportunities, while projects receive
-              high-quality support and promotion.
+              to the best opportunities of the blockchain world, and projects
+              deserve quality support and promotion. What we offer? - Launchpads
+              and IDOs: We provide project creators with a powerful tool for
+              fundraising and community engagement. - Community of experts: With
+              us, you work with professionals who will help your project stand
+              out. - CryptoTools: Convenient services for analyzing, trading and
+              investing.
             </p>
           </div>
           <div className={styles.valuesGrid}>
@@ -122,13 +135,17 @@ const AboutUs = () => {
         {/* <div className={styles.container}> */}
         <h2>Our Team</h2>
         <p className={styles.teamText}>
-          Arkinvest is a team of experienced specialists in blockchain,
-          investments, and marketing who work daily to improve your results.
+          Arkinvest is a team of experienced blockchain, investment and
+          marketing professionals who work hard every day to improve your
+          results. Join Arkinvest! Be part of the Web3 revolution. Launch your
+          projects, invest with confidence and create the future with us! This
+          text emphasizes your benefits and uniqueness by highlighting key
+          aspects of the platform. If you need to add more, let me know!
         </p>
         <div className={styles.teamGrid}>
           <div className={styles.teamCard}>
             <div className={styles.teamMemberImage}>
-              <img src="/api/placeholder/300/300" alt="CEO" />
+              <img src="/Bob.jpg" alt="CEO" />
             </div>
             <h3>Michael Anderson</h3>
             <span>CEO & Founder</span>
@@ -136,7 +153,7 @@ const AboutUs = () => {
           </div>
           <div className={styles.teamCard}>
             <div className={styles.teamMemberImage}>
-              <img src="/api/placeholder/300/300" alt="CTO" />
+              <img src="/Sar.jpg" alt="CTO" />
             </div>
             <h3>Sarah Chen</h3>
             <span>CTO</span>
@@ -144,7 +161,7 @@ const AboutUs = () => {
           </div>
           <div className={styles.teamCard}>
             <div className={styles.teamMemberImage}>
-              <img src="/api/placeholder/300/300" alt="COO" />
+              <img src="/Dav.jpg" alt="COO" />
             </div>
             <h3>David Miller</h3>
             <span>COO</span>

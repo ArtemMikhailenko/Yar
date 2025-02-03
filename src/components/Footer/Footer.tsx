@@ -3,11 +3,13 @@ import styles from "./FooterSection.module.css";
 import PrivacyPolicy from "../PrivacyPolicy/PrivacyPolicy";
 import SecurityModal from "../SecurityModal/SecurityModal";
 import TermsModal from "../TermsModal/TermsModal";
+import { Link } from "react-router-dom";
 
 const FooterSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSecurityModalOpen, setIsSecurityModalOpen] = useState(false);
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
+
   return (
     <>
       <footer className={styles.footer}>
@@ -26,17 +28,13 @@ const FooterSection = () => {
               <div className={styles.column}>
                 <h3>Company</h3>
                 <ul>
-                  <li>
-                    <span className={styles.dot}></span>About Us
-                  </li>
+                  <Link to="/about">
+                    <li>
+                      <span className={styles.dot}></span>About Us
+                    </li>
+                  </Link>
                   <li>
                     <span className={styles.dot}></span>Contact
-                  </li>
-                  <li>
-                    <span className={styles.dot}></span>Partners
-                  </li>
-                  <li>
-                    <span className={styles.dot}></span>News
                   </li>
                 </ul>
               </div>
@@ -58,19 +56,32 @@ const FooterSection = () => {
             </div>
           </div>
 
+          {/* Обновлённый блок социальных иконок */}
           <div className={styles.socialsBar}>
             <div className={styles.socials}>
-              <a href="#" className={styles.socialIcon}>
-                <i className="fa-brands fa-facebook-f"></i>
+              <a
+                href="https://t.me/yourTelegramChannel"
+                className={styles.socialIcon}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i className="fa-brands fa-telegram"></i>
               </a>
-              <a href="#" className={styles.socialIcon}>
+              <a
+                href="mailto:info@arkinvest.com"
+                className={styles.socialIcon}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i className="fa-solid fa-envelope"></i>
+              </a>
+              <a
+                href="https://x.com/ARKInvest?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor&mx=2"
+                className={styles.socialIcon}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i className="fa-brands fa-twitter"></i>
-              </a>
-              <a href="#" className={styles.socialIcon}>
-                <i className="fa-brands fa-linkedin-in"></i>
-              </a>
-              <a href="#" className={styles.socialIcon}>
-                <i className="fa-brands fa-instagram"></i>
               </a>
             </div>
           </div>

@@ -231,21 +231,21 @@ const Profile = () => {
         <div className={styles.projectsSection} onClick={handleWallet}>
           <div className={styles.projectsGrid}>
             {projects.map((project, index) => (
-              <div key={index} className={styles.investCard}>
+              <div key={index} className={styles.projectCard}>
                 <div className={styles.projectBlock}>
                   <img
                     src={project.logo}
                     alt={project.name}
                     className={styles.tokenIcon}
                   />
-                  <div className={styles.ctaBanner}>
-                    <p>Limited Offer!</p>
-                  </div>
                 </div>
                 <div className={styles.projectInfo}>
                   <h3>{project.name}</h3>
                   <p>Stage: {project.stage}</p>
                   <p>Token Price: {project.tokenPrice}</p>
+                </div>
+                <div className={styles.ctaBanner}>
+                  <p>Limited Offer!</p>
                 </div>
               </div>
             ))}

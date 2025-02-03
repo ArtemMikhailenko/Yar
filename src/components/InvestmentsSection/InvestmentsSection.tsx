@@ -52,7 +52,7 @@ const InvestmentsSection = () => {
 
         // Берём 1 самый новый проект из "Upcoming"
         const newestUpcomingToken =
-          upcomingProjects.length > 0 ? upcomingProjects[2] : null;
+          upcomingProjects.length > 0 ? upcomingProjects[1] : null;
 
         // Обновляем состояние: два старых + один новый из Upcoming
         setTokens(
