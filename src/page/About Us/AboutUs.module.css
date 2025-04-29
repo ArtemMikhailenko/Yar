@@ -1,18 +1,34 @@
 .aboutPage {
   background: linear-gradient(135deg, #f8fafc, #e2e8f0);
   font-family: Arial, sans-serif;
+  overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Общий контейнер */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Hero Section */
 .hero {
   position: relative;
-  height: 400px;
+  min-height: 400px; /* min-height вместо height для адаптивности */
   background: linear-gradient(135deg, #1e293b, #0f172a);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   margin-bottom: 50px;
+  padding: 60px 0; /* Padding для контента на мобильных */
 }
 
 .heroContent {
@@ -20,20 +36,23 @@
   color: white;
   z-index: 1;
   padding: 0 20px;
+  max-width: 1200px; /* Ограничение ширины контента */
+  margin: 0 auto;
 }
 
 .heroContent h1 {
-  font-size: 2.8rem;
+  font-size: 2.2rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
   background: linear-gradient(135deg, #60a5fa, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  line-height: 1.3;
 }
 
 .heroContent p {
-  font-size: 1.6rem;
-  line-height: 38px;
+  font-size: 1.1rem;
+  line-height: 1.6;
   color: #ebeef4;
 }
 
@@ -47,24 +66,26 @@
 
 /* Stats Section */
 .stats {
-  /* background: white; */
+  padding: 2rem 0;
+  margin-bottom: 2rem;
 }
 
 .stats .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .statCard {
   text-align: center;
   padding: 2rem;
-  /* background: rgba(255, 255, 255, 0.8); */
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  background: #fff;
 }
 
 .statCard:hover {
@@ -74,14 +95,14 @@
 
 .statNumber {
   display: block;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 800;
   color: #3b82f6;
   margin-bottom: 0.5rem;
 }
 
 .statLabel {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #64748b;
 }
 
@@ -89,31 +110,37 @@
 .mission {
   background: linear-gradient(135deg, #f8fafc, #e2e8f0);
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 4rem 0;
+}
+
+.mission .container {
+  padding: 0 20px;
+}
+
+.missionContent {
+  max-width: 1000px;
+  margin: 0 auto 3rem;
 }
 
 .missionContent h2 {
   font-size: 2.5rem;
   color: #1e293b;
-  margin-bottom: 1.9rem;
+  margin-bottom: 1.5rem;
 }
 
 .missionContent p {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #64748b;
   line-height: 1.8;
 }
 
 /* Core Values */
-.values {
-  background: white;
-  padding: 4rem 2rem;
-}
-
 .valuesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .valueCard {
@@ -122,6 +149,7 @@
   border-radius: 20px;
   text-align: center;
   transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
 .valueCard:hover {
@@ -135,32 +163,40 @@
 }
 
 .valueCard h3 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #1e293b;
   margin-bottom: 1rem;
 }
 
 .valueCard p {
   color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 /* Services */
 .expertise {
   background: white;
-  padding: 4rem 2rem;
+  padding: 4rem 0;
+}
+
+.expertise .container {
+  padding: 0 20px;
 }
 
 .expertise h2 {
   text-align: center;
   font-size: 2.5rem;
   color: #1e293b;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .expertiseGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .expertiseCard {
@@ -168,6 +204,7 @@
   border-radius: 20px;
   background: linear-gradient(135deg, #f8fafc, #e2e8f0);
   transition: all 0.3s ease;
+  height: 100%;
 }
 
 .expertiseCard:hover {
@@ -186,61 +223,36 @@
   line-height: 1.6;
 }
 
-/* Roadmap */
-.roadmap {
-  background: #f8fafc;
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-.roadmapGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.roadmapCard {
-  background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.roadmapCard:hover {
-  transform: translateY(-5px);
-}
-
-.roadmapCard h3 {
-  font-size: 1.5rem;
-  color: #1e293b;
-  margin-bottom: 0.5rem;
-}
-
-.roadmapCard p {
-  color: #64748b;
-}
-
 /* Team */
 .team {
   background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-  padding: 4rem 2rem;
+  padding: 4rem 20px;
   text-align: center;
 }
+
 .team h2 {
   color: black;
-  font-size: 42px;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
 }
+
 .teamText {
   color: black;
   font-weight: 500;
-  font-size: 23px;
+  font-size: 1.2rem;
   margin-bottom: 40px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
+
 .teamGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .teamCard {
@@ -248,8 +260,8 @@
 }
 
 .teamMemberImage {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   margin: 0 auto 1.5rem;
   border-radius: 50%;
   overflow: hidden;
@@ -260,7 +272,7 @@
 .teamMemberImage img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .teamCard h3 {
@@ -283,7 +295,7 @@
 /* Join Us */
 .joinUs {
   position: relative;
-  height: 200px;
+  min-height: 200px;
   background: linear-gradient(135deg, #1e293b, #0f172a);
   display: flex;
   text-align: center;
@@ -291,16 +303,24 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding: 3rem 20px;
+}
+
+.joinUs .container {
+  position: relative;
+  z-index: 1;
 }
 
 .joinUs h2 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin-bottom: 1rem;
 }
 
 .joinUs p {
   font-size: 1.2rem;
   color: #94a3b8;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* Animations */
@@ -314,21 +334,155 @@
   }
 }
 
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 1024px) {
+  .stats .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .valuesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .expertiseGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .teamGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
   .heroContent h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .heroContent p {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
-  .container {
-    padding: 4rem 1.5rem;
+  .statNumber {
+    font-size: 2.2rem;
+  }
+
+  .missionContent h2,
+  .expertise h2,
+  .team h2 {
+    font-size: 2.2rem;
+  }
+
+  .missionContent p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .stats .container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .valuesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .expertiseGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .teamGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .heroContent h1 {
+    font-size: 1.8rem;
+  }
+
+  .heroContent p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .missionContent h2,
+  .expertise h2,
+  .team h2 {
+    font-size: 2rem;
+  }
+
+  .missionContent p {
+    font-size: 1rem;
+  }
+
+  .teamText {
+    font-size: 1rem;
+  }
+
+  .hero {
+    padding: 3rem 0;
+  }
+
+  .joinUs h2 {
+    font-size: 1.8rem;
+  }
+
+  .joinUs p {
+    font-size: 1rem;
+  }
+
+  .statCard,
+  .valueCard,
+  .expertiseCard {
+    padding: 1.5rem;
   }
 
   .teamMemberImage {
     width: 150px;
     height: 150px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .heroContent h1 {
+    font-size: 1.5rem;
+  }
+
+  .heroContent p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .missionContent h2,
+  .expertise h2,
+  .team h2,
+  .joinUs h2 {
+    font-size: 1.7rem;
+  }
+
+  .statNumber {
+    font-size: 2rem;
+  }
+
+  .statCard {
+    padding: 1.25rem;
+  }
+
+  .valueCard h3,
+  .expertiseCard h3 {
+    font-size: 1.2rem;
+  }
+
+  .teamText {
+    font-size: 0.9rem;
+  }
+
+  .teamMemberImage {
+    width: 120px;
+    height: 120px;
   }
 }

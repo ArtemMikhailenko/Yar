@@ -4,16 +4,16 @@ const SecurityModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <h2 className={styles.modalTitle}>Security at Arkinvest</h2>
+        <h2 className={styles.modalTitle}>Security at In4fin</h2>
         <div className={styles.modalBody}>
           <p>
-            At Arkinvest, we understand that security is a top priority for all
+            At In4fin, we understand that security is a top priority for all
             participants of our platform. We strive to provide maximum
             protection for your data, funds, and transactions by utilizing the
             most advanced technologies and approaches.
           </p>
 
-          <h3>What Makes Arkinvest a Secure Platform?</h3>
+          <h3>What Makes In4fin a Secure Platform?</h3>
 
           <h4>1. Multi-Level Data Protection</h4>
           <p>
@@ -51,9 +51,9 @@ const SecurityModal = ({ onClose }: { onClose: () => void }) => {
 
           <h4>6. Transaction Transparency</h4>
           <p>
-            All transactions taking place on Arkinvest are completely
-            transparent and recorded on the blockchain. This eliminates the
-            possibility of manipulation and ensures trust between participants.
+            All transactions taking place on In4fin are completely transparent
+            and recorded on the blockchain. This eliminates the possibility of
+            manipulation and ensures trust between participants.
           </p>
 
           <h4>7. Backups and Attack Protection</h4>
@@ -71,9 +71,9 @@ const SecurityModal = ({ onClose }: { onClose: () => void }) => {
           </ul>
 
           <p>
-            At Arkinvest, security is not just a standard—it is our philosophy.
-            We do everything possible so that you can focus on the success of
-            your projects and investments without worrying about risks.
+            At In4fin, security is not just a standard—it is our philosophy. We
+            do everything possible so that you can focus on the success of your
+            projects and investments without worrying about risks.
           </p>
         </div>
         <button className={styles.closeButton} onClick={onClose}>

@@ -18,9 +18,19 @@ const FooterSection = () => {
         <div className={styles.content}>
           <div className={styles.grid}>
             <div className={styles.brandSection}>
-              <h2 className={styles.logo}>ArkInvest</h2>
+              <h2 className={styles.logo}>In4fin</h2>
               <p className={styles.brandDescription}>
                 Creating innovative solutions for the future of finance
+              </p>
+              <p>
+                <a
+                  href="mailto:support@in4fin.com"
+                  target="_blank"
+                  className={styles.mailLink}
+                  rel="noopener noreferrer"
+                >
+                  support@in4fin.com{" "}
+                </a>
               </p>
             </div>
 
@@ -36,6 +46,11 @@ const FooterSection = () => {
                   <li>
                     <span className={styles.dot}></span>Contact
                   </li>
+                  <a href="/#partners">
+                    <li>
+                      <span className={styles.dot}></span>Partners
+                    </li>
+                  </a>
                 </ul>
               </div>
 
@@ -60,7 +75,7 @@ const FooterSection = () => {
           <div className={styles.socialsBar}>
             <div className={styles.socials}>
               <a
-                href="https://t.me/yourTelegramChannel"
+                href="https://t.me/in4fin"
                 className={styles.socialIcon}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -68,7 +83,7 @@ const FooterSection = () => {
                 <i className="fa-brands fa-telegram"></i>
               </a>
               <a
-                href="mailto:info@arkinvest.com"
+                href="mailto:support@in4fin.com"
                 className={styles.socialIcon}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -87,16 +102,12 @@ const FooterSection = () => {
           </div>
 
           <div className={styles.bottom}>
-            <p>© 2024 ArkInvest. All rights reserved.</p>
+            <p>© 2024 In4fin. All rights reserved.</p>
             <div className={styles.bottomLinks}>
-              <a href="#">Terms</a>
+              {/* <a href="#">Terms</a>
               <a href="#">Privacy</a>
-              <a href="#">Cookies</a>
+              <a href="#">Cookies</a> */}
             </div>
-          </div>
-
-          <div className={styles.begonText}>
-            <p>begon</p>
           </div>
         </div>
       </footer>

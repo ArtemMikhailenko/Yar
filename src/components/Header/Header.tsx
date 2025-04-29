@@ -17,7 +17,11 @@ const Header = () => {
   const [user, setUser] = useState<User | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const burgerButtonRef = useRef<HTMLButtonElement>(null);
   const navigate = useNavigate();
+
+  // Store the initial scroll position
+  const scrollPositionRef = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +45,7 @@ const Header = () => {
     };
 
     checkUser();
-    window.addEventListener("storage", checkUser); // Отслеживаем изменения localStorage
+    window.addEventListener("storage", checkUser); // Track localStorage changes
 
     return () => {
       window.removeEventListener("storage", checkUser);
@@ -51,23 +55,29 @@ const Header = () => {
   useEffect(() => {
     //@ts-ignore
     const handleClickOutside = (event) => {
+      // Check if click is outside the mobile menu and not on the burger button
       if (
+        isMobileMenuOpen &&
         mobileMenuRef.current &&
         !mobileMenuRef.current.contains(event.target) &&
-        !event.target.closest(`.${styles.burgerButton}`)
+        burgerButtonRef.current &&
+        !burgerButtonRef.current.contains(event.target)
       ) {
         setIsMobileMenuOpen(false);
-        document.body.style.overflow = "unset";
+        enableScrolling();
       }
+
+      // Handle dropdown click outside
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
       }
     };
+
     //@ts-ignore
     const handleEscape = (event) => {
       if (event.key === "Escape") {
         setIsMobileMenuOpen(false);
-        document.body.style.overflow = "unset";
+        enableScrolling();
       }
     };
 
@@ -77,14 +87,44 @@ const Header = () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscape);
     };
-  }, []);
+  }, [isMobileMenuOpen]);
+
+  // Lock scrolling when mobile menu is open
+  const disableScrolling = () => {
+    // Store current scroll position
+    scrollPositionRef.current = window.scrollY;
+
+    // Add the no-scroll class to html and body elements
+    document.documentElement.classList.add(styles.noScroll);
+    document.body.classList.add(styles.noScroll);
+
+    // Set position fixed and top position to maintain visual position
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollPositionRef.current}px`;
+    document.body.style.width = "100%";
+  };
+
+  // Enable scrolling when mobile menu is closed
+  const enableScrolling = () => {
+    // Remove the no-scroll class
+    document.documentElement.classList.remove(styles.noScroll);
+    document.body.classList.remove(styles.noScroll);
+
+    // Reset body styles
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+
+    // Restore scroll position
+    window.scrollTo(0, scrollPositionRef.current);
+  };
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
     if (!isModalOpen) {
-      document.body.style.overflow = "hidden";
+      disableScrolling();
     } else {
-      document.body.style.overflow = "unset";
+      enableScrolling();
     }
   };
 
@@ -94,17 +134,22 @@ const Header = () => {
     setUser(null);
     setIsDropdownOpen(false);
     setIsMobileMenuOpen(false);
+    enableScrolling();
     navigate("/");
   };
 
   const toggleMobileMenu = () => {
+    if (!isMobileMenuOpen) {
+      disableScrolling();
+    } else {
+      enableScrolling();
+    }
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    document.body.style.overflow = !isMobileMenuOpen ? "hidden" : "unset";
   };
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
-    document.body.style.overflow = "unset";
+    enableScrolling();
   };
 
   const menuItems = [
@@ -122,7 +167,7 @@ const Header = () => {
         <div className={styles.logoWrapper}>
           <Link to="/" className={styles.logo} onClick={closeMobileMenu}>
             <img src={logo} alt="Logo" />
-            <span className={styles.logoText}>ArkInvest</span>
+            <span className={styles.logoText}>In4fin</span>
           </Link>
         </div>
 
@@ -169,6 +214,7 @@ const Header = () => {
           )}
 
           <button
+            ref={burgerButtonRef}
             className={`${styles.burgerButton} ${
               isMobileMenuOpen ? styles.active : ""
             }`}
@@ -180,19 +226,19 @@ const Header = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 {" "}
                 <path
                   d="M5 8H13.75M5 12H19M10.25 16L19 16"
                   stroke="#464455"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></path>{" "}
               </g>
             </svg>
@@ -216,7 +262,7 @@ const Header = () => {
                 onClick={closeMobileMenu}
               >
                 <img src={logo} alt="Logo" />
-                <span className={styles.mobileLogoText}>ArkInvest</span>
+                <span className={styles.mobileLogoText}>In4fin</span>
               </Link>
             </div>
             <button

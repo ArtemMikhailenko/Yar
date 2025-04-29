@@ -1,108 +1,109 @@
 .investments {
-    width: 100%;
-    padding: 100px 0;
-    text-align: center;
+  width: 100%;
+  padding: 100px 0;
+  text-align: center;
 }
 
 .title {
-    font-size: 52px;
-    font-weight: 900;
-    margin-bottom: 60px;
-    color: #111827;
-    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 52px;
+  font-weight: 900;
+  margin-bottom: 60px;
+  color: #111827;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
 /* Карточки */
 .card {
-    background: linear-gradient(135deg, #ffffff, #f3f8fe);
-    width: 340px;
-    border-radius: 25px;
-    padding: 35px;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0;
-    transform: translateY(40px);
+  background: linear-gradient(135deg, #ffffff, #f3f8fe);
+  width: 340px;
+  border-radius: 25px;
+  padding: 35px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(40px);
 }
 
 .card.show {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card:hover {
-    transform: translateY(-15px) scale(1.03);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
 }
 
 /* Заголовок проекта и лого */
 .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 25px;
-    gap: 18px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 18px;
 }
 
 .avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Подробности */
 .details {
-    margin-bottom: 25px;
-    font-size: 18px;
-    color: #475569;
+  margin-bottom: 25px;
+  font-size: 18px;
+  color: #475569;
 }
 
 .details p {
-    margin: 6px 0;
+  margin: 6px 0;
 }
 
 .details strong {
-    color: #1e40af;
+  color: #1e40af;
 }
 
 /* Описание */
 .description {
-    font-size: 17px;
-    color: #334155;
-    margin-bottom: 35px;
-    line-height: 1.6;
+  font-size: 17px;
+  color: #334155;
+  margin-bottom: 35px;
+  line-height: 1.6;
 }
 
 /* Кнопка */
 .viewButton {
-    padding: 14px 40px;
-    font-size: 18px;
-    border: none;
-    border-radius: 15px;
-    background: linear-gradient(135deg, #2563eb, #4f46e5);
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 6px 25px rgba(59, 130, 246, 0.5);
-    transition: all 0.3s ease, transform 0.3s ease;
+  padding: 14px 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 25px rgba(59, 130, 246, 0.5);
+  transition: all 0.3s ease, transform 0.3s ease;
 }
 
 .viewButton:hover {
-    background: linear-gradient(135deg, #1e3a8a, #4338ca);
-    transform: translateY(-7px);
-    box-shadow: 0 10px 35px rgba(59, 130, 246, 0.7);
+  background: linear-gradient(135deg, #1e3a8a, #4338ca);
+  transform: translateY(-7px);
+  box-shadow: 0 10px 35px rgba(59, 130, 246, 0.7);
 }
 
 .viewButton:active {
-    transform: translateY(2px);
-    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  transform: translateY(2px);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
 }

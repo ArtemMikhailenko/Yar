@@ -236,6 +236,31 @@
 .bottomLinks a:hover {
   color: #fff;
 }
+.mailLink {
+  position: relative; /* Позиционируем элемент */
+  color: #ffffff; /* Цвет текста */
+  text-decoration: none; /* Убираем стандартное подчёркивание */
+  transition: color 0.3s ease; /* При желании можно добавить плавное изменение цвета */
+}
+
+.mailLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* Линия появится чуть ниже текста */
+  width: 0; /* Начинаем с нулевой ширины */
+  height: 2px; /* Толщина линии */
+  background-color: #38bdf8; /* Цвет линии */
+  transition: width 0.3s ease; /* Анимация увеличения ширины */
+}
+
+.mailLink:hover {
+  color: #38bdf8; /* При наведении можно менять цвет текста */
+}
+
+.mailLink:hover::after {
+  width: 100%; /* Линия растягивается по всей ширине текста */
+}
 
 @keyframes buttonGlow {
   0% {

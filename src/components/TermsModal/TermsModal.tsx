@@ -11,8 +11,8 @@ const TermsModal = ({ onClose }: { onClose: () => void }) => {
           </p>
           <p>
             This User Agreement ("Agreement") sets forth the terms and
-            conditions governing the use of the Arkinvest platform ("Platform"
-            or "we"), which provides services for hosting crypto projects
+            conditions governing the use of the In4fin platform ("Platform" or
+            "we"), which provides services for hosting crypto projects
             (launchpads) for users ("User" or "you"). This Agreement is a
             legally binding document accepted by you upon registration and use
             of the Platform's services.
@@ -173,7 +173,7 @@ const TermsModal = ({ onClose }: { onClose: () => void }) => {
           <h4>10.1. Jurisdiction</h4>
           <p>
             This Agreement is governed by the laws of the jurisdiction in which
-            Arkinvest is registered.
+            In4fin{" "}
           </p>
 
           <h4>10.2. Dispute Resolution</h4>

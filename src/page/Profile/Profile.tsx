@@ -120,7 +120,7 @@ const Profile = () => {
               <div>
                 <span className={styles.label}>Staked Amount</span>
                 <span className={styles.value}>
-                  {user?.balance.USDT.toFixed(2)} USDT
+                  {user?.balance?.USDT.toFixed(2)} USDT
                 </span>
               </div>
               <div>
@@ -152,7 +152,7 @@ const Profile = () => {
               <div>
                 <span className={styles.label}>Staked Amount</span>
                 <span className={styles.value}>
-                  {user?.balance.BTC.toFixed(6)} BTC
+                  {user?.balance?.BTC.toFixed(6)} BTC
                 </span>
               </div>
               <div>
@@ -182,7 +182,7 @@ const Profile = () => {
             <div className={styles.investStats}>
               <div>
                 <span className={styles.label}>Staked Amount</span>
-                <span className={styles.value}>{user?.balance.ETH} ETH</span>
+                <span className={styles.value}>{user?.balance?.ETH} ETH</span>
               </div>
               <div>
                 <span className={styles.label}>APR</span>
@@ -212,7 +212,7 @@ const Profile = () => {
               <div>
                 <span className={styles.label}>Staked Amount</span>
                 <span className={styles.value}>
-                  {user?.balance.AVL.toFixed(2)} AVL
+                  {user?.balance?.AVL.toFixed(2)} AVL
                 </span>
               </div>
               <div>

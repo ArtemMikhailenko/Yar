@@ -56,7 +56,7 @@ const PartnersSection: React.FC = () => {
   }, []);
 
   return (
-    <section className={styles.partnersSection}>
+    <section className={styles.partnersSection} id="partners">
       <div className={styles.container}>
         <h2 className={styles.title}>
           <span className={styles.titleHighlight}>Our</span> Partners

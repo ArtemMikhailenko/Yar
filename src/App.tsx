@@ -30,7 +30,9 @@ function App() {
                 <HeroSection />
                 <StatsSection />
                 <InvestmentsSection />
-                <PartnersSection />
+                <div id="partners">
+                  <PartnersSection />
+                </div>
               </>
             }
           />

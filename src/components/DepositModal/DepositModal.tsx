@@ -10,12 +10,12 @@ const DepositModal: React.FC<DepositModalProps> = ({ onClose }) => {
   const wallets = [
     {
       name: "BTC",
-      address: "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwfhrl",
+      address: "bc1qwdk2vwvll8vnjc43fz2seyfhfnvpuq9t2up8qu",
       color: "#F7931A",
     },
     {
       name: "TRC",
-      address: "TQ2kJksK1m4Y6uN3d5C5bGJgY5r1ZWV4rZ",
+      address: "TFNPewCLvviuYhEid2Yvz3snSF6KTzAGS8",
       color: "#0088CC",
     },
   ];

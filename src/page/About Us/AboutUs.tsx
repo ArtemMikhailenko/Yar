@@ -6,19 +6,19 @@ const AboutUs = () => {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1>
-            Welcome to Arkinvest - the leading lunchespad platform for crypto
+            Welcome to In4fin - the leading lunchespad platform for crypto
             projects!
           </h1>
           <p>
             We create a unique ecosystem for launching and promoting the most
             promising blockchain projects, connecting creators of innovative
-            solutions with investors around the world. Why Arkinvest? -
-            Reliability and transparency: Our platform guarantees the security
-            of all transactions and provides access to verified projects. -
-            Multi-chain support: We work with the largest blockchains, including
-            Ethereum, BNB Chain, Polygon, Avalanche and others. - Innovation: We
-            help projects realize their boldest ideas, whether it's DeFi, AI,
-            NFT or Web3 Gaming. - Investor Benefits: Members of our platform get
+            solutions with investors around the world. Why In4fin? - Reliability
+            and transparency: Our platform guarantees the security of all
+            transactions and provides access to verified projects. - Multi-chain
+            support: We work with the largest blockchains, including Ethereum,
+            BNB Chain, Polygon, Avalanche and others. - Innovation: We help
+            projects realize their boldest ideas, whether it's DeFi, AI, NFT or
+            Web3 Gaming. - Investor Benefits: Members of our platform get
             exclusive access to early tokensales and unique opportunities to
             grow their investments.
           </p>
@@ -52,7 +52,7 @@ const AboutUs = () => {
           <div className={styles.missionContent}>
             <h2>Our Mission</h2>
             <p>
-              Arkinvest is committed to changing the way crypto projects are
+              In4fin is committed to changing the way crypto projects are
               launched and developed. We believe that everyone deserves access
               to the best opportunities of the blockchain world, and projects
               deserve quality support and promotion. What we offer? - Launchpads
@@ -123,7 +123,7 @@ const AboutUs = () => {
       </section>
       <section className={styles.joinUs}>
         <div className={styles.container}>
-          <h2>Join Arkinvest!</h2>
+          <h2>Join In4fin!</h2>
           <p>
             Be part of the Web3 revolution. Launch your projects, invest with
             confidence, and create the future together with us!
@@ -135,12 +135,12 @@ const AboutUs = () => {
         {/* <div className={styles.container}> */}
         <h2>Our Team</h2>
         <p className={styles.teamText}>
-          Arkinvest is a team of experienced blockchain, investment and
-          marketing professionals who work hard every day to improve your
-          results. Join Arkinvest! Be part of the Web3 revolution. Launch your
-          projects, invest with confidence and create the future with us! This
-          text emphasizes your benefits and uniqueness by highlighting key
-          aspects of the platform. If you need to add more, let me know!
+          In4fin is a team of experienced blockchain, investment and marketing
+          professionals who work hard every day to improve your results. Join
+          In4fin! Be part of the Web3 revolution. Launch your projects, invest
+          with confidence and create the future with us! This text emphasizes
+          your benefits and uniqueness by highlighting key aspects of the
+          platform. If you need to add more, let me know!
         </p>
         <div className={styles.teamGrid}>
           <div className={styles.teamCard}>

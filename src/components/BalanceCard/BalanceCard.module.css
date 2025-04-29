@@ -261,26 +261,57 @@
   margin-top: 16px;
 }
 
-/* Responsive Design */
+@media (max-width: 1024px) {
+  .balanceWrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .balanceItem {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
   .card {
     padding: 24px;
   }
 
-  .balance {
-    font-size: 36px;
+  .balanceWrapper {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
   }
 
-  .statsContainer {
+  .balanceItem {
+    width: 100%;
     flex-direction: column;
-    gap: 12px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .currencyIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .balanceAmount {
+    font-size: 18px;
   }
 
   .actionButtons {
     flex-direction: column;
+    align-items: center;
   }
 
-  .graphPlaceholder {
-    padding: 16px;
+  .actionButton {
+    width: 100%;
+    margin-bottom: 10px;
   }
 }

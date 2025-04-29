@@ -10,14 +10,14 @@ const Wallet = () => {
   const [activeTab, setActiveTab] = useState("HOLDINGS");
   const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
 
-  const holdings = Array(2).fill({
-    token: "Project Network PNT",
-    amount: 1500,
-    buyingPrice: "1$ (Private round)",
-    buyingTotal: "1500.00$",
-    currentPrice: "3$ (Public round)",
-    totalValue: "4500.00$",
-  });
+  // const holdings = Array(2).fill({
+  //   token: "Project Network PNT",
+  //   amount: 1500,
+  //   buyingPrice: "1$ (Private round)",
+  //   buyingTotal: "1500.00$",
+  //   currentPrice: "3$ (Public round)",
+  //   totalValue: "4500.00$",
+  // });
 
   // const openDepositModal = () => setIsDepositModalOpen(true);
   const closeDepositModal = () => setIsDepositModalOpen(false);
@@ -65,7 +65,7 @@ const Wallet = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {holdings.map((item, index) => (
+                  {/* {holdings.map((item, index) => (
                     <tr key={index}>
                       <td>
                         <div className={styles.tokenCell}>
@@ -79,7 +79,7 @@ const Wallet = () => {
                       <td>{item.currentPrice}</td>
                       <td>{item.totalValue}</td>
                     </tr>
-                  ))}
+                  ))} */}
                 </tbody>
               </table>
             </div>

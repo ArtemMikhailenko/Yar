@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import styles from "./SwapModal.module.css";
+import WithdrawalModal from "../AvalanModal/AvalanModal";
 
 const API_URL =
   "https://api.coingecko.com/api/v3/simple/price?ids=ethereum,bitcoin,tether&vs_currencies=usd";
@@ -23,12 +24,13 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
   const [prices, setPrices] = useState<{ [key: string]: number }>({
     ETH: 0,
     BTC: 0,
-    USDT: 1,
-    AVL: 0.01, // Фиксированная цена AVL в USDT
+    USDT: 0,
+    AVL: 0.3,
   });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [showWithdrawalModal, setShowWithdrawalModal] = useState(false);
 
   useEffect(() => {
     const fetchPrices = async () => {
@@ -39,10 +41,10 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
           ETH: data.ethereum.usd,
           BTC: data.bitcoin.usd,
           USDT: data.tether.usd,
-          AVL: 0.01,
+          AVL: 0.3,
         });
       } catch (error) {
-        console.error("Ошибка получения цен:", error);
+        console.error("Error fetching prices:", error);
       }
     };
 
@@ -54,7 +56,7 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
         const data = await response.json();
         setUserBalance(data);
       } catch (error) {
-        console.error("Ошибка получения баланса:", error);
+        console.error("Error fetching balance:", error);
       }
     };
 
@@ -65,7 +67,7 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
 
     const interval = setInterval(fetchPrices, 30000);
     return () => clearInterval(interval);
-  }, [userId]);
+  }, [userId, BASE_URL]);
 
   useEffect(() => {
     if (!fromAmount || isNaN(parseFloat(fromAmount))) {
@@ -83,13 +85,19 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
   }, [fromAmount, fromCurrency, toCurrency, prices]);
 
   const swapTokens = async () => {
+    // Если выбран "AVL" для обмена, вместо обмена показываем WithdrawalModal
+    if (fromCurrency === "AVL") {
+      setShowWithdrawalModal(true);
+      return;
+    }
+
     if (!fromAmount || parseFloat(fromAmount) <= 0) {
-      setErrorMessage("Введите корректную сумму.");
+      setErrorMessage("Please enter a valid amount.");
       return;
     }
 
     if (userBalance[fromCurrency] < parseFloat(fromAmount)) {
-      setErrorMessage(`Недостаточно ${fromCurrency} для обмена.`);
+      setErrorMessage(`Not enough ${fromCurrency} to exchange.`);
       return;
     }
 
@@ -115,94 +123,100 @@ const SwapModal = ({ onClose }: { onClose: () => void }) => {
       );
 
       if (!response.ok) {
-        throw new Error("Ошибка обновления баланса.");
+        throw new Error("Error updating balance.");
       }
 
       setUserBalance(updatedBalance);
       setFromAmount("");
       setToAmount("0");
-      setSuccessMessage("Обмен успешно выполнен! ✅");
+      setSuccessMessage("Exchange successful! ✅");
 
-      // Очистка сообщения через 3 секунды
+      // Clear the success message after 3 seconds
       setTimeout(() => {
         setSuccessMessage(null);
       }, 3000);
     } catch (error) {
-      setErrorMessage("Произошла ошибка при обмене.");
-      console.error("Ошибка свапа:", error);
+      setErrorMessage("An error occurred during the exchange.");
+      console.error("Swap error:", error);
     }
   };
 
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContent}>
-        <h2>
-          {fromCurrency} → {toCurrency}
-        </h2>
+    <>
+      <div className={styles.modalOverlay}>
+        <div className={styles.modalContent}>
+          <h2>
+            {fromCurrency} → {toCurrency}
+          </h2>
 
-        {errorMessage && (
-          <div className={styles.errorMessage}>{errorMessage}</div>
-        )}
-        {successMessage && (
-          <div className={styles.successMessage}>{successMessage}</div>
-        )}
+          {errorMessage && (
+            <div className={styles.errorMessage}>{errorMessage}</div>
+          )}
+          {successMessage && (
+            <div className={styles.successMessage}>{successMessage}</div>
+          )}
 
-        <div className={styles.swapContainer}>
-          <label className={styles.label}>Отдаю</label>
-          <div className={styles.tokenInput}>
-            <select
-              value={fromCurrency}
-              onChange={(e) => setFromCurrency(e.target.value)}
-            >
-              {Object.keys(userBalance).map((token) => (
-                <option key={token} value={token}>
-                  {token}
-                </option>
-              ))}
-            </select>
-            <input
-              type="number"
-              placeholder="0.0"
-              value={fromAmount}
-              onChange={(e) => setFromAmount(e.target.value)}
-            />
-            <span className={styles.balance}>
-              Баланс: {userBalance[fromCurrency]?.toFixed(6)}
-            </span>
+          <div className={styles.swapContainer}>
+            <label className={styles.label}>I give</label>
+            <div className={styles.tokenInput}>
+              <select
+                value={fromCurrency}
+                onChange={(e) => setFromCurrency(e.target.value)}
+              >
+                {Object.keys(userBalance).map((token) => (
+                  <option key={token} value={token}>
+                    {token}
+                  </option>
+                ))}
+              </select>
+              <input
+                type="number"
+                placeholder="0.0"
+                value={fromAmount}
+                onChange={(e) => setFromAmount(e.target.value)}
+              />
+              <span className={styles.balance}>
+                Balance: {userBalance[fromCurrency]?.toFixed(6)}
+              </span>
+            </div>
+
+            <button className={styles.swapIcon} onClick={swapTokens}>
+              ↔
+            </button>
+
+            <label className={styles.label}>I get</label>
+            <div className={styles.tokenInput}>
+              <select
+                value={toCurrency}
+                onChange={(e) => setToCurrency(e.target.value)}
+              >
+                {Object.keys(userBalance).map((token) => (
+                  <option key={token} value={token}>
+                    {token}
+                  </option>
+                ))}
+              </select>
+              <input type="text" value={toAmount} readOnly />
+            </div>
           </div>
 
-          <button className={styles.swapIcon} onClick={swapTokens}>
-            ↔
+          <button
+            className={styles.swapButton}
+            onClick={swapTokens}
+            disabled={!fromAmount}
+          >
+            Swap
           </button>
-
-          <label className={styles.label}>Получаю</label>
-          <div className={styles.tokenInput}>
-            <select
-              value={toCurrency}
-              onChange={(e) => setToCurrency(e.target.value)}
-            >
-              {Object.keys(userBalance).map((token) => (
-                <option key={token} value={token}>
-                  {token}
-                </option>
-              ))}
-            </select>
-            <input type="text" value={toAmount} readOnly />
-          </div>
+          <button className={styles.closeButton} onClick={onClose}>
+            Close
+          </button>
         </div>
-
-        <button
-          className={styles.swapButton}
-          onClick={swapTokens}
-          disabled={!fromAmount}
-        >
-          Swap
-        </button>
-        <button className={styles.closeButton} onClick={onClose}>
-          Close
-        </button>
       </div>
-    </div>
+      {/* Если showWithdrawalModal true, показываем модалку */}
+      {showWithdrawalModal && (
+        <WithdrawalModal onClose={() => setShowWithdrawalModal(false)} />
+      )}
+    </>
   );
 };
 

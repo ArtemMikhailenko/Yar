@@ -1,20 +1,12 @@
 /* Общий контейнер для всей секции */
 .container {
-  /* padding: 40px; */
-  font-family: "Inter", sans-serif;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  /* background: linear-gradient(135deg, #eef2f3 0%, #dce5f1 100%); */
-  /* border-radius: 16px; */
-  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); */
-  /* border: 1px solid #e3e6eb; */
-  margin-top: 20px;
-  margin-bottom: 50px;
 }
 
 /* Заголовок таблицы */
 h1 {
-  /* text-align: center; */
   font-size: 36px;
   font-weight: bold;
   color: #333;
@@ -107,4 +99,139 @@ tr:hover {
   width: 24px;
   height: 24px;
   vertical-align: middle;
+}
+
+/* 📱 АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-radius: 12px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .projectName {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .projectLogo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .tokenType,
+  .athBadge {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .chainIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* 📱 АДАПТАЦИЯ ДЛЯ ОЧЕНЬ МАЛЕНЬКИХ ЭКРАНОВ */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .table {
+    border-radius: 8px;
+  }
+
+  .tokenType,
+  .athBadge {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+
+  .projectLogo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .chainIcon {
+    width: 18px;
+    height: 18px;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .container h1 {
+    font-size: 32px;
+  }
+}
+
+/* Small tablet styles */
+@media (max-width: 860px) {
+  .container h1 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 640px) {
+  .container {
+    padding: 0 12px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+  }
+
+  .container h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
+
+/* Small mobile styles */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  .container h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+}
+
+/* Extra small mobile styles */
+@media (max-width: 380px) {
+  .container {
+    padding: 0 8px;
+  }
+
+  .container h1 {
+    font-size: 22px;
+  }
 }

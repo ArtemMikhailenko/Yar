@@ -226,7 +226,7 @@ const UpcomingProject: React.FC<UpcomingProjectProps> = ({
           </div>
           {project.name === "Avalanche AI" && (
             <div className={styles.buySection}>
-              <div className={styles.priceTag}>$0.01 per token</div>
+              <div className={styles.priceTag}>$0.3 per token</div>
               <div className={styles.countdown}>
                 Time remaining: {timeLeft.days}d {timeLeft.hours}h{" "}
                 {timeLeft.minutes}m {timeLeft.seconds}s

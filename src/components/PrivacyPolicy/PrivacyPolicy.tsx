@@ -7,10 +7,10 @@ const PrivacyPolicy = ({ onClose }: { onClose: () => void }) => {
         <h2 className={styles.modalTitle}>Privacy Policy</h2>
         <div className={styles.modalBody}>
           <p>
-            Arkinvest ("we", "our", "us") is committed to protecting and
-            respecting your privacy. This Privacy Policy explains what data we
-            collect, how we use it, and how we safeguard your information when
-            you use the Arkinvest platform ("Platform").
+            In4fin ("we", "our", "us") is committed to protecting and respecting
+            your privacy. This Privacy Policy explains what data we collect, how
+            we use it, and how we safeguard your information when you use the
+            In4fin platform ("Platform").
           </p>
 
           <h3>1. Data We Collect</h3>

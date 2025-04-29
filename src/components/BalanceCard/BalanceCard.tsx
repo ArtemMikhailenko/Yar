@@ -102,7 +102,7 @@ const BalanceCard: React.FC = () => {
                 className={styles.currencyIcon}
               />
               <div className={styles.balanceInfo}>
-                <span className={styles.balanceAmount}>
+                <span className={styles.balanceAmount} translate="no">
                   ${user.USDT.toFixed(2)}
                 </span>
                 <span className={styles.balanceLabel}>USD (Tether)</span>
@@ -117,10 +117,10 @@ const BalanceCard: React.FC = () => {
                 className={styles.currencyIcon}
               />
               <div className={styles.balanceInfo}>
-                <span className={styles.balanceAmount}>
+                <span className={styles.balanceAmount} translate="no">
                   {user.BTC.toFixed(6)} BTC
                 </span>
-                <span className={styles.balanceLabel}>
+                <span className={styles.balanceLabel} translate="no">
                   ≈ ${(user.BTC * prices.BTC).toFixed(2)}
                 </span>
               </div>
@@ -134,10 +134,10 @@ const BalanceCard: React.FC = () => {
                 className={styles.currencyIcon}
               />
               <div className={styles.balanceInfo}>
-                <span className={styles.balanceAmount}>
+                <span className={styles.balanceAmount} translate="no">
                   {user.ETH.toFixed(6)} ETH
                 </span>
-                <span className={styles.balanceLabel}>
+                <span className={styles.balanceLabel} translate="no">
                   ≈ ${(user.ETH * prices.ETH).toFixed(2)}
                 </span>
               </div>
@@ -151,10 +151,12 @@ const BalanceCard: React.FC = () => {
                 className={styles.currencyIcon}
               />
               <div className={styles.balanceInfo}>
-                <span className={styles.balanceAmount}>
+                <span className={styles.balanceAmount} translate="no">
                   {user.AVL.toFixed(2)} AVL
                 </span>
-                <span className={styles.balanceLabel}>AVL Token</span>
+                <span className={styles.balanceLabel} translate="no">
+                  ≈ ${(user.AVL * 0.3).toFixed(2)}
+                </span>
               </div>
             </div>
           </div>
@@ -191,7 +193,10 @@ const BalanceCard: React.FC = () => {
         <DepositModal onClose={() => setIsDepositModalOpen(false)} />
       )}
       {isWithdrawalModalOpen && (
-        <WithdrawalModal onClose={() => setIsWithdrawalModalOpen(false)} />
+        <WithdrawalModal
+          userBalans={user}
+          onClose={() => setIsWithdrawalModalOpen(false)}
+        />
       )}
       {isSwapModalOpen && (
         <SwapModal onClose={() => setIsSwapModalOpen(false)} />

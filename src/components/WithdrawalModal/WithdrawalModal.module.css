@@ -1,3 +1,4 @@
+/* Base Modal Styling */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -18,24 +19,15 @@
   border-radius: 16px;
   padding: 1.5rem;
   width: 90%;
-  max-width: 380px; /* 🔹 Уменьшил ширину */
-  max-height: 90vh; /* 🔹 Ограничил высоту */
-  overflow-y: auto; /* 🔹 Добавил скролл при переполнении */
+  max-width: 380px;
+  max-height: 90vh;
+  overflow-y: auto;
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* 🔹 Медиазапросы для мобилок */
-@media (max-width: 480px) {
-  .modalContent {
-    width: 95%;
-    padding: 1.2rem;
-    max-width: 350px;
-  }
-}
-
-/* 🔹 Кнопка закрытия */
+/* Close Button */
 .closeButton {
   position: absolute;
   top: 0.8rem;
@@ -47,24 +39,22 @@
   cursor: pointer;
   padding: 0.3rem;
   transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .closeButton:hover {
   color: #333;
 }
 
-/* 🔹 Адаптивная иконка */
+/* Icon Wrapper */
 .iconWrapper {
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto 1rem;
   border: 3px solid #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .timerIcon {
@@ -73,7 +63,7 @@
   height: 35px;
 }
 
-/* 🔹 Заголовок */
+/* Title */
 .title {
   color: #1976d2;
   text-align: center;
@@ -82,10 +72,10 @@
   font-weight: 600;
 }
 
-/* 🔹 Сообщение */
+/* Message Container */
 .messageContainer {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   background: #e3f2fd;
   border-radius: 10px;
   padding: 0.9rem;
@@ -98,14 +88,40 @@
   width: 22px;
   height: 22px;
   margin-right: 0.5rem;
+  align-self: flex-start;
 }
 
 .message {
   color: #1565c0;
   font-size: 0.95rem;
+  margin-top: 0.5rem;
 }
 
-/* 🔹 Секция безопасности */
+/* Error Container */
+.errorContainer {
+  display: flex;
+  align-items: flex-start;
+  background: #ffebee;
+  border-radius: 10px;
+  padding: 0.9rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ffcdd2;
+}
+
+.errorIcon {
+  color: #d32f2f;
+  width: 22px;
+  height: 22px;
+  margin-right: 0.5rem;
+}
+
+.errorMessage {
+  color: #c62828;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Security Section */
 .securitySection {
   text-align: center;
   padding: 1rem;
@@ -134,7 +150,7 @@
   font-size: 0.9rem;
 }
 
-/* 🔹 Блок с информацией */
+/* Info Box */
 .infoBox {
   background: #fafafa;
   border-radius: 10px;
@@ -171,7 +187,7 @@
   margin-right: 0.5rem;
 }
 
-/* 🔹 Кнопка */
+/* Buttons */
 .understoodButton {
   width: 100%;
   background: linear-gradient(135deg, #1976d2, #1565c0);
@@ -192,7 +208,203 @@
   transform: translateY(-1px);
 }
 
-/* 🔹 Медиа-запросы для мелких экранов */
+.cancelButton {
+  width: 48%;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 10px;
+  color: #424242;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancelButton:hover {
+  background: #d5d5d5;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.buttonGroup .understoodButton,
+.buttonGroup .cancelButton {
+  width: 48%;
+}
+
+/* Token Selection */
+.tokenGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.tokenCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #e0e0e0;
+}
+
+.tokenCard:hover {
+  background: #e3f2fd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tokenIconLarge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 0.7rem;
+}
+.tokenIconLarge img {
+  width: 30px;
+  height: 30px;
+}
+.tokenInfo {
+  text-align: center;
+}
+
+.tokenInfo h3 {
+  margin: 0 0 0.3rem 0;
+  font-size: 1rem;
+  color: #424242;
+}
+
+.tokenInfo p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #757575;
+}
+
+/* Form Styles */
+.formGroup {
+  margin-bottom: 1.2rem;
+}
+.formGroup input {
+  color: black;
+}
+.formLabel {
+  display: block;
+  font-size: 0.95rem;
+  color: #424242;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.formInput:focus {
+  border-color: #1976d2;
+  outline: none;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.inputWrapper input {
+  color: black;
+}
+.inputSuffix {
+  position: absolute;
+  right: 10px;
+  color: #757575;
+  font-weight: 500;
+}
+
+.balanceInfo {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #757575;
+  text-align: right;
+}
+
+/* Success Screen */
+.successContainer {
+  background: #e8f5e9;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #c8e6c9;
+  text-align: center;
+}
+
+.successDetails {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.successAmount {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2e7d32;
+  margin: 0;
+}
+
+.successArrow {
+  color: #2e7d32;
+  margin: 0 0.8rem;
+}
+
+.successAddress {
+  font-size: 1rem;
+  color: #2e7d32;
+  margin: 0;
+  font-family: monospace;
+}
+
+.successMessage {
+  color: #1b5e20;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+  .modalContent {
+    width: 95%;
+    padding: 1.2rem;
+    max-width: 350px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .tokenGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 400px) {
   .modalContent {
     width: 100%;
@@ -201,11 +413,16 @@
   }
 
   .title {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
-  .understoodButton {
-    font-size: 0.95rem;
-    padding: 0.7rem;
+  .buttonGroup {
+    flex-direction: column;
+  }
+
+  .buttonGroup .understoodButton,
+  .buttonGroup .cancelButton {
+    width: 100%;
+    margin-bottom: 0.5rem;
   }
 }

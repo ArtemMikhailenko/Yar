@@ -5,11 +5,15 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   min-height: 100%;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(145deg, #f0f4f8, #d9e2ef);  /* Градиент для всего body */
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(145deg, #f0f4f8, #d9e2ef);
+  overflow-x: hidden;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Основная обертка приложения */

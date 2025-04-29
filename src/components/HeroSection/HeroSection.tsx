@@ -26,7 +26,7 @@ const HeroSection = () => {
       <div className={styles.container}>
         <div className={styles.text}>
           <h1>
-            Invest in digital assets <br /> with ArkInvest
+            Invest in digital assets <br /> with In4fin
           </h1>
           <p className={styles.subtext}>
             Discover new opportunities in digital finance with trusted
@@ -39,7 +39,14 @@ const HeroSection = () => {
             >
               Invest
             </button>
-            <button className={styles.secondaryButton}>Contact Us</button>
+            <a
+              href="https://t.me/in4fin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.secondaryButton}
+            >
+              Contact Us
+            </a>
           </div>
         </div>
 
